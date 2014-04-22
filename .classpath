@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre7"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre7"/>
-	<classpathentry kind="lib" path="C:/Users/s1200508/Downloads/mysql-connector-java-5.1.29/mysql-connector-java-5.1.29/mysql-connector-java-5.1.29-bin.jar"/>
-	<classpathentry kind="lib" path="C:/Users/s1200508/Desktop/java-ohjelmoinnin materiaalit/3 tietoyhteydet/sqlselain/lib/derby.jar"/>
+	<classpathentry kind="lib" path="derby.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
