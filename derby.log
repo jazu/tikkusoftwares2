@@ -1,10 +1,10 @@
 ----------------------------------------------------------------
-Sun Apr 20 18:48:14 EEST 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077): instance a816c00e-0145-7fd2-d306-000006a1d6d0 
-on database directory C:\tikkusoftwares\RuipiGui\projhallintadb  with class loader sun.misc.Launcher$AppClassLoader@31f39c59 
-Loaded from file:/C:/Users/s1200522/Desktop/3%20tietoyhteydet/sqlselain/lib/derby.jar
+Tue Apr 29 12:21:34 EEST 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077): instance a816c00e-0145-acca-0e6c-00000646e298 
+on database directory C:\GitHub\RuipiGui\projhallintadb  with class loader sun.misc.Launcher$AppClassLoader@31f39c59 
+Loaded from file:/C:/GitHub/RuipiGui/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.7.0_51-b13
-user.dir=C:\tikkusoftwares\RuipiGui
+user.dir=C:\GitHub\RuipiGui
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''

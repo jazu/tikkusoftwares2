@@ -10,7 +10,7 @@ public class Tyontekija {
 	
 	
 	/*CREATE TABLE tyontekija (
-			  kayttajaID INTEGER NOT NULL FOREIGN KEY,
+			  kayttajaID INTEGER NOT NULL FOREIGN KEY,----- kayttaja_ID
 			  etunimi VARCHAR(55) NOT NULL,
 			  sukunimi VARCHAR(55) NOT NULL,
 			  syntymavuosi INTEGER NOT NULL,
