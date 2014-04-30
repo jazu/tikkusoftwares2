@@ -39,8 +39,8 @@ public class ProjektinMuokkausUI extends javax.swing.JFrame {
         TallennaNappi = new javax.swing.JButton();
         PeruutaNappi = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        Loppupvm = new javax.swing.JFormattedTextField();
-        Alkupvm = new javax.swing.JFormattedTextField();
+        Loppupvm = new javax.swing.JFormattedTextField(20);
+        Alkupvm = new javax.swing.JFormattedTextField(20);
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         ProjektinAsiakas = new javax.swing.JComboBox();
@@ -102,14 +102,14 @@ public class ProjektinMuokkausUI extends javax.swing.JFrame {
 
         jLabel6.setText("Selite:");
 
-        Loppupvm.setText("jFormattedTextField3");
+        Loppupvm.setText("");
         Loppupvm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LoppupvmActionPerformed(evt);
             }
         });
 
-        Alkupvm.setText("jFormattedTextField2");
+        Alkupvm.setText("");
         Alkupvm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AlkupvmActionPerformed(evt);
@@ -167,7 +167,6 @@ public class ProjektinMuokkausUI extends javax.swing.JFrame {
                 ProjektinNimiActionPerformed(evt);
             }
         });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -278,7 +277,7 @@ public class ProjektinMuokkausUI extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-
+        
         pack();
     }// </editor-fold>   
     

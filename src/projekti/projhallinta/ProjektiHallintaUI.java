@@ -32,61 +32,61 @@ public class ProjektiHallintaUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        MuokkaaTyontekijoita = new javax.swing.JButton();
+        muokkaaTyontekijoitaButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        MuokkaaVaiheita = new javax.swing.JButton();
-        projektinTiedot = new javax.swing.JButton();
-        uusiProjekti = new javax.swing.JButton();
-        kirjauduUlos = new javax.swing.JButton();
-        lopeta = new javax.swing.JButton();
-        projektiFilter = new javax.swing.JComboBox();
-        jLabel1 = new javax.swing.JLabel();
-        muokkaaAsiakkaita = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        projektitTextArea = new javax.swing.JTextArea();
+        muokkaaVaiheitaButton = new javax.swing.JButton();
+        projektinTiedotButton = new javax.swing.JButton();
+        uusiProjektiButton = new javax.swing.JButton();
+        kirjauduUlosButton = new javax.swing.JButton();
+        lopetaButton = new javax.swing.JButton();
+        projektiFilterComboBox = new javax.swing.JComboBox();
+        kukaLisasTanTurhanPaskanSyytanMiroaTjasu = new javax.swing.JLabel();
+        muokkaaAsiakkaitaButton = new javax.swing.JButton();
+        kukaLisasTanTurhanPaskanSyytanFronsiaTjasu = new javax.swing.JMenuBar();
+        katsoRiviYlospain = new javax.swing.JMenu();
+        katsoKaksiRiviaYlospain = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        MuokkaaTyontekijoita.setText("Muokkaa työntekijöitä");
-        MuokkaaTyontekijoita.addActionListener(new java.awt.event.ActionListener() {
+        muokkaaTyontekijoitaButton.setText("Muokkaa työntekijöitä");
+        muokkaaTyontekijoitaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MuokkaaTyontekijoitaActionPerformed(evt);
                 avaaMuokkaatyontekijoita();
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        projektitTextArea.setColumns(20);
+        projektitTextArea.setRows(5);
+        jScrollPane1.setViewportView(projektitTextArea);
 
-        MuokkaaVaiheita.setText("Muokkaa vaiheita");
-        MuokkaaVaiheita.addActionListener(new java.awt.event.ActionListener() {
+        muokkaaVaiheitaButton.setText("Muokkaa vaiheita");
+        muokkaaVaiheitaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MuokkaaVaiheitaActionPerformed(evt);
                 avaaMuokkaaVaiheita();
             }
         });
 
-        projektinTiedot.setText("Projektin muokkaus");
-        projektinTiedot.addActionListener(new java.awt.event.ActionListener() {
+        projektinTiedotButton.setText("Projektin muokkaus");
+        projektinTiedotButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 projektinTiedotActionPerformed(evt);
                 avaaProjektinMuokkaus();
             }
         });
 
-        uusiProjekti.setText("Uusi projekti");
-        uusiProjekti.addActionListener(new java.awt.event.ActionListener() {
+        uusiProjektiButton.setText("Uusi projekti");
+        uusiProjektiButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 uusiProjektiActionPerformed(evt);
                 avaaProjektinLisays();
             }
         });
 
-        kirjauduUlos.setText("Kirjaudu ulos");
-        kirjauduUlos.addActionListener(new java.awt.event.ActionListener() {
+        kirjauduUlosButton.setText("Kirjaudu ulos");
+        kirjauduUlosButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 kirjauduUlosActionPerformed(evt);
                 avaaKirjauduUlos();
@@ -96,8 +96,8 @@ public class ProjektiHallintaUI extends javax.swing.JFrame {
             }
         });
 
-        lopeta.setText("Lopeta");
-        lopeta.addActionListener(new java.awt.event.ActionListener() {
+        lopetaButton.setText("Lopeta");
+        lopetaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lopetaActionPerformed(evt);
                 System.exit(0);
@@ -105,27 +105,27 @@ public class ProjektiHallintaUI extends javax.swing.JFrame {
             }
         });
 
-        projektiFilter.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        projektiFilter.addActionListener(new java.awt.event.ActionListener() {
+        projektiFilterComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        projektiFilterComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 projektiFilterActionPerformed(evt);
             }
         });
 
-        muokkaaAsiakkaita.setText("Muokkaa asiakkaita");
-        muokkaaAsiakkaita.addActionListener(new java.awt.event.ActionListener() {
+        muokkaaAsiakkaitaButton.setText("Muokkaa asiakkaita");
+        muokkaaAsiakkaitaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 muokkaaAsiakkaitaActionPerformed(evt);
             }
         });
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        katsoRiviYlospain.setText("File");
+        kukaLisasTanTurhanPaskanSyytanFronsiaTjasu.add(katsoRiviYlospain);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        katsoKaksiRiviaYlospain.setText("Edit");
+        kukaLisasTanTurhanPaskanSyytanFronsiaTjasu.add(katsoKaksiRiviaYlospain);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(kukaLisasTanTurhanPaskanSyytanFronsiaTjasu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -135,23 +135,23 @@ public class ProjektiHallintaUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(kukaLisasTanTurhanPaskanSyytanMiroaTjasu)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                            .addComponent(projektiFilter, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(projektiFilterComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(MuokkaaVaiheita, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(muokkaaAsiakkaita, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(MuokkaaTyontekijoita, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(projektinTiedot, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(muokkaaVaiheitaButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(muokkaaAsiakkaitaButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(muokkaaTyontekijoitaButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(projektinTiedotButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(uusiProjekti)
+                        .addComponent(uusiProjektiButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(kirjauduUlos, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(kirjauduUlosButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lopeta, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lopetaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
@@ -161,24 +161,24 @@ public class ProjektiHallintaUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(MuokkaaTyontekijoita)
-                            .addComponent(projektiFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
+                            .addComponent(muokkaaTyontekijoitaButton)
+                            .addComponent(projektiFilterComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(kukaLisasTanTurhanPaskanSyytanMiroaTjasu))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(MuokkaaVaiheita)
+                        .addComponent(muokkaaVaiheitaButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(projektinTiedot)
+                        .addComponent(projektinTiedotButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(muokkaaAsiakkaita)
+                        .addComponent(muokkaaAsiakkaitaButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(32, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(uusiProjekti)
-                    .addComponent(kirjauduUlos)
-                    .addComponent(lopeta))
+                    .addComponent(uusiProjektiButton)
+                    .addComponent(kirjauduUlosButton)
+                    .addComponent(lopetaButton))
                 .addContainerGap())
         );
 
@@ -280,19 +280,19 @@ public class ProjektiHallintaUI extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify                     
-    private javax.swing.JButton MuokkaaTyontekijoita;
-    private javax.swing.JButton MuokkaaVaiheita;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JButton muokkaaTyontekijoitaButton;
+    private javax.swing.JButton muokkaaVaiheitaButton;
+    private javax.swing.JLabel kukaLisasTanTurhanPaskanSyytanMiroaTjasu;
+    private javax.swing.JMenu katsoRiviYlospain;
+    private javax.swing.JMenu katsoKaksiRiviaYlospain;
+    private javax.swing.JMenuBar kukaLisasTanTurhanPaskanSyytanFronsiaTjasu;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JButton kirjauduUlos;
-    private javax.swing.JButton lopeta;
-    private javax.swing.JButton muokkaaAsiakkaita;
-    private javax.swing.JComboBox projektiFilter;
-    private javax.swing.JButton projektinTiedot;
-    private javax.swing.JButton uusiProjekti;
+    private javax.swing.JTextArea projektitTextArea;
+    private javax.swing.JButton kirjauduUlosButton;
+    private javax.swing.JButton lopetaButton;
+    private javax.swing.JButton muokkaaAsiakkaitaButton;
+    private javax.swing.JComboBox projektiFilterComboBox;
+    private javax.swing.JButton projektinTiedotButton;
+    private javax.swing.JButton uusiProjektiButton;
     // End of variables declaration                   
 }
