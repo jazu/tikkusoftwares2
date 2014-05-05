@@ -5,6 +5,20 @@
 package projekti.projhallinta;
 
 import projekti.login.LoginUI;
+import javax.swing.JTabbedPane;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.GroupLayout;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JComboBox;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import javax.swing.JFormattedTextField;
+import javax.swing.JList;
+import javax.swing.JFrame;
+import java.awt.Rectangle;
 
 /**
  *
@@ -16,9 +30,10 @@ public class ProjektiHallintaUI extends javax.swing.JFrame {
      * Creates new form ProjektiHallinta
      */
     public ProjektiHallintaUI() {
+    	setBounds(new Rectangle(0, 0, 720, 450));
         this.setTitle("Projektinhallinta");
 
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -32,157 +47,749 @@ public class ProjektiHallintaUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        muokkaaTyontekijoitaButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        projektitTextArea = new javax.swing.JTextArea();
-        muokkaaVaiheitaButton = new javax.swing.JButton();
-        projektinTiedotButton = new javax.swing.JButton();
-        uusiProjektiButton = new javax.swing.JButton();
-        kirjauduUlosButton = new javax.swing.JButton();
-        lopetaButton = new javax.swing.JButton();
-        projektiFilterComboBox = new javax.swing.JComboBox();
-        kukaLisasTanTurhanPaskanSyytanMiroaTjasu = new javax.swing.JLabel();
-        muokkaaAsiakkaitaButton = new javax.swing.JButton();
-        kukaLisasTanTurhanPaskanSyytanFronsiaTjasu = new javax.swing.JMenuBar();
-        katsoRiviYlospain = new javax.swing.JMenu();
-        katsoKaksiRiviaYlospain = new javax.swing.JMenu();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        muokkaaTyontekijoitaButton.setText("Muokkaa työntekijöitä");
-        muokkaaTyontekijoitaButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MuokkaaTyontekijoitaActionPerformed(evt);
-                avaaMuokkaatyontekijoita();
-            }
-        });
-
-        projektitTextArea.setColumns(20);
-        projektitTextArea.setRows(5);
-        jScrollPane1.setViewportView(projektitTextArea);
-
-        muokkaaVaiheitaButton.setText("Muokkaa vaiheita");
-        muokkaaVaiheitaButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MuokkaaVaiheitaActionPerformed(evt);
-                avaaMuokkaaVaiheita();
-            }
-        });
-
-        projektinTiedotButton.setText("Projektin muokkaus");
-        projektinTiedotButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                projektinTiedotActionPerformed(evt);
-                avaaProjektinMuokkaus();
-            }
-        });
-
-        uusiProjektiButton.setText("Uusi projekti");
-        uusiProjektiButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                uusiProjektiActionPerformed(evt);
-                avaaProjektinLisays();
-            }
-        });
-
-        kirjauduUlosButton.setText("Kirjaudu ulos");
-        kirjauduUlosButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                kirjauduUlosActionPerformed(evt);
-                avaaKirjauduUlos();
-                
-
-
-            }
-        });
-
-        lopetaButton.setText("Lopeta");
-        lopetaButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lopetaActionPerformed(evt);
-                System.exit(0);
-                
-            }
-        });
-
-        projektiFilterComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        projektiFilterComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                projektiFilterActionPerformed(evt);
-            }
-        });
-
-        muokkaaAsiakkaitaButton.setText("Muokkaa asiakkaita");
-        muokkaaAsiakkaitaButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                muokkaaAsiakkaitaActionPerformed(evt);
-            }
-        });
-
-        katsoRiviYlospain.setText("File");
-        kukaLisasTanTurhanPaskanSyytanFronsiaTjasu.add(katsoRiviYlospain);
-
-        katsoKaksiRiviaYlospain.setText("Edit");
-        kukaLisasTanTurhanPaskanSyytanFronsiaTjasu.add(katsoKaksiRiviaYlospain);
-
-        setJMenuBar(kukaLisasTanTurhanPaskanSyytanFronsiaTjasu);
+        
+        tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(kukaLisasTanTurhanPaskanSyytanMiroaTjasu)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                            .addComponent(projektiFilterComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(muokkaaVaiheitaButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(muokkaaAsiakkaitaButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(muokkaaTyontekijoitaButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(projektinTiedotButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(uusiProjektiButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(kirjauduUlosButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lopetaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18))
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 580, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(muokkaaTyontekijoitaButton)
-                            .addComponent(projektiFilterComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(kukaLisasTanTurhanPaskanSyytanMiroaTjasu))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(muokkaaVaiheitaButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(projektinTiedotButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(muokkaaAsiakkaitaButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(32, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(uusiProjektiButton)
-                    .addComponent(kirjauduUlosButton)
-                    .addComponent(lopetaButton))
-                .addContainerGap())
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
         );
+        
+        ProjektinhallintaUI = new JPanel();
+        tabbedPane.addTab("Projektinhallinta", null, ProjektinhallintaUI, null);
+        
+        JLabel label = new JLabel();
+        
+        JScrollPane scrollPane = new JScrollPane();
+        
+        JComboBox comboBox = new JComboBox();
+        
+        JButton button_5 = new JButton();
+        button_5.setText("Kirjaudu ulos");
+        
+        JButton button_6 = new JButton();
+        button_6.setText("Lopeta");
+        GroupLayout gl_ProjektinhallintaUI = new GroupLayout(ProjektinhallintaUI);
+        gl_ProjektinhallintaUI.setHorizontalGroup(
+        	gl_ProjektinhallintaUI.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_ProjektinhallintaUI.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(gl_ProjektinhallintaUI.createParallelGroup(Alignment.LEADING, false)
+        				.addGroup(gl_ProjektinhallintaUI.createSequentialGroup()
+        					.addComponent(label, GroupLayout.PREFERRED_SIZE, 0, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 497, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(gl_ProjektinhallintaUI.createSequentialGroup()
+        					.addGap(4)
+        					.addComponent(scrollPane)))
+        			.addContainerGap(65, Short.MAX_VALUE))
+        		.addGroup(Alignment.TRAILING, gl_ProjektinhallintaUI.createSequentialGroup()
+        			.addContainerGap(311, Short.MAX_VALUE)
+        			.addComponent(button_5, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+        			.addGap(6)
+        			.addComponent(button_6, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap())
+        );
+        gl_ProjektinhallintaUI.setVerticalGroup(
+        	gl_ProjektinhallintaUI.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_ProjektinhallintaUI.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(gl_ProjektinhallintaUI.createParallelGroup(Alignment.LEADING)
+        				.addComponent(label, GroupLayout.PREFERRED_SIZE, 0, GroupLayout.PREFERRED_SIZE)
+        				.addGroup(gl_ProjektinhallintaUI.createSequentialGroup()
+        					.addGap(1)
+        					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+        			.addGap(11)
+        			.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 218, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+        			.addGroup(gl_ProjektinhallintaUI.createParallelGroup(Alignment.LEADING)
+        				.addComponent(button_5)
+        				.addComponent(button_6))
+        			.addContainerGap())
+        );
+        ProjektinhallintaUI.setLayout(gl_ProjektinhallintaUI);
+        
+        JPanel ProjektinlisaysUI = new JPanel();
+        tabbedPane.addTab("Lisaa projekti", null, ProjektinlisaysUI, null);
+        
+        JLabel label_1 = new JLabel();
+        label_1.setText("Nime\u00E4 projekti:");
+        
+        textField = new JTextField();
+        textField.setText("jTextField1");
+        
+        JLabel label_2 = new JLabel();
+        label_2.setText("Alkup\u00E4iv\u00E4m\u00E4\u00E4r\u00E4:");
+        
+        JFormattedTextField formattedTextField = new JFormattedTextField();
+        formattedTextField.setText("jFormattedTextField2");
+        
+        JLabel label_3 = new JLabel();
+        label_3.setText("Loppup\u00E4iv\u00E4m\u00E4\u00E4r\u00E4: ");
+        
+        JLabel label_4 = new JLabel();
+        label_4.setText("Projektin status:");
+        
+        JFormattedTextField formattedTextField_1 = new JFormattedTextField();
+        formattedTextField_1.setText("jFormattedTextField3");
+        
+        JComboBox comboBox_1 = new JComboBox();
+        
+        JScrollPane scrollPane_1 = new JScrollPane();
+        
+        JLabel label_5 = new JLabel();
+        label_5.setText("Selite:");
+        
+        JLabel label_6 = new JLabel();
+        label_6.setText("Projektin asiakas:");
+        
+        JComboBox comboBox_2 = new JComboBox();
+        
+        JButton button_7 = new JButton();
+        button_7.setText("Peruuta");
+        
+        JButton button_8 = new JButton();
+        button_8.setText("Tallenna");
+        
+        JComboBox comboBox_3 = new JComboBox();
+        
+        JScrollPane scrollPane_2 = new JScrollPane();
+        
+        JButton button_9 = new JButton();
+        button_9.setText("Muokkaa ty\u00F6ntekij\u00F6it\u00E4");
+        
+        JLabel label_7 = new JLabel();
+        label_7.setText("Projektin ty\u00F6ntekij\u00E4t");
+        
+        JLabel label_8 = new JLabel();
+        label_8.setText("Projektin vaiheet:");
+        
+        JScrollPane scrollPane_3 = new JScrollPane();
+        
+        JComboBox comboBox_4 = new JComboBox();
+        
+        JButton button_10 = new JButton();
+        button_10.setText("Muokkaa vaiheita");
+        GroupLayout gl_ProjektinlisaysUI = new GroupLayout(ProjektinlisaysUI);
+        gl_ProjektinlisaysUI.setHorizontalGroup(
+        	gl_ProjektinlisaysUI.createParallelGroup(Alignment.TRAILING)
+        		.addGroup(gl_ProjektinlisaysUI.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(gl_ProjektinlisaysUI.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_ProjektinlisaysUI.createSequentialGroup()
+        					.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(textField, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+        					.addGap(39)
+        					.addComponent(label_7, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(label_8, GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
+        				.addGroup(gl_ProjektinlisaysUI.createSequentialGroup()
+        					.addGap(250)
+        					.addComponent(comboBox_3, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+        					.addGap(10)
+        					.addComponent(comboBox_4, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(gl_ProjektinlisaysUI.createSequentialGroup()
+        					.addGroup(gl_ProjektinlisaysUI.createParallelGroup(Alignment.LEADING)
+        						.addComponent(label_5, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)
+        						.addGroup(gl_ProjektinlisaysUI.createSequentialGroup()
+        							.addGroup(gl_ProjektinlisaysUI.createParallelGroup(Alignment.TRAILING, false)
+        								.addComponent(label_3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        								.addComponent(label_2, GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE))
+        							.addGroup(gl_ProjektinlisaysUI.createParallelGroup(Alignment.LEADING)
+        								.addGroup(gl_ProjektinlisaysUI.createSequentialGroup()
+        									.addPreferredGap(ComponentPlacement.RELATED)
+        									.addComponent(formattedTextField, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE))
+        								.addGroup(Alignment.TRAILING, gl_ProjektinlisaysUI.createSequentialGroup()
+        									.addPreferredGap(ComponentPlacement.RELATED)
+        									.addComponent(formattedTextField_1, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE))))
+        						.addGroup(gl_ProjektinlisaysUI.createSequentialGroup()
+        							.addGroup(gl_ProjektinlisaysUI.createParallelGroup(Alignment.TRAILING, false)
+        								.addComponent(label_6, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        								.addComponent(label_4, GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
+        							.addGroup(gl_ProjektinlisaysUI.createParallelGroup(Alignment.LEADING)
+        								.addGroup(gl_ProjektinlisaysUI.createSequentialGroup()
+        									.addPreferredGap(ComponentPlacement.UNRELATED)
+        									.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE))
+        								.addGroup(Alignment.TRAILING, gl_ProjektinlisaysUI.createSequentialGroup()
+        									.addGap(10)
+        									.addComponent(comboBox_2, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)))))
+        					.addGap(39)
+        					.addGroup(gl_ProjektinlisaysUI.createParallelGroup(Alignment.TRAILING)
+        						.addGroup(gl_ProjektinlisaysUI.createSequentialGroup()
+        							.addGroup(gl_ProjektinlisaysUI.createParallelGroup(Alignment.LEADING)
+        								.addComponent(scrollPane_2, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+        								.addComponent(button_9, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))
+        							.addGap(10)
+        							.addGroup(gl_ProjektinlisaysUI.createParallelGroup(Alignment.LEADING)
+        								.addComponent(scrollPane_3, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+        								.addComponent(button_10, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)))
+        						.addGroup(gl_ProjektinlisaysUI.createSequentialGroup()
+        							.addComponent(button_7, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(button_8, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)))))
+        			.addContainerGap())
+        );
+        gl_ProjektinlisaysUI.setVerticalGroup(
+        	gl_ProjektinlisaysUI.createParallelGroup(Alignment.TRAILING)
+        		.addGroup(gl_ProjektinlisaysUI.createSequentialGroup()
+        			.addGroup(gl_ProjektinlisaysUI.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_ProjektinlisaysUI.createParallelGroup(Alignment.LEADING)
+        					.addGroup(gl_ProjektinlisaysUI.createSequentialGroup()
+        						.addGap(17)
+        						.addComponent(label_7)
+        						.addPreferredGap(ComponentPlacement.RELATED))
+        					.addGroup(Alignment.TRAILING, gl_ProjektinlisaysUI.createSequentialGroup()
+        						.addContainerGap(14, Short.MAX_VALUE)
+        						.addGroup(gl_ProjektinlisaysUI.createParallelGroup(Alignment.LEADING)
+        							.addGroup(gl_ProjektinlisaysUI.createSequentialGroup()
+        								.addGap(3)
+        								.addComponent(label_1))
+        							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        						.addGap(11)))
+        				.addGroup(gl_ProjektinlisaysUI.createSequentialGroup()
+        					.addGap(20)
+        					.addComponent(label_8)
+        					.addPreferredGap(ComponentPlacement.RELATED)))
+        			.addGroup(gl_ProjektinlisaysUI.createParallelGroup(Alignment.LEADING)
+        				.addComponent(comboBox_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(comboBox_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addGap(1)
+        			.addGroup(gl_ProjektinlisaysUI.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_ProjektinlisaysUI.createSequentialGroup()
+        					.addGroup(gl_ProjektinlisaysUI.createParallelGroup(Alignment.LEADING)
+        						.addComponent(formattedTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addGroup(gl_ProjektinlisaysUI.createSequentialGroup()
+        							.addGap(3)
+        							.addComponent(label_2)))
+        					.addGap(18)
+        					.addGroup(gl_ProjektinlisaysUI.createParallelGroup(Alignment.LEADING)
+        						.addComponent(formattedTextField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addGroup(gl_ProjektinlisaysUI.createSequentialGroup()
+        							.addGap(3)
+        							.addComponent(label_3)))
+        					.addGap(18)
+        					.addGroup(gl_ProjektinlisaysUI.createParallelGroup(Alignment.LEADING)
+        						.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addGroup(gl_ProjektinlisaysUI.createSequentialGroup()
+        							.addGap(3)
+        							.addComponent(label_4)))
+        					.addGap(18)
+        					.addGroup(gl_ProjektinlisaysUI.createParallelGroup(Alignment.LEADING)
+        						.addComponent(comboBox_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(label_6))
+        					.addGap(14)
+        					.addComponent(label_5)
+        					.addGap(18)
+        					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(gl_ProjektinlisaysUI.createSequentialGroup()
+        					.addGroup(gl_ProjektinlisaysUI.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_ProjektinlisaysUI.createSequentialGroup()
+        							.addComponent(scrollPane_2, GroupLayout.PREFERRED_SIZE, 237, GroupLayout.PREFERRED_SIZE)
+        							.addGap(6)
+        							.addComponent(button_9))
+        						.addGroup(gl_ProjektinlisaysUI.createSequentialGroup()
+        							.addComponent(scrollPane_3, GroupLayout.PREFERRED_SIZE, 237, GroupLayout.PREFERRED_SIZE)
+        							.addGap(6)
+        							.addComponent(button_10)))
+        					.addGap(18)
+        					.addGroup(gl_ProjektinlisaysUI.createParallelGroup(Alignment.LEADING)
+        						.addComponent(button_8)
+        						.addComponent(button_7))))
+        			.addGap(27))
+        );
+        ProjektinlisaysUI.setLayout(gl_ProjektinlisaysUI);
+        
+        JPanel ProjektinmuokkausUI = new JPanel();
+        tabbedPane.addTab("Muokkaa projektia", null, ProjektinmuokkausUI, null);
+        
+        JLabel lblProjekti = new JLabel();
+        lblProjekti.setText("Projekti:");
+        
+        JLabel label_10 = new JLabel();
+        label_10.setText("Projektin ty\u00F6ntekij\u00E4t");
+        
+        JLabel label_11 = new JLabel();
+        label_11.setText("Projektin vaiheet:");
+        
+        JComboBox comboBox_5 = new JComboBox();
+        
+        JComboBox comboBox_6 = new JComboBox();
+        
+        JLabel label_12 = new JLabel();
+        label_12.setText("Alkup\u00E4iv\u00E4m\u00E4\u00E4r\u00E4:");
+        
+        JFormattedTextField formattedTextField_2 = new JFormattedTextField();
+        formattedTextField_2.setText("jFormattedTextField2");
+        
+        JLabel label_13 = new JLabel();
+        label_13.setText("Loppup\u00E4iv\u00E4m\u00E4\u00E4r\u00E4: ");
+        
+        JFormattedTextField formattedTextField_3 = new JFormattedTextField();
+        formattedTextField_3.setText("jFormattedTextField3");
+        
+        JLabel label_14 = new JLabel();
+        label_14.setText("Projektin status:");
+        
+        JComboBox comboBox_7 = new JComboBox();
+        
+        JLabel label_15 = new JLabel();
+        label_15.setText("Projektin asiakas:");
+        
+        JComboBox comboBox_8 = new JComboBox();
+        
+        JLabel label_16 = new JLabel();
+        label_16.setText("Selite:");
+        
+        JScrollPane scrollPane_4 = new JScrollPane();
+        
+        JScrollPane scrollPane_5 = new JScrollPane();
+        
+        JButton button_11 = new JButton();
+        button_11.setText("Muokkaa ty\u00F6ntekij\u00F6it\u00E4");
+        
+        JScrollPane scrollPane_6 = new JScrollPane();
+        
+        JButton button_12 = new JButton();
+        button_12.setText("Muokkaa vaiheita");
+        
+        JButton button_13 = new JButton();
+        button_13.setText("Peruuta");
+        
+        JButton button_14 = new JButton();
+        button_14.setText("Tallenna");
+        
+        JComboBox comboBox_9 = new JComboBox();
+        GroupLayout gl_ProjektinmuokkausUI = new GroupLayout(ProjektinmuokkausUI);
+        gl_ProjektinmuokkausUI.setHorizontalGroup(
+        	gl_ProjektinmuokkausUI.createParallelGroup(Alignment.TRAILING)
+        		.addGroup(gl_ProjektinmuokkausUI.createSequentialGroup()
+        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        			.addGroup(gl_ProjektinmuokkausUI.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_ProjektinmuokkausUI.createSequentialGroup()
+        					.addComponent(lblProjekti, GroupLayout.PREFERRED_SIZE, 72, GroupLayout.PREFERRED_SIZE)
+        					.addGap(178)
+        					.addComponent(label_10, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+        					.addGap(63)
+        					.addComponent(label_11, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(gl_ProjektinmuokkausUI.createSequentialGroup()
+        					.addGap(250)
+        					.addComponent(comboBox_5, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+        					.addGap(10)
+        					.addComponent(comboBox_6, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(gl_ProjektinmuokkausUI.createSequentialGroup()
+        					.addGroup(gl_ProjektinmuokkausUI.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_ProjektinmuokkausUI.createSequentialGroup()
+        							.addComponent(label_13, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
+        							.addGap(10)
+        							.addComponent(formattedTextField_3, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE))
+        						.addGroup(gl_ProjektinmuokkausUI.createSequentialGroup()
+        							.addComponent(label_14, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE)
+        							.addGap(23)
+        							.addComponent(comboBox_7, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE))
+        						.addGroup(gl_ProjektinmuokkausUI.createSequentialGroup()
+        							.addComponent(label_15, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
+        							.addGap(18)
+        							.addComponent(comboBox_8, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE))
+        						.addComponent(label_16, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(scrollPane_4, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)
+        						.addGroup(gl_ProjektinmuokkausUI.createSequentialGroup()
+        							.addComponent(label_12, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+        							.addGap(22)
+        							.addGroup(gl_ProjektinmuokkausUI.createParallelGroup(Alignment.LEADING)
+        								.addComponent(comboBox_9, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+        								.addComponent(formattedTextField_2, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE))))
+        					.addGap(39)
+        					.addGroup(gl_ProjektinmuokkausUI.createParallelGroup(Alignment.LEADING)
+        						.addComponent(scrollPane_5, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(button_11, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))
+        					.addGap(10)
+        					.addGroup(gl_ProjektinmuokkausUI.createParallelGroup(Alignment.LEADING)
+        						.addComponent(scrollPane_6, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(button_12, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+        						.addGroup(gl_ProjektinmuokkausUI.createSequentialGroup()
+        							.addComponent(button_13, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
+        							.addGap(6)
+        							.addComponent(button_14, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)))))
+        			.addContainerGap())
+        );
+        gl_ProjektinmuokkausUI.setVerticalGroup(
+        	gl_ProjektinmuokkausUI.createParallelGroup(Alignment.TRAILING)
+        		.addGroup(gl_ProjektinmuokkausUI.createSequentialGroup()
+        			.addContainerGap(11, Short.MAX_VALUE)
+        			.addGroup(gl_ProjektinmuokkausUI.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_ProjektinmuokkausUI.createSequentialGroup()
+        					.addGap(3)
+        					.addGroup(gl_ProjektinmuokkausUI.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblProjekti)
+        						.addComponent(comboBox_9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+        				.addGroup(gl_ProjektinmuokkausUI.createSequentialGroup()
+        					.addGap(3)
+        					.addComponent(label_10))
+        				.addGroup(gl_ProjektinmuokkausUI.createSequentialGroup()
+        					.addGap(6)
+        					.addComponent(label_11)))
+        			.addGap(11)
+        			.addGroup(gl_ProjektinmuokkausUI.createParallelGroup(Alignment.LEADING)
+        				.addComponent(comboBox_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(comboBox_6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addGap(1)
+        			.addGroup(gl_ProjektinmuokkausUI.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_ProjektinmuokkausUI.createSequentialGroup()
+        					.addGroup(gl_ProjektinmuokkausUI.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_ProjektinmuokkausUI.createSequentialGroup()
+        							.addGap(3)
+        							.addComponent(label_12))
+        						.addComponent(formattedTextField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGap(18)
+        					.addGroup(gl_ProjektinmuokkausUI.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_ProjektinmuokkausUI.createSequentialGroup()
+        							.addGap(3)
+        							.addComponent(label_13))
+        						.addComponent(formattedTextField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGap(18)
+        					.addGroup(gl_ProjektinmuokkausUI.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_ProjektinmuokkausUI.createSequentialGroup()
+        							.addGap(3)
+        							.addComponent(label_14))
+        						.addComponent(comboBox_7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGap(18)
+        					.addGroup(gl_ProjektinmuokkausUI.createParallelGroup(Alignment.LEADING)
+        						.addComponent(label_15)
+        						.addComponent(comboBox_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGap(14)
+        					.addComponent(label_16)
+        					.addGap(18)
+        					.addComponent(scrollPane_4, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(gl_ProjektinmuokkausUI.createSequentialGroup()
+        					.addComponent(scrollPane_5, GroupLayout.PREFERRED_SIZE, 237, GroupLayout.PREFERRED_SIZE)
+        					.addGap(6)
+        					.addComponent(button_11))
+        				.addGroup(gl_ProjektinmuokkausUI.createSequentialGroup()
+        					.addComponent(scrollPane_6, GroupLayout.PREFERRED_SIZE, 237, GroupLayout.PREFERRED_SIZE)
+        					.addGap(6)
+        					.addComponent(button_12)
+        					.addGap(16)
+        					.addGroup(gl_ProjektinmuokkausUI.createParallelGroup(Alignment.LEADING)
+        						.addComponent(button_13)
+        						.addComponent(button_14))))
+        			.addContainerGap())
+        );
+        ProjektinmuokkausUI.setLayout(gl_ProjektinmuokkausUI);
+        
+        JPanel TyontekijoidenhallintaUI = new JPanel();
+        tabbedPane.addTab("Hallitse tyontekijoita", null, TyontekijoidenhallintaUI, null);
+        
+        JButton button_15 = new JButton();
+        button_15.setText("Lis\u00E4\u00E4 projektiin");
+        
+        JButton button_16 = new JButton();
+        button_16.setText("Poista projektista");
+        
+        JButton button_17 = new JButton();
+        button_17.setText("Valmis");
+        
+        JScrollPane scrollPane_7 = new JScrollPane();
+        
+        JScrollPane scrollPane_8 = new JScrollPane();
+        
+        JComboBox comboBox_10 = new JComboBox();
+        
+        JComboBox comboBox_11 = new JComboBox();
+        
+        JLabel label_9 = new JLabel();
+        label_9.setText("Projektin ty\u00F6ntekij\u00E4t:");
+        
+        JLabel label_17 = new JLabel();
+        label_17.setText("Saatavilla olevat ty\u00F6ntekij\u00E4t");
+        
+        JLabel label_18 = new JLabel();
+        label_18.setToolTipText("");
+        label_18.setText("Projekti:");
+        
+        JComboBox comboBox_12 = new JComboBox();
+        GroupLayout gl_TyontekijoidenhallintaUI = new GroupLayout(TyontekijoidenhallintaUI);
+        gl_TyontekijoidenhallintaUI.setHorizontalGroup(
+        	gl_TyontekijoidenhallintaUI.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_TyontekijoidenhallintaUI.createSequentialGroup()
+        			.addGap(18)
+        			.addGroup(gl_TyontekijoidenhallintaUI.createParallelGroup(Alignment.LEADING, false)
+        				.addGroup(gl_TyontekijoidenhallintaUI.createSequentialGroup()
+        					.addGroup(gl_TyontekijoidenhallintaUI.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_TyontekijoidenhallintaUI.createSequentialGroup()
+        							.addGroup(gl_TyontekijoidenhallintaUI.createParallelGroup(Alignment.LEADING)
+        								.addComponent(comboBox_10, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
+        								.addComponent(scrollPane_7, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE))
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addGroup(gl_TyontekijoidenhallintaUI.createParallelGroup(Alignment.LEADING)
+        								.addComponent(button_16, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+        								.addComponent(button_15, GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+        								.addComponent(button_17, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        						.addComponent(label_9, GroupLayout.PREFERRED_SIZE, 192, GroupLayout.PREFERRED_SIZE))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(gl_TyontekijoidenhallintaUI.createParallelGroup(Alignment.LEADING)
+        						.addComponent(scrollPane_8, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(comboBox_11, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(label_17, GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)))
+        				.addGroup(gl_TyontekijoidenhallintaUI.createSequentialGroup()
+        					.addComponent(label_18, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+        					.addGap(18)
+        					.addComponent(comboBox_12, GroupLayout.PREFERRED_SIZE, 471, GroupLayout.PREFERRED_SIZE)))
+        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        gl_TyontekijoidenhallintaUI.setVerticalGroup(
+        	gl_TyontekijoidenhallintaUI.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_TyontekijoidenhallintaUI.createSequentialGroup()
+        			.addGroup(gl_TyontekijoidenhallintaUI.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_TyontekijoidenhallintaUI.createSequentialGroup()
+        					.addGap(14)
+        					.addComponent(label_18))
+        				.addGroup(gl_TyontekijoidenhallintaUI.createSequentialGroup()
+        					.addContainerGap()
+        					.addComponent(comboBox_12, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+        			.addGap(11)
+        			.addGroup(gl_TyontekijoidenhallintaUI.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_TyontekijoidenhallintaUI.createSequentialGroup()
+        					.addComponent(label_9)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(comboBox_10, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addGap(6)
+        					.addGroup(gl_TyontekijoidenhallintaUI.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_TyontekijoidenhallintaUI.createSequentialGroup()
+        							.addGap(24)
+        							.addComponent(button_15)
+        							.addPreferredGap(ComponentPlacement.UNRELATED)
+        							.addComponent(button_16)
+        							.addPreferredGap(ComponentPlacement.UNRELATED)
+        							.addComponent(button_17))
+        						.addComponent(scrollPane_7, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE)))
+        				.addGroup(gl_TyontekijoidenhallintaUI.createSequentialGroup()
+        					.addComponent(label_17)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(comboBox_11, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(scrollPane_8, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE)))
+        			.addContainerGap(110, Short.MAX_VALUE))
+        );
+        TyontekijoidenhallintaUI.setLayout(gl_TyontekijoidenhallintaUI);
+        
+        JPanel VaiheidenluontiUI = new JPanel();
+        tabbedPane.addTab("Vaiheiden luonti", null, VaiheidenluontiUI, null);
+        
+        JLabel label_19 = new JLabel();
+        label_19.setToolTipText("");
+        label_19.setText("Vaiheen alkup\u00E4iv\u00E4m\u00E4\u00E4r\u00E4:");
+        
+        textField_1 = new JTextField();
+        textField_1.setText("jTextField3");
+        
+        JLabel label_20 = new JLabel();
+        label_20.setToolTipText("");
+        label_20.setText("Vaiheen alkup\u00E4iv\u00E4m\u00E4\u00E4r\u00E4:");
+        
+        textField_2 = new JTextField();
+        textField_2.setText("jTextField3");
+        
+        JLabel label_21 = new JLabel();
+        label_21.setText("Vaiheen nimi:");
+        
+        textField_3 = new JTextField();
+        textField_3.setText("jTextField2");
+        
+        JLabel label_22 = new JLabel();
+        label_22.setText("Selite:");
+        
+        JScrollPane scrollPane_9 = new JScrollPane();
+        
+        JLabel label_23 = new JLabel();
+        label_23.setText("Vaiheen ID:");
+        
+        JLabel label_24 = new JLabel();
+        label_24.setText("Projekti:");
+        
+        textField_4 = new JTextField();
+        textField_4.setText("jTextField1");
+        
+        textField_5 = new JTextField();
+        textField_5.setText("jTextField5");
+        
+        JButton button_18 = new JButton();
+        button_18.setText("Peruuta");
+        
+        JButton button_19 = new JButton();
+        button_19.setText("Talleta");
+        GroupLayout gl_VaiheidenluontiUI = new GroupLayout(VaiheidenluontiUI);
+        gl_VaiheidenluontiUI.setHorizontalGroup(
+        	gl_VaiheidenluontiUI.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_VaiheidenluontiUI.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(gl_VaiheidenluontiUI.createParallelGroup(Alignment.LEADING)
+        				.addGroup(Alignment.TRAILING, gl_VaiheidenluontiUI.createSequentialGroup()
+        					.addComponent(button_18, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
+        					.addGap(6)
+        					.addComponent(button_19, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+        					.addContainerGap())
+        				.addGroup(Alignment.TRAILING, gl_VaiheidenluontiUI.createSequentialGroup()
+        					.addGroup(gl_VaiheidenluontiUI.createParallelGroup(Alignment.LEADING, false)
+        						.addComponent(label_22, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        						.addGroup(gl_VaiheidenluontiUI.createSequentialGroup()
+        							.addGroup(gl_VaiheidenluontiUI.createParallelGroup(Alignment.TRAILING, false)
+        								.addComponent(label_21, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        								.addComponent(label_23, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        								.addComponent(label_24, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
+        							.addGap(31)
+        							.addGroup(gl_VaiheidenluontiUI.createParallelGroup(Alignment.LEADING)
+        								.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, 371, GroupLayout.PREFERRED_SIZE)
+        								.addComponent(textField_4)
+        								.addComponent(textField_3)))
+        						.addGroup(gl_VaiheidenluontiUI.createSequentialGroup()
+        							.addGroup(gl_VaiheidenluontiUI.createParallelGroup(Alignment.TRAILING, false)
+        								.addComponent(label_20, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        								.addComponent(label_19, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addGroup(gl_VaiheidenluontiUI.createParallelGroup(Alignment.LEADING)
+        								.addComponent(textField_1)
+        								.addComponent(textField_2)
+        								.addComponent(scrollPane_9, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE))))
+        					.addContainerGap(57, Short.MAX_VALUE))))
+        );
+        gl_VaiheidenluontiUI.setVerticalGroup(
+        	gl_VaiheidenluontiUI.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_VaiheidenluontiUI.createSequentialGroup()
+        			.addGroup(gl_VaiheidenluontiUI.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_VaiheidenluontiUI.createSequentialGroup()
+        					.addContainerGap()
+        					.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(gl_VaiheidenluontiUI.createSequentialGroup()
+        					.addGap(14)
+        					.addComponent(label_24)))
+        			.addGroup(gl_VaiheidenluontiUI.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_VaiheidenluontiUI.createSequentialGroup()
+        					.addGap(11)
+        					.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(gl_VaiheidenluontiUI.createSequentialGroup()
+        					.addGap(14)
+        					.addComponent(label_23)))
+        			.addGap(18)
+        			.addGroup(gl_VaiheidenluontiUI.createParallelGroup(Alignment.LEADING)
+        				.addComponent(label_21)
+        				.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addGroup(gl_VaiheidenluontiUI.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_VaiheidenluontiUI.createSequentialGroup()
+        					.addGap(18)
+        					.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(gl_VaiheidenluontiUI.createSequentialGroup()
+        					.addGap(21)
+        					.addComponent(label_19)))
+        			.addGroup(gl_VaiheidenluontiUI.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_VaiheidenluontiUI.createSequentialGroup()
+        					.addGap(21)
+        					.addComponent(label_20)
+        					.addGap(21)
+        					.addComponent(label_22))
+        				.addGroup(gl_VaiheidenluontiUI.createSequentialGroup()
+        					.addGap(18)
+        					.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+        			.addGap(7)
+        			.addComponent(scrollPane_9, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+        			.addGroup(gl_VaiheidenluontiUI.createParallelGroup(Alignment.LEADING)
+        				.addComponent(button_18)
+        				.addComponent(button_19))
+        			.addContainerGap())
+        );
+        VaiheidenluontiUI.setLayout(gl_VaiheidenluontiUI);
+        
+        JPanel VaiheidenhallintaUI = new JPanel();
+        tabbedPane.addTab("Vaiheiden hallinta", null, VaiheidenhallintaUI, null);
+        
+        JScrollPane scrollPane_10 = new JScrollPane();
+        
+        JLabel label_25 = new JLabel();
+        label_25.setText("Projekti:");
+        
+        JComboBox comboBox_13 = new JComboBox();
+        
+        JLabel label_26 = new JLabel();
+        label_26.setText("Vaiheet:");
+        
+        JButton button_20 = new JButton();
+        button_20.setText("Lis\u00E4\u00E4 vaihe");
+        
+        JButton button_21 = new JButton();
+        button_21.setText("Poista vaihe");
+        
+        JButton button_22 = new JButton();
+        button_22.setText("Peruuta");
+        
+        JButton button_23 = new JButton();
+        button_23.setText("Talleta");
+        GroupLayout gl_VaiheidenhallintaUI = new GroupLayout(VaiheidenhallintaUI);
+        gl_VaiheidenhallintaUI.setHorizontalGroup(
+        	gl_VaiheidenhallintaUI.createParallelGroup(Alignment.TRAILING)
+        		.addGroup(gl_VaiheidenhallintaUI.createSequentialGroup()
+        			.addContainerGap(235, Short.MAX_VALUE)
+        			.addComponent(button_20, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
+        			.addGap(6)
+        			.addComponent(button_21, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+        			.addGap(6)
+        			.addComponent(button_22, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
+        			.addGap(6)
+        			.addComponent(button_23, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap())
+        		.addGroup(gl_VaiheidenhallintaUI.createSequentialGroup()
+        			.addContainerGap(24, Short.MAX_VALUE)
+        			.addGroup(gl_VaiheidenhallintaUI.createParallelGroup(Alignment.LEADING, false)
+        				.addGroup(gl_VaiheidenhallintaUI.createSequentialGroup()
+        					.addComponent(label_25, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+        					.addGap(18)
+        					.addComponent(comboBox_13, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        				.addComponent(label_26, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(scrollPane_10, GroupLayout.PREFERRED_SIZE, 530, GroupLayout.PREFERRED_SIZE))
+        			.addGap(21))
+        );
+        gl_VaiheidenhallintaUI.setVerticalGroup(
+        	gl_VaiheidenhallintaUI.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_VaiheidenhallintaUI.createSequentialGroup()
+        			.addGap(27)
+        			.addGroup(gl_VaiheidenhallintaUI.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(label_25)
+        				.addComponent(comboBox_13, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addGap(33)
+        			.addComponent(label_26)
+        			.addGap(18)
+        			.addComponent(scrollPane_10, GroupLayout.PREFERRED_SIZE, 170, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+        			.addGroup(gl_VaiheidenhallintaUI.createParallelGroup(Alignment.LEADING)
+        				.addComponent(button_20)
+        				.addComponent(button_21)
+        				.addComponent(button_22)
+        				.addComponent(button_23))
+        			.addContainerGap())
+        );
+        VaiheidenhallintaUI.setLayout(gl_VaiheidenhallintaUI);
+        
+        JPanel AsiakashallintaUI = new JPanel();
+        tabbedPane.addTab("Asiakkaiden hallinta", null, AsiakashallintaUI, null);
+        GroupLayout gl_AsiakashallintaUI = new GroupLayout(AsiakashallintaUI);
+        gl_AsiakashallintaUI.setHorizontalGroup(
+        	gl_AsiakashallintaUI.createParallelGroup(Alignment.LEADING)
+        		.addGap(0, 575, Short.MAX_VALUE)
+        );
+        gl_AsiakashallintaUI.setVerticalGroup(
+        	gl_AsiakashallintaUI.createParallelGroup(Alignment.LEADING)
+        		.addGap(0, 379, Short.MAX_VALUE)
+        );
+        AsiakashallintaUI.setLayout(gl_AsiakashallintaUI);
+        getContentPane().setLayout(layout);
 
-        pack();
     }// </editor-fold>  
     
     private void avaaProjektinLisays(){
@@ -237,14 +844,6 @@ public class ProjektiHallintaUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                            
 
-    private void muokkaaAsiakkaitaActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-        // TODO add your handling code here:
-    }                                                 
-
-    private void projektiFilterActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        // TODO add your handling code here:
-    }                                              
-
     /**
      * @param args the command line arguments
      */
@@ -278,21 +877,14 @@ public class ProjektiHallintaUI extends javax.swing.JFrame {
                 new ProjektiHallintaUI().setVisible(true);
             }
         });
+        
     }
-    // Variables declaration - do not modify                     
-    private javax.swing.JButton muokkaaTyontekijoitaButton;
-    private javax.swing.JButton muokkaaVaiheitaButton;
-    private javax.swing.JLabel kukaLisasTanTurhanPaskanSyytanMiroaTjasu;
-    private javax.swing.JMenu katsoRiviYlospain;
-    private javax.swing.JMenu katsoKaksiRiviaYlospain;
-    private javax.swing.JMenuBar kukaLisasTanTurhanPaskanSyytanFronsiaTjasu;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea projektitTextArea;
-    private javax.swing.JButton kirjauduUlosButton;
-    private javax.swing.JButton lopetaButton;
-    private javax.swing.JButton muokkaaAsiakkaitaButton;
-    private javax.swing.JComboBox projektiFilterComboBox;
-    private javax.swing.JButton projektinTiedotButton;
-    private javax.swing.JButton uusiProjektiButton;
-    // End of variables declaration                   
+    private JTabbedPane tabbedPane;
+    private JPanel ProjektinhallintaUI;
+    private JTextField textField;
+    private JTextField textField_1;
+    private JTextField textField_2;
+    private JTextField textField_3;
+    private JTextField textField_4;
+    private JTextField textField_5;
 }
