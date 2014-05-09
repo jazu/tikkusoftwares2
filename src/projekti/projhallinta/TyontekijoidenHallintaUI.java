@@ -12,21 +12,29 @@ import javax.swing.JButton;
 import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author s1200508
  */
 public class TyontekijoidenHallintaUI extends JPanel {
+	private Projektit projektit;
+	private List<Projekti> apulista = new ArrayList<Projekti>();
+	private JComboBox projektiComboBox;
+	private Tyontekijat tyontekijat;
 
-    public TyontekijoidenHallintaUI() {
+    public TyontekijoidenHallintaUI(Projektit projektit, Tyontekijat tyontekijat) {
     	setLayout(null);
+    	this.projektit = projektit;
+    	this.tyontekijat = tyontekijat;
     	
     	JLabel projektiLabel = new JLabel("Projekti: ");
     	projektiLabel.setBounds(10, 11, 74, 14);
     	add(projektiLabel);
     	
-    	JComboBox projektiComboBox = new JComboBox();
+    	projektiComboBox = new JComboBox();
     	projektiComboBox.setBounds(94, 8, 547, 20);
     	add(projektiComboBox);
     	
@@ -85,5 +93,17 @@ public class TyontekijoidenHallintaUI extends JPanel {
     	JSeparator separator_1 = new JSeparator();
     	separator_1.setBounds(221, 361, 209, 2);
     	add(separator_1);
+    }
+    public void paivitaProjektit(){
+		for (Projekti projekti : projektit.palautaLista()) {
+			if (projektit.palautaLista() == null) {
+			} else {
+				if (!apulista.contains(projekti)) {
+					apulista.add(projekti);
+					projektiComboBox.addItem(projekti);
+				}
+
+			}
+		}
     }
 }

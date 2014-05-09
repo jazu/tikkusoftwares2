@@ -20,127 +20,166 @@ import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
 /**
- *
- * @author Jay-Z        u
+ * 
+ * @author Jay-Z u
  */
 public class ProjektinlisaysUI extends JPanel {
 	private JTextField nimeaProjektiTextField;
 	private JTextField loppupvmTextField;
 	private JTextField alkupvmTextField;
-    public ProjektinlisaysUI() {
-    	setLayout(null);
-    	
-    	JLabel nimeaProjektiLabel = new JLabel("Nimea Projekti: ");
-    	nimeaProjektiLabel.setBounds(10, 38, 105, 14);
-    	add(nimeaProjektiLabel);
-    	
-    	nimeaProjektiTextField = new JTextField();
-    	nimeaProjektiTextField.setBounds(125, 35, 170, 20);
-    	add(nimeaProjektiTextField);
-    	nimeaProjektiTextField.setColumns(10);
-    	
-    	JComboBox projTyontekijatLabel = new JComboBox();
-    	projTyontekijatLabel.setBounds(305, 35, 200, 20);
-    	add(projTyontekijatLabel);
-    	
-    	JComboBox projVaiheetComboBox = new JComboBox();
-    	projVaiheetComboBox.setBounds(555, 35, 200, 20);
-    	add(projVaiheetComboBox);
-    	
-    	loppupvmTextField = new JTextField();
-    	loppupvmTextField.setColumns(10);
-    	loppupvmTextField.setBounds(125, 94, 170, 20);
-    	add(loppupvmTextField);
-    	
-    	alkupvmTextField = new JTextField();
-    	alkupvmTextField.setColumns(10);
-    	alkupvmTextField.setBounds(125, 63, 170, 20);
-    	add(alkupvmTextField);
-    	
-    	JLabel alkupvmLabel = new JLabel("Alkupaivamaara:");
-    	alkupvmLabel.setBounds(10, 66, 105, 14);
-    	add(alkupvmLabel);
-    	
-    	JLabel loppupvmLabel = new JLabel("Loppupaivamaara:");
-    	loppupvmLabel.setBounds(10, 97, 106, 14);
-    	add(loppupvmLabel);
-    	
-    	JComboBox projStatusComboBox = new JComboBox();
-    	projStatusComboBox.setBounds(125, 125, 170, 20);
-    	add(projStatusComboBox);
-    	
-    	JComboBox projAsiakasComboBox = new JComboBox();
-    	projAsiakasComboBox.setBounds(125, 156, 170, 20);
-    	add(projAsiakasComboBox);
-    	
-    	JTextArea projTyontekijatTextArea_1 = new JTextArea();
-    	projTyontekijatTextArea_1.setBounds(305, 66, 200, 296);
-    	add(projTyontekijatTextArea_1);
-    	
-    	JTextArea projVaiheetTextArea = new JTextArea();
-    	projVaiheetTextArea.setBounds(555, 66, 200, 296);
-    	add(projVaiheetTextArea);
-    	
-    	JButton muokkaaTyontekijoitaButton = new JButton("Muokkaa tyontekijoita");
-    	muokkaaTyontekijoitaButton.addActionListener(new ActionListener() {
-    		public void actionPerformed(ActionEvent arg0) {
-    		}
-    	});
-    	muokkaaTyontekijoitaButton.setBounds(305, 373, 200, 23);
-    	add(muokkaaTyontekijoitaButton);
-    	
-    	JButton muokkaaVaiheitaButton = new JButton("Muokkaa vaiheita");
-    	muokkaaVaiheitaButton.addActionListener(new ActionListener() {
-    		public void actionPerformed(ActionEvent arg0) {
-    		}
-    	});
-    	muokkaaVaiheitaButton.setBounds(555, 373, 200, 23);
-    	add(muokkaaVaiheitaButton);
-    	
-    	JButton tallennaButton = new JButton("Tallenna");
-    	tallennaButton.addActionListener(new ActionListener() {
-    		public void actionPerformed(ActionEvent arg0) {
-    		}
-    	});
-    	tallennaButton.setBounds(555, 424, 127, 23);
-    	add(tallennaButton);
-    	
-    	JButton peruutaButton = new JButton("Peruuta");
-    	peruutaButton.addActionListener(new ActionListener() {
-    		public void actionPerformed(ActionEvent arg0) {
-    		}
-    	});
-    	peruutaButton.setBounds(378, 424, 127, 23);
-    	add(peruutaButton);
-    	
-    	JTextArea seliteTextArea = new JTextArea();
-    	seliteTextArea.setBounds(10, 220, 285, 142);
-    	add(seliteTextArea);
-    	
-    	JLabel seliteLabel = new JLabel("Selite:");
-    	seliteLabel.setBounds(10, 197, 91, 14);
-    	add(seliteLabel);
-    	
-    	JLabel projStatusLabel = new JLabel("Projektin status:");
-    	projStatusLabel.setBounds(10, 128, 106, 14);
-    	add(projStatusLabel);
-    	
-    	JLabel projAsiakasLabel = new JLabel("Projektin asiakas:");
-    	projAsiakasLabel.setBounds(10, 159, 105, 14);
-    	add(projAsiakasLabel);
-    	
-    	JLabel projTyontekijatTextArea = new JLabel("Projektin tyontekijat:");
-    	projTyontekijatTextArea.setBounds(305, 11, 200, 14);
-    	add(projTyontekijatTextArea);
-    	
-    	JLabel projVaiheetLabel = new JLabel("Projektin vaiheet");
-    	projVaiheetLabel.setBounds(555, 10, 200, 14);
-    	add(projVaiheetLabel);
-    	
-    	JSeparator separator = new JSeparator();
-    	separator.setOrientation(SwingConstants.VERTICAL);
-    	separator.setBounds(530, 67, 2, 295);
-    	add(separator);
+	private Projektit projektit;
+	private JTextArea seliteTextArea;
+	private Tyontekijat tyontekijat;
 
-    }
+	public ProjektinlisaysUI(Projektit projektit,Tyontekijat tyontekijat) {
+
+		this.projektit = projektit;
+		this.tyontekijat = tyontekijat;
+
+		setLayout(null);
+
+		JLabel nimeaProjektiLabel = new JLabel("Nimea Projekti: ");
+		nimeaProjektiLabel.setBounds(10, 38, 105, 14);
+		add(nimeaProjektiLabel);
+
+		nimeaProjektiTextField = new JTextField();
+		nimeaProjektiTextField.setBounds(125, 35, 170, 20);
+		add(nimeaProjektiTextField);
+		nimeaProjektiTextField.setColumns(10);
+
+		JComboBox projTyontekijatLabel = new JComboBox();
+		projTyontekijatLabel.setBounds(305, 35, 200, 20);
+		add(projTyontekijatLabel);
+
+		JComboBox projVaiheetComboBox = new JComboBox();
+		projVaiheetComboBox.setBounds(555, 35, 200, 20);
+		add(projVaiheetComboBox);
+
+		loppupvmTextField = new JTextField();
+		loppupvmTextField.setColumns(10);
+		loppupvmTextField.setBounds(125, 94, 170, 20);
+		add(loppupvmTextField);
+
+		alkupvmTextField = new JTextField();
+		alkupvmTextField.setColumns(10);
+		alkupvmTextField.setBounds(125, 63, 170, 20);
+		add(alkupvmTextField);
+
+		JLabel alkupvmLabel = new JLabel("Alkupaivamaara:");
+		alkupvmLabel.setBounds(10, 66, 105, 14);
+		add(alkupvmLabel);
+
+		JLabel loppupvmLabel = new JLabel("Loppupaivamaara:");
+		loppupvmLabel.setBounds(10, 97, 106, 14);
+		add(loppupvmLabel);
+
+		JComboBox projStatusComboBox = new JComboBox();
+		projStatusComboBox.setBounds(125, 125, 170, 20);
+		add(projStatusComboBox);
+
+		JComboBox projAsiakasComboBox = new JComboBox();
+		projAsiakasComboBox.setBounds(125, 156, 170, 20);
+		add(projAsiakasComboBox);
+
+		JList projTyontekijatTextArea_1 = new JList();
+		projTyontekijatTextArea_1.setBounds(305, 66, 200, 296);
+		add(projTyontekijatTextArea_1);
+
+		JList projVaiheetTextArea = new JList();
+		projVaiheetTextArea.setBounds(555, 66, 200, 296);
+		add(projVaiheetTextArea);
+
+		JButton muokkaaTyontekijoitaButton = new JButton(
+				"Muokkaa tyontekijoita");
+		muokkaaTyontekijoitaButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		muokkaaTyontekijoitaButton.setBounds(305, 373, 200, 23);
+		add(muokkaaTyontekijoitaButton);
+
+		JButton muokkaaVaiheitaButton = new JButton("Muokkaa vaiheita");
+		muokkaaVaiheitaButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		muokkaaVaiheitaButton.setBounds(555, 373, 200, 23);
+		add(muokkaaVaiheitaButton);
+
+		JButton tallennaButton = new JButton("Tallenna");
+		tallennaButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				lisaaProjekti();
+
+			}
+		});
+		tallennaButton.setBounds(555, 424, 127, 23);
+		add(tallennaButton);
+
+		JButton peruutaButton = new JButton("Peruuta");
+		peruutaButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		peruutaButton.setBounds(378, 424, 127, 23);
+		add(peruutaButton);
+
+		JTextArea seliteTextArea = new JTextArea();
+		seliteTextArea.setBounds(10, 220, 285, 142);
+		add(seliteTextArea);
+
+		JLabel seliteLabel = new JLabel("Selite:");
+		seliteLabel.setBounds(10, 197, 91, 14);
+		add(seliteLabel);
+
+		JLabel projStatusLabel = new JLabel("Projektin status:");
+		projStatusLabel.setBounds(10, 128, 106, 14);
+		add(projStatusLabel);
+
+		JLabel projAsiakasLabel = new JLabel("Projektin asiakas:");
+		projAsiakasLabel.setBounds(10, 159, 105, 14);
+		add(projAsiakasLabel);
+
+		JLabel projTyontekijatTextArea = new JLabel("Projektin tyontekijat:");
+		projTyontekijatTextArea.setBounds(305, 11, 200, 14);
+		add(projTyontekijatTextArea);
+
+		JLabel projVaiheetLabel = new JLabel("Projektin vaiheet");
+		projVaiheetLabel.setBounds(555, 10, 200, 14);
+		add(projVaiheetLabel);
+
+		JSeparator separator = new JSeparator();
+		separator.setOrientation(SwingConstants.VERTICAL);
+		separator.setBounds(530, 67, 2, 295);
+		add(separator);
+
+	}
+
+	public int tarkistaId() {
+
+		Projekti projekti = projektit.palautaLista().get(projektit.palautaLista().size()-1);
+		int id = projekti.getID();
+		id++;
+		return id;
+
+	}
+
+	public void lisaaProjekti() {
+		if (!this.nimeaProjektiTextField.equals("")
+				&& !this.loppupvmTextField.equals("")
+				&& !this.alkupvmTextField.equals("")) {
+			int id = tarkistaId();
+
+			Projekti projekti = new Projekti(id,
+					nimeaProjektiTextField.getText(),
+					alkupvmTextField.getText(), loppupvmTextField.getText(),
+					"Selite");
+
+			projektit.lisaaProjekti(projekti);
+			nimeaProjektiTextField.setText("");
+			loppupvmTextField.setText("");
+			alkupvmTextField.setText("");
+
+		}
+	}
 }

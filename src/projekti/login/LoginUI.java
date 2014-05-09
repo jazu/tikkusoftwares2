@@ -57,8 +57,7 @@ public class LoginUI extends javax.swing.JFrame {
 			else if(haettava.getPassword().equals(salasanaTextField.getText())&&haettava.getIsAdmin() == 1){
 				
 				this.dispose();
-				ProjektiHallintaUI admin = new ProjektiHallintaUI();
-				admin.setVisible(true);		
+				ProjektiHallintaUI admin = new ProjektiHallintaUI();	
 			}
 			else if(haettava.getPassword().equals(salasanaTextField.getText())&& haettava.getIsAdmin() ==0){
 				
