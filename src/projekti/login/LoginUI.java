@@ -1,17 +1,16 @@
 package projekti.login;
 
 
-import javax.swing.JFrame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import projekti.login.User;
+import projekti.projhallinta.ProjektiHallintaUI;
 import projekti.sql.Tietovarasto;
-import projekti.login.*;
-import projekti.sql.*;
-import projekti.tyontekija.*;
-import projekti.projhallinta.*;
+import projekti.tyontekija.TyontekijaUI;
 
 
 /*
@@ -47,7 +46,7 @@ public class LoginUI extends javax.swing.JFrame {
 
 		try {
 			
-			User haettava = rekisteri.haeKayttaja(jTextField1.getText());
+			User haettava = rekisteri.haeKayttaja(kayttajanimiTextField.getText());
 			if(haettava == null){
 				 JOptionPane.showMessageDialog(null,
 						  "Virheellinen Käyttäjänimi tai Salasana.", "Error",
@@ -55,13 +54,12 @@ public class LoginUI extends javax.swing.JFrame {
 				
 			}
 			
-			else if(haettava.getPassword().equals(jPasswordField1.getText())&&haettava.getIsAdmin() == 1){
+			else if(haettava.getPassword().equals(salasanaTextField.getText())&&haettava.getIsAdmin() == 1){
 				
 				this.dispose();
-				ProjektiHallintaUI admin = new ProjektiHallintaUI();
-				admin.setVisible(true);		
+				ProjektiHallintaUI admin = new ProjektiHallintaUI();	
 			}
-			else if(haettava.getPassword().equals(jPasswordField1.getText())&& haettava.getIsAdmin() ==0){
+			else if(haettava.getPassword().equals(salasanaTextField.getText())&& haettava.getIsAdmin() ==0){
 				
 				this.dispose();
 				TyontekijaUI tyontekija = new TyontekijaUI();
@@ -154,48 +152,55 @@ public class LoginUI extends javax.swing.JFrame {
 */
 	private void initComponents() {
 
-		jLabel1 = new javax.swing.JLabel();
-		jButton1 = new javax.swing.JButton();
-		jButton2 = new javax.swing.JButton();
-		jTextField1 = new javax.swing.JTextField();
-		jLabel2 = new javax.swing.JLabel();
-		jLabel3 = new javax.swing.JLabel();
-		jPasswordField1 = new javax.swing.JPasswordField();
+		loginLabel = new javax.swing.JLabel();
+		kirjauduButton = new javax.swing.JButton();
+		lopetaButton = new javax.swing.JButton();
+		kayttajanimiTextField = new javax.swing.JTextField();
+		kayttajanimiLabel = new javax.swing.JLabel();
+		salasanaLabel = new javax.swing.JLabel();
+		salasanaTextField = new javax.swing.JPasswordField();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-		jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-		jLabel1.setText("Login");
+		loginLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+		loginLabel.setText("Login");
 
-		jButton1.setText("Kirjaudu");
-		jButton1.addActionListener(new java.awt.event.ActionListener() {
+		kirjauduButton.setText("Kirjaudu");
+		kirjauduButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton1ActionPerformed(evt);
+				kirjauduButtonActionPerformed(evt);
 				kirjaudu();
 			}
 		});
 
-		jButton2.setText("Lopeta");
-		jButton2.addActionListener(new java.awt.event.ActionListener() {
+		salasanaTextField.addActionListener(new ActionListener(){
+
+		       public void actionPerformed(ActionEvent e){
+		            kirjaudu();
+		            
+		      }
+		});
+		lopetaButton.setText("Lopeta");
+		lopetaButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton2ActionPerformed(evt);
+				lopetaButtonActionPerformed(evt);
 				lopetus();
 			}
 		});
 
-		jTextField1.addActionListener(new java.awt.event.ActionListener() {
+		kayttajanimiTextField.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jTextField1ActionPerformed(evt);
+				kayttajanimiTextFieldActionPerformed(evt);
 			}
 		});
 
-		jLabel2.setText("Käyttäjänimi:");
+		kayttajanimiLabel.setText("Käyttäjänimi:");
 
-		jLabel3.setText("Salasana:");
+		salasanaLabel.setText("Salasana:");
 
-		jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+		salasanaTextField.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jPasswordField1ActionPerformed(evt);
+				salasanaTextFieldActionPerformed(evt);
 			}
 		});
 
@@ -210,10 +215,10 @@ public class LoginUI extends javax.swing.JFrame {
 								.addContainerGap(
 										javax.swing.GroupLayout.DEFAULT_SIZE,
 										Short.MAX_VALUE)
-								.addComponent(jButton1)
+								.addComponent(kirjauduButton)
 								.addPreferredGap(
 										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(jButton2).addGap(32, 32, 32))
+								.addComponent(lopetaButton).addGap(32, 32, 32))
 				.addGroup(
 						layout.createSequentialGroup()
 								.addGroup(
@@ -224,7 +229,7 @@ public class LoginUI extends javax.swing.JFrame {
 																.addGap(19, 19,
 																		19)
 																.addComponent(
-																		jLabel1,
+																		loginLabel,
 																		javax.swing.GroupLayout.PREFERRED_SIZE,
 																		290,
 																		javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -237,13 +242,13 @@ public class LoginUI extends javax.swing.JFrame {
 																				javax.swing.GroupLayout.Alignment.LEADING,
 																				false)
 																				.addComponent(
-																						jLabel2)
+																						kayttajanimiLabel)
 																				.addComponent(
-																						jTextField1)
+																						kayttajanimiTextField)
 																				.addComponent(
-																						jLabel3)
+																						salasanaLabel)
 																				.addComponent(
-																						jPasswordField1,
+																						salasanaTextField,
 																						javax.swing.GroupLayout.DEFAULT_SIZE,
 																						331,
 																						Short.MAX_VALUE))))
@@ -255,23 +260,23 @@ public class LoginUI extends javax.swing.JFrame {
 				.addGroup(
 						layout.createSequentialGroup()
 								.addContainerGap()
-								.addComponent(jLabel1,
+								.addComponent(loginLabel,
 										javax.swing.GroupLayout.PREFERRED_SIZE,
 										55,
 										javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addGap(18, 18, 18)
-								.addComponent(jLabel2)
+								.addComponent(kayttajanimiLabel)
 								.addGap(2, 2, 2)
-								.addComponent(jTextField1,
+								.addComponent(kayttajanimiTextField,
 										javax.swing.GroupLayout.PREFERRED_SIZE,
 										javax.swing.GroupLayout.DEFAULT_SIZE,
 										javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addPreferredGap(
 										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-								.addComponent(jLabel3)
+								.addComponent(salasanaLabel)
 								.addPreferredGap(
 										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(jPasswordField1,
+								.addComponent(salasanaTextField,
 										javax.swing.GroupLayout.PREFERRED_SIZE,
 										javax.swing.GroupLayout.DEFAULT_SIZE,
 										javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -282,26 +287,26 @@ public class LoginUI extends javax.swing.JFrame {
 								.addGroup(
 										layout.createParallelGroup(
 												javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(jButton1)
-												.addComponent(jButton2))
+												.addComponent(kirjauduButton)
+												.addComponent(lopetaButton))
 								.addContainerGap()));
 
 		pack();
 	}// </editor-fold>
 
-	private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {
+	private void kayttajanimiTextFieldActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
 	}
 
-	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+	private void kirjauduButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
 	}
 
-	private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {
+	private void salasanaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
 	}
 
-	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
+	private void lopetaButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
 	}
 
@@ -351,12 +356,12 @@ public class LoginUI extends javax.swing.JFrame {
 	}
 
 	// Variables declaration - do not modify
-	private javax.swing.JButton jButton1;
-	private javax.swing.JButton jButton2;
-	private javax.swing.JLabel jLabel1;
-	private javax.swing.JLabel jLabel2;
-	private javax.swing.JLabel jLabel3;
-	private javax.swing.JPasswordField jPasswordField1;
-	private javax.swing.JTextField jTextField1;
+	private javax.swing.JButton kirjauduButton;
+	private javax.swing.JButton lopetaButton;
+	private javax.swing.JLabel loginLabel;
+	private javax.swing.JLabel kayttajanimiLabel;
+	private javax.swing.JLabel salasanaLabel;
+	private javax.swing.JPasswordField salasanaTextField;
+	private javax.swing.JTextField kayttajanimiTextField;
 	// End of variables declaration
 }

@@ -221,7 +221,31 @@ public class Tietovarasto {
 
 		}
 	}
-
+	public boolean muutaTyontekijanTietoja(Tyontekija tyontekija){
+		Connection yhteys= Yhteydenhallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+		if(yhteys==null) return false;
+		PreparedStatement muutoslause=null;
+		try{
+			String muutoslauseSql ="update tyontekija set kayttajaID=?, etunimi=? ,sukunimi=?, syntymavuosi=?, osaaminenetunimi=?, sukunimi=?, syntymavuosi=? where henkiloID=?";
+			muutoslause = yhteys.prepareStatement(muutoslauseSql);
+			muutoslause.setInt(1, tyontekija.getKayttajaID());
+			muutoslause.setString(2, tyontekija.getEtunimi());
+			muutoslause.setString(3, tyontekija.getSukunimi());
+			muutoslause.setInt(4, tyontekija.getSyntymavuosi());
+			muutoslause.setString(5, tyontekija.getOsaaminen());
+			
+			muutoslause.executeUpdate();
+			return true;
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		finally{
+			Yhteydenhallinta.suljeLause(muutoslause);
+			Yhteydenhallinta.suljeYhteys(yhteys);
+		}
+	}
 
 }
 

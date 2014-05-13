@@ -10,7 +10,7 @@ public class User {
 			  kayttajaID INTEGER NOT NULL PRIMARY KEY,
 			  kayttajanimi VARCHAR(45) NOT NULL,
 			  salasana VARCHAR(45) NOT NULL,
-			  onkoAdmin VARCHAR(255) NOT NULL
+			  onkoAdmin INTEGER(1) NOT NULL
 			);
 			
 			insert into loginusers (kayttajaID, kayttajanimi, salasana, onkoAdmin) values(1,'Admin','admin','1');
