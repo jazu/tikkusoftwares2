@@ -26,8 +26,7 @@ public class ProjektiHallintaUI {
 		tabbedPane.setTabPlacement(JTabbedPane.LEFT);
 		tabbedPane.add("Lisaa projekti", projlisayspaneeli);
 		tabbedPane.add("Muokkaa projektia", projmuokkauspaneeli);
-
-		tabbedPane.add("Hallitse vaiheita", vaiheidenluontipaneeli);
+	tabbedPane.add("Hallitse vaiheita", vaiheidenluontipaneeli);
 		tabbedPane.add("Hallitse tyontekijoita", tyontekhallintapaneeli);
 		tabbedPane.add("Asiakkaiden hallinta", projlisayspaneeli6);
 		tabbedPane.add("Help", helppaneeli);
