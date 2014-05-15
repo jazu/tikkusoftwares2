@@ -36,6 +36,8 @@ public class ProjektinlisaysUI extends JPanel {
 
 		this.projektit = projektit;
 		this.tyontekijat = tyontekijat;
+		
+		
 
 		setLayout(null);
 

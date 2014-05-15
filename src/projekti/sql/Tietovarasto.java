@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import projekti.*;
 import projekti.login.User;
+import projekti.projhallinta.Tyontekija;
 import projekti.tyontekija.*;
 
 public class Tietovarasto {

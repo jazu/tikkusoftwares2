@@ -19,15 +19,15 @@ public class ProjektiHallintaUI {
     Help helppaneeli = new Help(); 
     ProjektinMuokkausUI projmuokkauspaneeli = new ProjektinMuokkausUI(projektit,tyontekijat);
     AsiakasUI asiakasui = new AsiakasUI(projektit,tyontekijat); //placeholder
-
+    private static String kirjautujannimi;
     
-	public ProjektiHallintaUI() {
-		
+	public ProjektiHallintaUI(String kirjautujannimi) {
+		this.kirjautujannimi = kirjautujannimi;
+
 		tabbedPane.setTabPlacement(JTabbedPane.LEFT);
 		tabbedPane.add("Lisaa projekti", projlisayspaneeli);
 		tabbedPane.add("Muokkaa projektia", projmuokkauspaneeli);
-
-		tabbedPane.add("Hallitse vaiheita", vaiheidenluontipaneeli);
+	tabbedPane.add("Hallitse vaiheita", vaiheidenluontipaneeli);
 		tabbedPane.add("Hallitse tyontekijoita", tyontekhallintapaneeli);
 		tabbedPane.add("Asiakkaiden hallinta", asiakasui);
 		tabbedPane.add("Help", helppaneeli);
@@ -37,6 +37,8 @@ public class ProjektiHallintaUI {
         frame.setSize(950, 500);
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
+		frame.setTitle("Kirjautunut sisaan kayttajana: "+kirjautujannimi);
+
         jasutus();
         tabbedPane.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
@@ -51,7 +53,7 @@ public class ProjektiHallintaUI {
 
 			@Override
 			public void run() {	
-				new ProjektiHallintaUI();
+				new ProjektiHallintaUI(kirjautujannimi);
 			}
 			
 		});

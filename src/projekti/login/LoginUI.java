@@ -25,6 +25,7 @@ import projekti.tyontekija.TyontekijaUI;
 public class LoginUI extends javax.swing.JFrame {
 
 	private Tietovarasto rekisteri = new Tietovarasto();
+	private String kirjautujannimi = "";
 
 	/**
 	 * Creates new form Login
@@ -55,14 +56,15 @@ public class LoginUI extends javax.swing.JFrame {
 			}
 			
 			else if(haettava.getPassword().equals(salasanaTextField.getText())&&haettava.getIsAdmin() == 1){
-				
+				this.kirjautujannimi = kayttajanimiTextField.getText();
 				this.dispose();
-				ProjektiHallintaUI admin = new ProjektiHallintaUI();	
+				ProjektiHallintaUI admin = new ProjektiHallintaUI(kirjautujannimi);	
 			}
 			else if(haettava.getPassword().equals(salasanaTextField.getText())&& haettava.getIsAdmin() ==0){
+				this.kirjautujannimi = kayttajanimiTextField.getText();
 				
 				this.dispose();
-				TyontekijaUI tyontekija = new TyontekijaUI();
+				TyontekijaUI tyontekija = new TyontekijaUI(kirjautujannimi);
 				tyontekija.setVisible(true);
 				
 			}
