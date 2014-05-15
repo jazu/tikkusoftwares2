@@ -23,5 +23,8 @@ public class Tyontekijat {
 		}
 		tyontekijat.remove(poistettava);
 	}
+	public List<Tyontekija> getTyontekijat(){
+		return tyontekijat;
+	}
 
 }

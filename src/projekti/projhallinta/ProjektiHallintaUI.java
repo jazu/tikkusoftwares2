@@ -18,7 +18,7 @@ public class ProjektiHallintaUI {
     TyontekijoidenHallintaUI tyontekhallintapaneeli = new TyontekijoidenHallintaUI(projektit,tyontekijat);
     Help helppaneeli = new Help(); 
     ProjektinMuokkausUI projmuokkauspaneeli = new ProjektinMuokkausUI(projektit,tyontekijat);
-    ProjektinlisaysUI projlisayspaneeli6 = new ProjektinlisaysUI(projektit,tyontekijat); //placeholder
+    AsiakasUI asiakasui = new AsiakasUI(projektit,tyontekijat); //placeholder
 
     
 	public ProjektiHallintaUI() {
@@ -29,7 +29,7 @@ public class ProjektiHallintaUI {
 
 		tabbedPane.add("Hallitse vaiheita", vaiheidenluontipaneeli);
 		tabbedPane.add("Hallitse tyontekijoita", tyontekhallintapaneeli);
-		tabbedPane.add("Asiakkaiden hallinta", projlisayspaneeli6);
+		tabbedPane.add("Asiakkaiden hallinta", asiakasui);
 		tabbedPane.add("Help", helppaneeli);
 		
         frame.getContentPane().add(tabbedPane);
@@ -50,10 +50,7 @@ public class ProjektiHallintaUI {
 		SwingUtilities.invokeLater(new Runnable() {
 
 			@Override
-			public void run() {
-
-				
-				
+			public void run() {	
 				new ProjektiHallintaUI();
 			}
 			
@@ -81,13 +78,18 @@ public class ProjektiHallintaUI {
 		projekti1.lisaaTyontekija(tyontekija4);
 		projekti2.lisaaTyontekija(tyontekija);
 		projekti2.lisaaTyontekija(tyontekija2);
+		tyontekijat.lisaaTyontekija(tyontekija);
+		tyontekijat.lisaaTyontekija(tyontekija2);
+		tyontekijat.lisaaTyontekija(tyontekija4);
+		tyontekijat.lisaaTyontekija(tyontekija3);
+		projekti1.setStatus(ProjektinStatus.KAYNNISSA);
+		projekti2.setStatus(ProjektinStatus.TARJOTTU);
 		projekti1.lisaaVaihe(vaihe1);
 		projekti1.lisaaVaihe(vaihe2);
 		projekti1.lisaaVaihe(vaihe3);
 		projekti2.lisaaVaihe(lolz);
 		projekti2.lisaaVaihe(sofunni);
 		this.projektit.lisaaProjekti(projekti1);
-		
 		this.projektit.lisaaProjekti(projekti2);
 		System.out.println(projekti1.getVaiheet().toString());
 		System.out.println(projekti1.getTyontekijat().toString());

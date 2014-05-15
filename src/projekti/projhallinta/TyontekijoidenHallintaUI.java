@@ -24,6 +24,9 @@ public class TyontekijoidenHallintaUI extends JPanel {
 	private List<Projekti> apulista = new ArrayList<Projekti>();
 	private JComboBox projektiComboBox;
 	private Tyontekijat tyontekijat;
+	private JList projTyontekijatList;
+	private JList vapaatTyontekijatList;
+	private List<Tyontekija> jasu = new ArrayList<Tyontekija>();
 
     public TyontekijoidenHallintaUI(Projektit projektit, Tyontekijat tyontekijat) {
     	setLayout(null);
@@ -45,18 +48,20 @@ public class TyontekijoidenHallintaUI extends JPanel {
     	JComboBox projTyontekijatComboBox = new JComboBox();
     	projTyontekijatComboBox.setBounds(10, 84, 201, 20);
     	add(projTyontekijatComboBox);
+    	projTyontekijatComboBox.addItem("Filter");
     	
-    	JList projTyontekijatList = new JList();
+    	projTyontekijatList = new JList();
     	projTyontekijatList.setBounds(10, 114, 201, 249);
     	add(projTyontekijatList);
     	
-    	JList vapaatTyontekijatList = new JList();
+    	vapaatTyontekijatList = new JList();
     	vapaatTyontekijatList.setBounds(440, 114, 201, 249);
     	add(vapaatTyontekijatList);
     	
     	JComboBox vapaatTyontekijatComboBox = new JComboBox();
     	vapaatTyontekijatComboBox.setBounds(440, 84, 201, 20);
     	add(vapaatTyontekijatComboBox);
+    	vapaatTyontekijatComboBox.addItem("Filter");
     	
     	JLabel vapaatTyontekijatLabel = new JLabel("Saatavilla olevat tyontekijat:");
     	vapaatTyontekijatLabel.setBounds(440, 59, 201, 14);
@@ -65,6 +70,8 @@ public class TyontekijoidenHallintaUI extends JPanel {
     	JButton lisaaProjektiinButton = new JButton("Lisaa projektiin");
     	lisaaProjektiinButton.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent arg0) {
+    			lisaaProjektiin();
+    			paivita();
     		}
     	});
     	lisaaProjektiinButton.setBounds(221, 178, 209, 23);
@@ -73,18 +80,14 @@ public class TyontekijoidenHallintaUI extends JPanel {
     	JButton poistaProjektistaButton = new JButton("Poista projektista");
     	poistaProjektistaButton.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent arg0) {
+    			poistaProjektista();
+    			paivita();
     		}
     	});
     	poistaProjektistaButton.setBounds(221, 212, 209, 23);
     	add(poistaProjektistaButton);
     	
-    	JButton valmisButton = new JButton("Valmis");
-    	valmisButton.addActionListener(new ActionListener() {
-    		public void actionPerformed(ActionEvent arg0) {
-    		}
-    	});
-    	valmisButton.setBounds(221, 246, 209, 23);
-    	add(valmisButton);
+
     	
     	JSeparator separator = new JSeparator();
     	separator.setBounds(221, 114, 209, 2);
@@ -93,6 +96,14 @@ public class TyontekijoidenHallintaUI extends JPanel {
     	JSeparator separator_1 = new JSeparator();
     	separator_1.setBounds(221, 361, 209, 2);
     	add(separator_1);
+		projektiComboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				paivitaAluksi();
+				paivita();
+			}
+		});
+		
+		
     }
     public void paivitaProjektit(){
 		for (Projekti projekti : projektit.palautaLista()) {
@@ -106,4 +117,60 @@ public class TyontekijoidenHallintaUI extends JPanel {
 			}
 		}
     }
+    public void paivitaAluksi(){
+    	Projekti proj = (Projekti) projektiComboBox.getSelectedItem();
+    	List<Tyontekija> poistettavat = new ArrayList<Tyontekija>();
+    	for(Projekti projekti : projektit.palautaLista()){
+        	for(Tyontekija tyontekija : projekti.getTyontekijat()){
+        		if(!jasu.contains(tyontekija)){
+    				jasu.add(tyontekija);
+        		}
+        	}
+    		
+    	}
+    	
+
+		for(Tyontekija jasuttaja : jasu){
+			
+			if(proj.getTyontekijat().contains(jasuttaja)){
+				poistettavat.add(jasuttaja);
+			}	
+		}
+    	jasu.removeAll(poistettavat);
+    	System.out.println(jasu.toString()+" PAIVITAALUKSI");
+    	this.projTyontekijatList.setListData(proj.getTyontekijat().toArray());
+    	this.vapaatTyontekijatList.setListData(jasu.toArray());
+    	
+    	
+    }
+    public void paivita(){
+    	Projekti proj = (Projekti) projektiComboBox.getSelectedItem();
+    	this.projTyontekijatList.setListData(proj.getTyontekijat().toArray());
+    	this.vapaatTyontekijatList.setListData(jasu.toArray());
+    	
+    }
+    public void lisaaProjektiin(){
+    	Projekti proj = (Projekti) projektiComboBox.getSelectedItem();
+
+    	int num = vapaatTyontekijatList.getSelectedIndex();
+        if(!proj.getTyontekijat().contains(jasu.get(num))){
+        	proj.lisaaTyontekija(jasu.get(num));
+        	jasu.remove(num);
+        	
+        }
+
+
+    	
+    }
+
+    public void poistaProjektista(){
+    	Projekti proj = (Projekti) projektiComboBox.getSelectedItem();
+    	int num = projTyontekijatList.getSelectedIndex();
+    	Tyontekija tyontekija = proj.getTyontekijat().get(num);
+    	proj.poistaTyontekija(tyontekija);
+    	jasu.add(tyontekija);
+    	
+    	
+    }
+    
 }

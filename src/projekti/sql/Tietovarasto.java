@@ -9,7 +9,6 @@ import java.util.List;
 import projekti.*;
 import projekti.login.User;
 import projekti.tyontekija.*;
-import projekti.tyontekija.Tyontekija;
 
 public class Tietovarasto {
 	private String ajuri;

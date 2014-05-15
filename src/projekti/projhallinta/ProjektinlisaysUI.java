@@ -30,6 +30,7 @@ public class ProjektinlisaysUI extends JPanel {
 	private Projektit projektit;
 	private JTextArea seliteTextArea;
 	private Tyontekijat tyontekijat;
+	private JComboBox projStatusComboBox;
 
 	public ProjektinlisaysUI(Projektit projektit,Tyontekijat tyontekijat) {
 
@@ -47,13 +48,15 @@ public class ProjektinlisaysUI extends JPanel {
 		add(nimeaProjektiTextField);
 		nimeaProjektiTextField.setColumns(10);
 
-		JComboBox projTyontekijatLabel = new JComboBox();
-		projTyontekijatLabel.setBounds(305, 35, 200, 20);
-		add(projTyontekijatLabel);
+		JComboBox projTyontekijatComboBox = new JComboBox();
+		projTyontekijatComboBox.setBounds(305, 35, 200, 20);
+		add(projTyontekijatComboBox);
+		projTyontekijatComboBox.addItem("Filter");
 
 		JComboBox projVaiheetComboBox = new JComboBox();
 		projVaiheetComboBox.setBounds(555, 35, 200, 20);
 		add(projVaiheetComboBox);
+		projVaiheetComboBox.addItem("Filter");
 
 		loppupvmTextField = new JTextField();
 		loppupvmTextField.setColumns(10);
@@ -73,13 +76,17 @@ public class ProjektinlisaysUI extends JPanel {
 		loppupvmLabel.setBounds(10, 97, 106, 14);
 		add(loppupvmLabel);
 
-		JComboBox projStatusComboBox = new JComboBox();
+		projStatusComboBox = new JComboBox();
 		projStatusComboBox.setBounds(125, 125, 170, 20);
 		add(projStatusComboBox);
+		projStatusComboBox.addItem(ProjektinStatus.TARJOTTU);
+		projStatusComboBox.addItem(ProjektinStatus.KAYNNISSA);
+		projStatusComboBox.addItem(ProjektinStatus.PAATTYNYT);
 
 		JComboBox projAsiakasComboBox = new JComboBox();
 		projAsiakasComboBox.setBounds(125, 156, 170, 20);
 		add(projAsiakasComboBox);
+		
 
 		JList projTyontekijatTextArea_1 = new JList();
 		projTyontekijatTextArea_1.setBounds(305, 66, 200, 296);
@@ -174,11 +181,19 @@ public class ProjektinlisaysUI extends JPanel {
 					nimeaProjektiTextField.getText(),
 					alkupvmTextField.getText(), loppupvmTextField.getText(),
 					"Selite");
+		    if(projStatusComboBox.getSelectedIndex() == 1){
+		    	projekti.setStatus(ProjektinStatus.KAYNNISSA);
+		    }else if(projStatusComboBox.getSelectedIndex() == 2){
+		    	projekti.setStatus(ProjektinStatus.PAATTYNYT);
+		    }else{
+		    	projekti.setStatus(ProjektinStatus.TARJOTTU);
+		    }
 
 			projektit.lisaaProjekti(projekti);
 			nimeaProjektiTextField.setText("");
 			loppupvmTextField.setText("");
 			alkupvmTextField.setText("");
+			JOptionPane.showMessageDialog(this, "Projekti: "+projekti.getNimi()+" luotu IDllä: "+projekti.getID()+" onnistuneesti","Projekti luotu",JOptionPane.INFORMATION_MESSAGE);
 
 		}
 	}

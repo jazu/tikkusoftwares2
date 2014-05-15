@@ -14,6 +14,9 @@ public class Projekti {
 	private List<Tyontekija> tyontekijat;
 	private String asiakas;
 	private String selite;
+	private ProjektinStatus status;
+	
+
 	
 	public Projekti(int iD, String nimi, String alkupvm, String loppupvm, String selite) {
 		
@@ -24,6 +27,15 @@ public class Projekti {
 		this.selite = selite;
 		this.vaiheet = new ArrayList<Vaihe>();
 		this.tyontekijat = new ArrayList<Tyontekija>();
+		this.status = status;
+	}
+
+	public ProjektinStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(ProjektinStatus status) {
+		this.status = status;
 	}
 
 	public int getID() {
@@ -119,6 +131,15 @@ public class Projekti {
 			this.tyontekijat.add(tyontekija);
 	//	}
 
+	}
+	public void poistaTyontekija(Tyontekija poistettavatyontekija){
+		Tyontekija poistettava = null;
+		for(Tyontekija tyontekija : this.getTyontekijat()){
+			if(tyontekija.equals(poistettavatyontekija)){
+				poistettava = tyontekija;
+			}
+		}
+		this.tyontekijat.remove(poistettava);
 	}
 	public void lisaaVaiheet(List<Vaihe> vaiheet){
 		this.vaiheet = vaiheet;

@@ -33,6 +33,7 @@ public class ProjektinMuokkausUI extends JPanel {
 	private JList projVaiheetTextArea;
 	private Tyontekijat tyontekijat;
 	private JList projTyontekijatTextArea;
+	private JComboBox projStatusTextField;
 
 	public ProjektinMuokkausUI(Projektit projektit, Tyontekijat tyontekijat) {
 		setLayout(null);
@@ -49,10 +50,12 @@ public class ProjektinMuokkausUI extends JPanel {
 		JComboBox projTyontekijatComboBox = new JComboBox();
 		projTyontekijatComboBox.setBounds(305, 36, 200, 20);
 		add(projTyontekijatComboBox);
+		projTyontekijatComboBox.addItem("Filter");
 
 		JComboBox projVaiheetComboBox = new JComboBox();
 		projVaiheetComboBox.setBounds(555, 36, 200, 20);
 		add(projVaiheetComboBox);
+		projVaiheetComboBox.addItem("Filter");
 
 		loppupvmTextField = new JTextField();
 		loppupvmTextField.setColumns(10);
@@ -72,9 +75,12 @@ public class ProjektinMuokkausUI extends JPanel {
 		loppupvmLabel.setBounds(10, 98, 106, 14);
 		add(loppupvmLabel);
 
-		JComboBox projStatusTextField = new JComboBox();
+		projStatusTextField = new JComboBox();
 		projStatusTextField.setBounds(125, 126, 170, 20);
 		add(projStatusTextField);
+		projStatusTextField.addItem(ProjektinStatus.TARJOTTU);
+		projStatusTextField.addItem(ProjektinStatus.KAYNNISSA);
+		projStatusTextField.addItem(ProjektinStatus.PAATTYNYT);
 
 		JComboBox projAsiakasTextField = new JComboBox();
 		projAsiakasTextField.setBounds(125, 157, 170, 20);
@@ -166,6 +172,8 @@ public class ProjektinMuokkausUI extends JPanel {
 		this.seliteTextArea.setText(projekti.getSelite());
 		this.projVaiheetTextArea.setListData(projekti.getVaiheet().toArray());
 		this.projTyontekijatTextArea.setListData(projekti.getTyontekijat().toArray());
+		this.projStatusTextField.setSelectedItem(projekti.getStatus());
+		
 
 		
 		

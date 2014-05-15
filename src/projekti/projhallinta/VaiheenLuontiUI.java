@@ -131,13 +131,7 @@ public class VaiheenLuontiUI extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				int valittu = vaiheList.getSelectedIndex();
-				Vaihe vaihe = (Vaihe) vaiheList.getModel()
-						.getElementAt(valittu);
-				vaiheenNimiTextField.setText(vaihe.getNimi());
-				vaiheenAlkupvmTextField.setText(vaihe.getAlkupvm());
-				vaiheenLoppupvmTextField.setText(vaihe.getLoppupvm());
-				seliteTextArea.setText(vaihe.getSelite());
+
 
 			}
 
@@ -153,6 +147,7 @@ public class VaiheenLuontiUI extends JPanel {
 
 			@Override
 			public void mousePressed(MouseEvent arg0) {
+				paivitaVaiheenTiedot();
 
 			}
 
@@ -163,10 +158,25 @@ public class VaiheenLuontiUI extends JPanel {
 		});
 
 	}
+	public void paivitaVaiheenTiedot(){
+		int valittu = vaiheList.getSelectedIndex();
+		if(valittu >= 0){
+			Vaihe vaihe = (Vaihe) vaiheList.getModel()
+					.getElementAt(valittu);
+			vaiheenNimiTextField.setText(vaihe.getNimi());
+			vaiheenAlkupvmTextField.setText(vaihe.getAlkupvm());
+			vaiheenLoppupvmTextField.setText(vaihe.getLoppupvm());
+			seliteTextArea.setText(vaihe.getSelite());
+			
+		}
+
+		
+	}
 
 	public void paivitaTiedot() {
 		Projekti projekti = (Projekti) projektiComboBox.getSelectedItem();
 		this.vaiheList.setListData(projekti.getVaiheet().toArray());
+
 
 	}
 
@@ -200,7 +210,14 @@ public class VaiheenLuontiUI extends JPanel {
 	}
 
 	public void lisaaVaihe() {
-		int id = tarkistaId();
+		int id = 1;
+		Projekti zz = (Projekti) projektiComboBox.getSelectedItem();
+		if(zz.getVaiheet().size() == 0){
+			id = 1;
+		}else{
+		    id = tarkistaId();
+		}
+
 
 		Vaihe vaihe = new Vaihe(id, vaiheenNimiTextField.getText(),
 				vaiheenAlkupvmTextField.getText(),
