@@ -86,6 +86,7 @@ public class VaiheenLuontiUI extends JPanel {
 		uusiButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				lisaaVaihe();
+				paivitaTiedot();
 			}
 		});
 
@@ -156,6 +157,7 @@ public class VaiheenLuontiUI extends JPanel {
 
 			}
 		});
+
 
 	}
 	public void paivitaVaiheenTiedot(){

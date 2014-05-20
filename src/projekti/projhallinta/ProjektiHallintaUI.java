@@ -1,6 +1,7 @@
 package projekti.projhallinta;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
@@ -14,21 +15,23 @@ public class ProjektiHallintaUI {
     Tyontekijat tyontekijat = new Tyontekijat();
     Asiakkaat asiakkaat = new Asiakkaat();
     
+    ProjektiNakymaUI alkuruutu = new ProjektiNakymaUI(projektit,tyontekijat, tabbedPane);
     ProjektinlisaysUI projlisayspaneeli = new ProjektinlisaysUI(projektit,tyontekijat, asiakkaat);
     VaiheenLuontiUI vaiheidenluontipaneeli = new VaiheenLuontiUI(projektit,tyontekijat);
     TyontekijoidenHallintaUI tyontekhallintapaneeli = new TyontekijoidenHallintaUI(projektit,tyontekijat);
     Help helppaneeli = new Help(); 
-    ProjektinMuokkausUI projmuokkauspaneeli = new ProjektinMuokkausUI(projektit,tyontekijat, asiakkaat);
-    AsiakasUI asiakasui = new AsiakasUI(projektit,tyontekijat, asiakkaat); //placeholder
+    ProjektinMuokkausUI projmuokkauspaneeli = new ProjektinMuokkausUI(projektit,tyontekijat, asiakkaat, tabbedPane);
+    AsiakasUI asiakasui = new AsiakasUI(projektit,tyontekijat, asiakkaat);
     private static String kirjautujannimi;
     
 	public ProjektiHallintaUI(String kirjautujannimi) {
 		this.kirjautujannimi = kirjautujannimi;
 
 		tabbedPane.setTabPlacement(JTabbedPane.LEFT);
+		tabbedPane.add("Projekti Näkymä",alkuruutu );
 		tabbedPane.add("Lisaa projekti", projlisayspaneeli);
 		tabbedPane.add("Muokkaa projektia", projmuokkauspaneeli);
-	tabbedPane.add("Hallitse vaiheita", vaiheidenluontipaneeli);
+	    tabbedPane.add("Hallitse vaiheita", vaiheidenluontipaneeli);
 		tabbedPane.add("Hallitse tyontekijoita", tyontekhallintapaneeli);
 		tabbedPane.add("Asiakkaiden hallinta", asiakasui);
 		tabbedPane.add("Help", helppaneeli);
@@ -47,6 +50,7 @@ public class ProjektiHallintaUI {
             }
         });
 		projlisayspaneeli.paivitaAsiakkaat();
+		alkuruutu.paivitaTiedot();
 		
 	}
 	
@@ -62,13 +66,22 @@ public class ProjektiHallintaUI {
 		});
 	}
 	public void paivitaKaikki(){
+		alkuruutu.paivitaTiedot();
 		projlisayspaneeli.paivitaAsiakkaat();
 		projmuokkauspaneeli.paivitaProjektit();
+		projmuokkauspaneeli.paivitaAsiakkaat();
+		projmuokkauspaneeli.paivitaTiedot();
 		vaiheidenluontipaneeli.paivitaProjektit();
 		tyontekhallintapaneeli.paivitaProjektit();
 		asiakasui.paivitaTiedot();
 
 	}
+	public JTabbedPane getTabbedPane() {
+		return tabbedPane;
+	}
+
+
+
 	public void jasutus(){
 		Projekti projekti1 = new Projekti(1,"Testiprojekti","12.2.2012","23.5.2012","Testaillaan projektia");
 		Projekti projekti2 = new Projekti(2,"Miron Salainen Projekti","14.6.2012","23.8.2012","Makkaraperunat");
@@ -81,9 +94,14 @@ public class ProjektiHallintaUI {
 		Tyontekija tyontekija2 = new Tyontekija(2,"Miro","Helenius",1994,"CSS Ohjelmointi");
 		Tyontekija tyontekija3 = new Tyontekija(3,"Make","Siwa",2000,"Java Ohjelmointi");
 		Tyontekija tyontekija4 = new Tyontekija(4,"Jay","Zu",1993,"Musiikki");
-	    asiakkaat.lisaaAsiakas(new Asiakas(0,"Kalle Töyrylä", "Jasun hotpics Oy", "Robin Jakkara"));
-	    asiakkaat.lisaaAsiakas(new Asiakas(1, "Juuso Korpela", "Jakkaramyynti Oy","Juusi Lampela"));
-	    asiakkaat.lisaaAsiakas(new Asiakas(2, "Tuomas Salami", "Siwa Oy", "Jaakko Metsola"));
+		Asiakas asiakas1 = new Asiakas(0,"Kalle Töyrylä", "Jasun hotpics Oy", "Robin Jakkara");
+		Asiakas asiakas2 = new Asiakas(1, "Juuso Korpela", "Jakkaramyynti Oy","Juusi Lampela");
+		Asiakas asiakas3 = new Asiakas(2, "Tuomas Salami", "Siwa Oy", "Jaakko Metsola");
+	    asiakkaat.lisaaAsiakas(asiakas1);
+	    asiakkaat.lisaaAsiakas(asiakas2);
+	    asiakkaat.lisaaAsiakas(asiakas3);
+	    projekti1.setAsiakas(asiakas3);
+	    projekti2.setAsiakas(asiakas2);
 		projekti1.lisaaTyontekija(tyontekija3);
 		projekti1.lisaaTyontekija(tyontekija4);
 		projekti2.lisaaTyontekija(tyontekija);

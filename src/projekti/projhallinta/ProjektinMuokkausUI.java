@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -33,11 +34,14 @@ public class ProjektinMuokkausUI extends JPanel {
 	private JList projVaiheetTextArea;
 	private Tyontekijat tyontekijat;
 	private JList projTyontekijatTextArea;
-	private JComboBox projStatusTextField;
+	private JComboBox projStatusComboBox;
 	private Asiakkaat asiakkaat;
 	private JComboBox projAsiakasTextField;
+	private JTabbedPane tb;
 
-	public ProjektinMuokkausUI(Projektit projektit, Tyontekijat tyontekijat, Asiakkaat asiakkaat) {
+
+	public ProjektinMuokkausUI(Projektit projektit, Tyontekijat tyontekijat, Asiakkaat asiakkaat, final JTabbedPane tb) {
+		this.tb = tb;
 		this.asiakkaat = asiakkaat;
 		setLayout(null);
 		this.projektit = projektit;
@@ -78,12 +82,12 @@ public class ProjektinMuokkausUI extends JPanel {
 		loppupvmLabel.setBounds(10, 98, 106, 14);
 		add(loppupvmLabel);
 
-		projStatusTextField = new JComboBox();
-		projStatusTextField.setBounds(125, 126, 170, 20);
-		add(projStatusTextField);
-		projStatusTextField.addItem(ProjektinStatus.TARJOTTU);
-		projStatusTextField.addItem(ProjektinStatus.KAYNNISSA);
-		projStatusTextField.addItem(ProjektinStatus.PAATTYNYT);
+		projStatusComboBox = new JComboBox();
+		projStatusComboBox.setBounds(125, 126, 170, 20);
+		add(projStatusComboBox);
+		projStatusComboBox.addItem(ProjektinStatus.TARJOTTU);
+		projStatusComboBox.addItem(ProjektinStatus.KAYNNISSA);
+		projStatusComboBox.addItem(ProjektinStatus.PAATTYNYT);
 
 		projAsiakasTextField = new JComboBox();
 		projAsiakasTextField.setBounds(125, 157, 170, 20);
@@ -101,10 +105,12 @@ public class ProjektinMuokkausUI extends JPanel {
 		projVaiheetTextArea.setBounds(555, 67, 200, 296);
 		add(projVaiheetTextArea);
 
-		JButton muokkaaTyontekijoitaButton = new JButton(
-				"Muokkaa tyontekijoita");
+
+		JButton muokkaaTyontekijoitaButton = new JButton("Muokkaa tyontekijoita");
 		muokkaaTyontekijoitaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				tb.setSelectedIndex(4);
+				
 			}
 		});
 		muokkaaTyontekijoitaButton.setBounds(305, 374, 200, 23);
@@ -113,6 +119,7 @@ public class ProjektinMuokkausUI extends JPanel {
 		JButton muokkaaVaiheitaButton = new JButton("Muokkaa vaiheita");
 		muokkaaVaiheitaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				tb.setSelectedIndex(3);
 			}
 		});
 		muokkaaVaiheitaButton.setBounds(555, 374, 200, 23);
@@ -121,6 +128,7 @@ public class ProjektinMuokkausUI extends JPanel {
 		JButton tallennaButton = new JButton("Tallenna");
 		tallennaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				muokkaaProjektia();
 			}
 		});
 		tallennaButton.setBounds(555, 425, 127, 23);
@@ -167,9 +175,19 @@ public class ProjektinMuokkausUI extends JPanel {
 				paivitaTiedot();
 			}
 		});
+		
+		
 
 
 
+	}
+	public void paivitaAsiakkaat(){
+		for(Asiakas asiakas: asiakkaat.getAsiakkaat()){
+			if(projAsiakasTextField.getItemCount() < asiakkaat.getAsiakkaat().size()){
+				projAsiakasTextField.addItem(asiakas);
+			}
+
+		}
 	}
 	public void paivitaTiedot(){
 	    Projekti projekti = (Projekti) projektiComboBox.getSelectedItem();
@@ -178,15 +196,28 @@ public class ProjektinMuokkausUI extends JPanel {
 		this.seliteTextArea.setText(projekti.getSelite());
 		this.projVaiheetTextArea.setListData(projekti.getVaiheet().toArray());
 		this.projTyontekijatTextArea.setListData(projekti.getTyontekijat().toArray());
-		this.projStatusTextField.setSelectedItem(projekti.getStatus());
-
-		
-
-
-		
-
-		
-		
+		this.projStatusComboBox.setSelectedItem(projekti.getStatus());
+		this.projAsiakasTextField.setSelectedItem(projekti.getAsiakas());
+	
+	}
+	public void muokkaaProjektia(){
+		for(Projekti projekti : projektit.palautaLista()){
+			if(projekti.equals(projektiComboBox.getSelectedItem())){
+				projekti.setAlkupvm(alkupvmTextField.getText());
+				projekti.setLoppupvm(loppupvmTextField.getText());
+				projekti.setSelite(seliteTextArea.getText());
+			    if(projStatusComboBox.getSelectedIndex() == 1){
+			    	projekti.setStatus(ProjektinStatus.KAYNNISSA);
+			    }else if(projStatusComboBox.getSelectedIndex() == 2){
+			    	projekti.setStatus(ProjektinStatus.PAATTYNYT);
+			    }else{
+			    	projekti.setStatus(ProjektinStatus.TARJOTTU);
+			    }
+			    Asiakas asiakas = (Asiakas) projAsiakasTextField.getSelectedItem();
+			    projekti.setAsiakas(asiakas);
+			    
+			}
+		}
 	}
 
 	public void paivitaProjektit() {

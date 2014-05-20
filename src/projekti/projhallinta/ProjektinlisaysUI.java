@@ -92,7 +92,7 @@ public class ProjektinlisaysUI extends JPanel {
 		projAsiakasComboBox.setBounds(125, 156, 170, 20);
 		add(projAsiakasComboBox);
 		for(Asiakas asiakas: asiakkaat.getAsiakkaat()){
-			projAsiakasComboBox.addItem(asiakas);
+			projAsiakasComboBox.addItem(new Asiakas(asiakas.getID(),asiakas.getNimi(), asiakas.getAyritys(), asiakas.getAyhteishenkilo()));
 		}
 		
 
@@ -173,7 +173,9 @@ public class ProjektinlisaysUI extends JPanel {
 	}
 	public void paivitaAsiakkaat(){
 		for(Asiakas asiakas: asiakkaat.getAsiakkaat()){
-			projAsiakasComboBox.addItem(asiakas);
+			if(projAsiakasComboBox.getItemCount() < asiakkaat.getAsiakkaat().size()){
+				projAsiakasComboBox.addItem(asiakas);
+			}
 		}
 	}
 
@@ -205,6 +207,8 @@ public class ProjektinlisaysUI extends JPanel {
 		    }else{
 		    	projekti.setStatus(ProjektinStatus.TARJOTTU);
 		    }
+		    
+		    projekti.setAsiakas((Asiakas) projAsiakasComboBox.getSelectedItem());
 
 			projektit.lisaaProjekti(projekti);
 			nimeaProjektiTextField.setText("");
