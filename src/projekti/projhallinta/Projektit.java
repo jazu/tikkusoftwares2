@@ -24,7 +24,7 @@ public class Projektit {
 		}
 		projektit.remove(poistettava);
 	}
-	public void muokkaaProjektia(Projekti projekti, String nimi, String alkupvm, List<Tyontekija> tyontekijat, String asiakas, String selite){
+	public void muokkaaProjektia(Projekti projekti, String nimi, String alkupvm, List<Tyontekija> tyontekijat, Asiakas asiakas, String selite){
 		Projekti muokattava = null;
 		for(Projekti haettava: projektit){
 			if(haettava.equals(projekti)){

@@ -10,7 +10,13 @@ public class Asiakkaat {
 		asiakkaat = new ArrayList<Asiakas>();
 	}
 	public void lisaaAsiakas(Asiakas asiakas){
-		asiakkaat.add(asiakas);
+		if(!asiakkaat.contains(asiakas)){
+			asiakkaat.add(asiakas);
+		}
+
+	}
+	public List<Asiakas> getAsiakkaat() {
+		return asiakkaat;
 	}
 
 }

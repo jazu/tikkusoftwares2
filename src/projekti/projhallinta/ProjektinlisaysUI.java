@@ -31,12 +31,15 @@ public class ProjektinlisaysUI extends JPanel {
 	private JTextArea seliteTextArea;
 	private Tyontekijat tyontekijat;
 	private JComboBox projStatusComboBox;
+	private Asiakkaat asiakkaat;
+	private JComboBox projAsiakasComboBox;
+	
 
-	public ProjektinlisaysUI(Projektit projektit,Tyontekijat tyontekijat) {
+	public ProjektinlisaysUI(Projektit projektit,Tyontekijat tyontekijat, Asiakkaat asiakkaat) {
 
 		this.projektit = projektit;
 		this.tyontekijat = tyontekijat;
-		
+		this.asiakkaat = asiakkaat;
 		
 
 		setLayout(null);
@@ -85,9 +88,12 @@ public class ProjektinlisaysUI extends JPanel {
 		projStatusComboBox.addItem(ProjektinStatus.KAYNNISSA);
 		projStatusComboBox.addItem(ProjektinStatus.PAATTYNYT);
 
-		JComboBox projAsiakasComboBox = new JComboBox();
+		projAsiakasComboBox = new JComboBox();
 		projAsiakasComboBox.setBounds(125, 156, 170, 20);
 		add(projAsiakasComboBox);
+		for(Asiakas asiakas: asiakkaat.getAsiakkaat()){
+			projAsiakasComboBox.addItem(asiakas);
+		}
 		
 
 		JList projTyontekijatTextArea_1 = new JList();
@@ -133,7 +139,7 @@ public class ProjektinlisaysUI extends JPanel {
 		peruutaButton.setBounds(378, 424, 127, 23);
 		add(peruutaButton);
 
-		JTextArea seliteTextArea = new JTextArea();
+		seliteTextArea = new JTextArea();
 		seliteTextArea.setBounds(10, 220, 285, 142);
 		add(seliteTextArea);
 
@@ -161,7 +167,14 @@ public class ProjektinlisaysUI extends JPanel {
 		separator.setOrientation(SwingConstants.VERTICAL);
 		separator.setBounds(530, 67, 2, 295);
 		add(separator);
+		
 
+
+	}
+	public void paivitaAsiakkaat(){
+		for(Asiakas asiakas: asiakkaat.getAsiakkaat()){
+			projAsiakasComboBox.addItem(asiakas);
+		}
 	}
 
 	public int tarkistaId() {
@@ -178,11 +191,13 @@ public class ProjektinlisaysUI extends JPanel {
 				&& !this.loppupvmTextField.equals("")
 				&& !this.alkupvmTextField.equals("")) {
 			int id = tarkistaId();
+			
+			String miro = seliteTextArea.getText();
 
 			Projekti projekti = new Projekti(id,
 					nimeaProjektiTextField.getText(),
 					alkupvmTextField.getText(), loppupvmTextField.getText(),
-					"Selite");
+					miro);
 		    if(projStatusComboBox.getSelectedIndex() == 1){
 		    	projekti.setStatus(ProjektinStatus.KAYNNISSA);
 		    }else if(projStatusComboBox.getSelectedIndex() == 2){
@@ -195,6 +210,8 @@ public class ProjektinlisaysUI extends JPanel {
 			nimeaProjektiTextField.setText("");
 			loppupvmTextField.setText("");
 			alkupvmTextField.setText("");
+			seliteTextArea.setText("");
+			
 			JOptionPane.showMessageDialog(this, "Projekti: "+projekti.getNimi()+" luotu IDllä: "+projekti.getID()+" onnistuneesti","Projekti luotu",JOptionPane.INFORMATION_MESSAGE);
 
 		}

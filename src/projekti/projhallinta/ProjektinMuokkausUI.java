@@ -34,8 +34,11 @@ public class ProjektinMuokkausUI extends JPanel {
 	private Tyontekijat tyontekijat;
 	private JList projTyontekijatTextArea;
 	private JComboBox projStatusTextField;
+	private Asiakkaat asiakkaat;
+	private JComboBox projAsiakasTextField;
 
-	public ProjektinMuokkausUI(Projektit projektit, Tyontekijat tyontekijat) {
+	public ProjektinMuokkausUI(Projektit projektit, Tyontekijat tyontekijat, Asiakkaat asiakkaat) {
+		this.asiakkaat = asiakkaat;
 		setLayout(null);
 		this.projektit = projektit;
 		this.tyontekijat = tyontekijat;
@@ -82,9 +85,13 @@ public class ProjektinMuokkausUI extends JPanel {
 		projStatusTextField.addItem(ProjektinStatus.KAYNNISSA);
 		projStatusTextField.addItem(ProjektinStatus.PAATTYNYT);
 
-		JComboBox projAsiakasTextField = new JComboBox();
+		projAsiakasTextField = new JComboBox();
 		projAsiakasTextField.setBounds(125, 157, 170, 20);
 		add(projAsiakasTextField);
+		for(Asiakas asiakas: asiakkaat.getAsiakkaat()){
+			projAsiakasTextField.addItem(asiakas);
+		}
+		
 
 		projTyontekijatTextArea = new JList();
 		projTyontekijatTextArea.setBounds(305, 67, 200, 296);
@@ -160,7 +167,6 @@ public class ProjektinMuokkausUI extends JPanel {
 				paivitaTiedot();
 			}
 		});
-		
 
 
 
@@ -173,6 +179,10 @@ public class ProjektinMuokkausUI extends JPanel {
 		this.projVaiheetTextArea.setListData(projekti.getVaiheet().toArray());
 		this.projTyontekijatTextArea.setListData(projekti.getTyontekijat().toArray());
 		this.projStatusTextField.setSelectedItem(projekti.getStatus());
+
+		
+
+
 		
 
 		

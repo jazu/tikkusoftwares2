@@ -1,83 +1,226 @@
-
-
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package projekti.projhallinta;
 
-import javax.swing.JFrame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
-import javax.swing.SwingConstants;
-import java.awt.Color;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JButton;
+import javax.swing.SwingConstants;
 
+/**
+ * 
+ * @author s1200508
+ */
 public class AsiakasUI extends JPanel {
-	private JTextField asiakasidTextfield;
-	private JTextField asiakkaannimiTextfield;
-	private JTextField yhteyshenkilöTextfield;
-	private JTextField yrityksennimiTextfield;
+	private JTextField vaiheenNimiTextField;
+	private JTextField vaiheenAlkupvmTextField;
+	private JTextField vaiheenLoppupvmTextField;
+	private JLabel seliteLabel;
+	private JButton uusiButton;
+	private JLabel projektiLabel;
+	private JComboBox projektiComboBox;
+	private JLabel vaiheLabel;
 	private Projektit projektit;
+	private List<Projekti> apulista = new ArrayList<Projekti>();
+	private JList vaiheList;
+	private JTextArea seliteTextArea;
 	private Tyontekijat tyontekijat;
-	
-	public AsiakasUI(Projektit projektit, Tyontekijat tyontekijat) {
+	private Asiakkaat asiakkaat;
+
+	public AsiakasUI(Projektit projektit, Tyontekijat tyontekijat, Asiakkaat asiakkaat) {
+		setLayout(null);
 		this.projektit = projektit;
 		this.tyontekijat = tyontekijat;
-		
-	this.setLayout(null);
+		this.asiakkaat = asiakkaat;
 
-		JLabel asiakkaatLabel = new JLabel("Asiakkaat");
-		asiakkaatLabel.setBounds(10, 11, 150, 14);
-		this.add(asiakkaatLabel);
+		vaiheenNimiTextField = new JTextField();
+		vaiheenNimiTextField.setColumns(10);
+		vaiheenNimiTextField.setBounds(562, 11, 216, 20);
+		add(vaiheenNimiTextField);
 
-		JList AsiakkaatList = new JList();
-		AsiakkaatList.setBounds(10, 36, 193, 244);
-		this.add(AsiakkaatList);
+		JLabel vaiheenNimiLabel = new JLabel("Asiakkaan nimi:");
+		vaiheenNimiLabel.setBounds(389, 14, 114, 14);
+		add(vaiheenNimiLabel);
 
-		JSeparator separator = new JSeparator();
-		separator.setForeground(Color.BLACK);
-		separator.setOrientation(SwingConstants.VERTICAL);
-		separator.setBounds(225, 11, 14, 371);
-		this.add(separator);
+		vaiheenAlkupvmTextField = new JTextField();
+		vaiheenAlkupvmTextField.setColumns(10);
+		vaiheenAlkupvmTextField.setBounds(562, 42, 216, 20);
+		add(vaiheenAlkupvmTextField);
 
-		JLabel asiakkaanimiLabel = new JLabel("Asiakkaan nimi :");
-		asiakkaanimiLabel.setBounds(249, 96, 99, 26);
-		this.add(asiakkaanimiLabel);
+		JLabel vaiheenAlkupvmLabel = new JLabel("Asiakkaan yritys:");
+		vaiheenAlkupvmLabel.setBounds(389, 45, 163, 14);
+		add(vaiheenAlkupvmLabel);
 
-		JLabel yhteyshenkilöLabel = new JLabel("Yhteyshenkil\u00F6:");
-		yhteyshenkilöLabel.setBounds(249, 155, 74, 26);
-		this.add(yhteyshenkilöLabel);
+		vaiheenLoppupvmTextField = new JTextField();
+		vaiheenLoppupvmTextField.setColumns(10);
+		vaiheenLoppupvmTextField.setBounds(562, 73, 216, 20);
+		add(vaiheenLoppupvmTextField);
 
-		JLabel yrityksennimiLabel = new JLabel("Yrityksen nimi:");
-		yrityksennimiLabel.setBounds(249, 217, 74, 26);
-		this.add(yrityksennimiLabel);
+		JLabel vaiheenLoppupvmLabel = new JLabel("Asiakkaan yhteishenkilö:");
+		vaiheenLoppupvmLabel.setBounds(389, 76, 163, 14);
+		add(vaiheenLoppupvmLabel);
 
-		JLabel asiakasidLabel = new JLabel("AsiakasID:");
-		asiakasidLabel.setBounds(249, 37, 74, 23);
-		this.add(asiakasidLabel);
+
+
+		uusiButton = new JButton("Uusi");
+		uusiButton.setBounds(389, 279, 114, 23);
+		add(uusiButton);
+		uusiButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				paivitaTiedot();
+			//	lisaaAsiakas();
+			}
+		});
+
+
+
+
+		vaiheLabel = new JLabel("Asiakkaat");
+		vaiheLabel.setBounds(10, 14, 54, 14);
+		add(vaiheLabel);
+
+		JButton poistaButton = new JButton("Poista");
+		poistaButton.setBounds(234, 279, 114, 23);
+		add(poistaButton);
+
+		JButton muokkaaButton = new JButton("Muokkaa");
+		muokkaaButton.setBounds(664, 279, 114, 23);
+		add(muokkaaButton);
 
 		JButton tallennaButton = new JButton("Tallenna");
-		tallennaButton.setBounds(10, 306, 89, 23);
-		this.add(tallennaButton);
 
-		asiakasidTextfield = new JTextField();
-		asiakasidTextfield.setBounds(424, 34, 193, 20);
-		this.add(asiakasidTextfield);
-		asiakasidTextfield.setColumns(10);
+		tallennaButton.setBounds(528, 279, 114, 23);
+		add(tallennaButton);
 
-		asiakkaannimiTextfield = new JTextField();
-		asiakkaannimiTextfield.setBounds(424, 99, 193, 20);
-		this.add(asiakkaannimiTextfield);
-		asiakkaannimiTextfield.setColumns(10);
+		JSeparator separator = new JSeparator();
+		separator.setOrientation(SwingConstants.VERTICAL);
+		separator.setBounds(367, 13, 2, 289);
+		add(separator);
 
-		yhteyshenkilöTextfield = new JTextField();
-		yhteyshenkilöTextfield.setBounds(424, 158, 193, 20);
-		this.add(yhteyshenkilöTextfield);
-		yhteyshenkilöTextfield.setColumns(10);
+		vaiheList = new JList();
+		vaiheList.setBounds(8, 33, 340, 182);
+		add(vaiheList);
 
-		yrityksennimiTextfield = new JTextField();
-		yrityksennimiTextfield.setBounds(424, 220, 190, 20);
-		this.add(yrityksennimiTextfield);
-		yrityksennimiTextfield.setColumns(10);
+		vaiheList.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				paivitaVaiheenTiedot();
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+
+			}
+		});
+		
+		
+
 	}
+	public void paivitaVaiheenTiedot(){
+		int valittu = vaiheList.getSelectedIndex();
+		if(valittu >= 0){
+			Asiakas asiakas = (Asiakas) vaiheList.getModel()
+					.getElementAt(valittu);
+			vaiheenNimiTextField.setText(asiakas.getNimi());
+			vaiheenAlkupvmTextField.setText(asiakas.getAyritys());
+			vaiheenLoppupvmTextField.setText(asiakas.getAyhteishenkilo());
+			
+		}
+
+		
+	}
+
+	public void paivitaTiedot() {
+		this.vaiheList.setListData(asiakkaat.getAsiakkaat().toArray());
+
+
+	}
+
+	public void paivitaProjektit() {
+		
+		for (Projekti projekti : projektit.palautaLista()) {
+			if (projektit.palautaLista() == null) {
+			} else {
+				if (!apulista.contains(projekti)) {
+					apulista.add(projekti);
+					projektiComboBox.addItem(projekti);
+				}
+
+			}
+		}
+	}
+
+	public int tarkistaId() {
+		int id = 0;
+		int selectedIx = 0;
+
+		for (Asiakas asiakas : asiakkaat.getAsiakkaat()) {
+			
+			if (asiakas.equals(vaiheList.getModel().getElementAt(selectedIx))) {
+				Asiakas asiakas1 = asiakkaat.getAsiakkaat().get(asiakkaat.getAsiakkaat().size() - 1);
+				id = asiakas1.getID();
+				id++;
+				
+			}
+			selectedIx++;
+		}
+
+		return id;
+
+	}
+
+	public void lisaaAsiakas() {
+		int id = 1;
+		int selectedIx = vaiheList.getSelectedIndex();
+		Asiakkaat zz = (Asiakkaat) vaiheList.getModel().getElementAt(selectedIx);
+		if(zz.getAsiakkaat().size() == 0){
+			id = 1;
+		}else{
+		    id = tarkistaId();
+		}
+
+
+		Asiakas asiakas = new Asiakas(id, vaiheenNimiTextField.getText(),
+				vaiheenAlkupvmTextField.getText(),
+				vaiheenLoppupvmTextField.getText());
+
+			vaiheenNimiTextField.setText("");
+			vaiheenAlkupvmTextField.setText("");
+			vaiheenLoppupvmTextField.setText("");
+			seliteTextArea.setText("");
+
+		}
+	
 }

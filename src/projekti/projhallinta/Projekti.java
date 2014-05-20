@@ -12,9 +12,10 @@ public class Projekti {
 	private String loppupvm;
 	private List<Vaihe> vaiheet;
 	private List<Tyontekija> tyontekijat;
-	private String asiakas;
+	private List<Asiakas> asiakkaat;
 	private String selite;
 	private ProjektinStatus status;
+	private Asiakas asiakas;
 	
 
 	
@@ -28,6 +29,7 @@ public class Projekti {
 		this.vaiheet = new ArrayList<Vaihe>();
 		this.tyontekijat = new ArrayList<Tyontekija>();
 		this.status = status;
+		this.asiakkaat = new ArrayList<Asiakas>();
 	}
 
 	public ProjektinStatus getStatus() {
@@ -78,11 +80,11 @@ public class Projekti {
 		this.vaiheet = vaiheet;
 	}
 
-	public String getAsiakas() {
+	public Asiakas getAsiakas() {
 		return asiakas;
 	}
 
-	public void setAsiakas(String asiakas) {
+	public void setAsiakas(Asiakas asiakas) {
 		this.asiakas = asiakas;
 	}
 
@@ -96,6 +98,12 @@ public class Projekti {
 
 	public List<Tyontekija> getTyontekijat() {
 		return tyontekijat;
+	}
+	public void lisaaAsiakas(Asiakas asiakas){
+		if(!this.asiakkaat.contains(asiakas)){
+			this.asiakkaat.add(asiakas);
+		}
+
 	}
 
 
@@ -121,15 +129,15 @@ public class Projekti {
 		return true;
 	}
 	public void lisaaVaihe(Vaihe vaihe){
-	//	if(!this.vaiheet.contains(vaihe)){
+		if(!this.vaiheet.contains(vaihe)){
 			this.vaiheet.add(vaihe);
-	//	}
+		}
 
 	}
 	public void lisaaTyontekija(Tyontekija tyontekija){
-	//	if(!this.tyontekijat.contains(tyontekija)){
+		if(!this.tyontekijat.contains(tyontekija)){
 			this.tyontekijat.add(tyontekija);
-	//	}
+		}
 
 	}
 	public void poistaTyontekija(Tyontekija poistettavatyontekija){
@@ -147,9 +155,7 @@ public class Projekti {
 	public void lisaaTyontekijat(List<Tyontekija> vaiheet){
 		this.tyontekijat = vaiheet;
 	}
-	public void lisaaAsiakas(String string){
-		this.asiakas = string;
-	}
+
 
 	@Override
 	public String toString() {

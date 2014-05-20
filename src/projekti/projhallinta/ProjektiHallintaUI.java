@@ -12,13 +12,14 @@ public class ProjektiHallintaUI {
     JTabbedPane tabbedPane = new JTabbedPane();
     Projektit projektit = new Projektit();
     Tyontekijat tyontekijat = new Tyontekijat();
+    Asiakkaat asiakkaat = new Asiakkaat();
     
-    ProjektinlisaysUI projlisayspaneeli = new ProjektinlisaysUI(projektit,tyontekijat);
+    ProjektinlisaysUI projlisayspaneeli = new ProjektinlisaysUI(projektit,tyontekijat, asiakkaat);
     VaiheenLuontiUI vaiheidenluontipaneeli = new VaiheenLuontiUI(projektit,tyontekijat);
     TyontekijoidenHallintaUI tyontekhallintapaneeli = new TyontekijoidenHallintaUI(projektit,tyontekijat);
     Help helppaneeli = new Help(); 
-    ProjektinMuokkausUI projmuokkauspaneeli = new ProjektinMuokkausUI(projektit,tyontekijat);
-    AsiakasUI asiakasui = new AsiakasUI(projektit,tyontekijat); //placeholder
+    ProjektinMuokkausUI projmuokkauspaneeli = new ProjektinMuokkausUI(projektit,tyontekijat, asiakkaat);
+    AsiakasUI asiakasui = new AsiakasUI(projektit,tyontekijat, asiakkaat); //placeholder
     private static String kirjautujannimi;
     
 	public ProjektiHallintaUI(String kirjautujannimi) {
@@ -45,6 +46,8 @@ public class ProjektiHallintaUI {
                 paivitaKaikki();
             }
         });
+		projlisayspaneeli.paivitaAsiakkaat();
+		
 	}
 	
 	public static void main(String[] args) {
@@ -59,10 +62,12 @@ public class ProjektiHallintaUI {
 		});
 	}
 	public void paivitaKaikki(){
+		projlisayspaneeli.paivitaAsiakkaat();
 		projmuokkauspaneeli.paivitaProjektit();
 		vaiheidenluontipaneeli.paivitaProjektit();
 		tyontekhallintapaneeli.paivitaProjektit();
-		
+		asiakasui.paivitaTiedot();
+
 	}
 	public void jasutus(){
 		Projekti projekti1 = new Projekti(1,"Testiprojekti","12.2.2012","23.5.2012","Testaillaan projektia");
@@ -76,6 +81,9 @@ public class ProjektiHallintaUI {
 		Tyontekija tyontekija2 = new Tyontekija(2,"Miro","Helenius",1994,"CSS Ohjelmointi");
 		Tyontekija tyontekija3 = new Tyontekija(3,"Make","Siwa",2000,"Java Ohjelmointi");
 		Tyontekija tyontekija4 = new Tyontekija(4,"Jay","Zu",1993,"Musiikki");
+	    asiakkaat.lisaaAsiakas(new Asiakas(0,"Kalle Töyrylä", "Jasun hotpics Oy", "Robin Jakkara"));
+	    asiakkaat.lisaaAsiakas(new Asiakas(1, "Juuso Korpela", "Jakkaramyynti Oy","Juusi Lampela"));
+	    asiakkaat.lisaaAsiakas(new Asiakas(2, "Tuomas Salami", "Siwa Oy", "Jaakko Metsola"));
 		projekti1.lisaaTyontekija(tyontekija3);
 		projekti1.lisaaTyontekija(tyontekija4);
 		projekti2.lisaaTyontekija(tyontekija);
