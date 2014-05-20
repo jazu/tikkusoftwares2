@@ -90,7 +90,7 @@ public class AsiakasUI extends JPanel {
 
 
 		vaiheLabel = new JLabel("Asiakkaat");
-		vaiheLabel.setBounds(10, 14, 54, 14);
+		vaiheLabel.setBounds(10, 14, 124, 14);
 		add(vaiheLabel);
 
 		JButton poistaButton = new JButton("Poista");

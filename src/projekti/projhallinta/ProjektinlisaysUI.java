@@ -64,11 +64,13 @@ public class ProjektinlisaysUI extends JPanel {
 		projVaiheetComboBox.addItem("Filter");
 
 		loppupvmTextField = new JTextField();
+		loppupvmTextField.setToolTipText("DD:MM:YYYY");
 		loppupvmTextField.setColumns(10);
 		loppupvmTextField.setBounds(125, 94, 170, 20);
 		add(loppupvmTextField);
 
 		alkupvmTextField = new JTextField();
+		alkupvmTextField.setToolTipText("DD:MM:YYYY");
 		alkupvmTextField.setColumns(10);
 		alkupvmTextField.setBounds(125, 63, 170, 20);
 		add(alkupvmTextField);
@@ -104,23 +106,6 @@ public class ProjektinlisaysUI extends JPanel {
 		projVaiheetTextArea.setBounds(555, 66, 200, 296);
 		add(projVaiheetTextArea);
 
-		JButton muokkaaTyontekijoitaButton = new JButton(
-				"Muokkaa tyontekijoita");
-		muokkaaTyontekijoitaButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		muokkaaTyontekijoitaButton.setBounds(305, 373, 200, 23);
-		add(muokkaaTyontekijoitaButton);
-
-		JButton muokkaaVaiheitaButton = new JButton("Muokkaa vaiheita");
-		muokkaaVaiheitaButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		muokkaaVaiheitaButton.setBounds(555, 373, 200, 23);
-		add(muokkaaVaiheitaButton);
-
 		JButton tallennaButton = new JButton("Tallenna");
 		tallennaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -128,7 +113,7 @@ public class ProjektinlisaysUI extends JPanel {
 
 			}
 		});
-		tallennaButton.setBounds(555, 424, 127, 23);
+		tallennaButton.setBounds(555, 373, 127, 23);
 		add(tallennaButton);
 
 		JButton peruutaButton = new JButton("Peruuta");
@@ -136,7 +121,7 @@ public class ProjektinlisaysUI extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		peruutaButton.setBounds(378, 424, 127, 23);
+		peruutaButton.setBounds(378, 373, 127, 23);
 		add(peruutaButton);
 
 		seliteTextArea = new JTextArea();
