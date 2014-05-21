@@ -47,6 +47,7 @@ public class ProjektiHallintaUI {
         tabbedPane.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 paivitaKaikki();
+   
             }
         });
 		projlisayspaneeli.paivitaAsiakkaat();
