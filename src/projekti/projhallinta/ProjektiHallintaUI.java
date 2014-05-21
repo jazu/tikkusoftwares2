@@ -1,5 +1,7 @@
 package projekti.projhallinta;
 
+import java.util.List;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -28,7 +30,7 @@ public class ProjektiHallintaUI {
 		this.kirjautujannimi = kirjautujannimi;
 
 		tabbedPane.setTabPlacement(JTabbedPane.LEFT);
-		tabbedPane.add("Projekti N‰kym‰",alkuruutu );
+		tabbedPane.add("Projekti N√§kym√§",alkuruutu );
 		tabbedPane.add("Lisaa projekti", projlisayspaneeli);
 		tabbedPane.add("Muokkaa projektia", projmuokkauspaneeli);
 	    tabbedPane.add("Hallitse vaiheita", vaiheidenluontipaneeli);
@@ -66,6 +68,9 @@ public class ProjektiHallintaUI {
 			
 		});
 	}
+	public void stealthmode(){
+		frame.setVisible(false);
+	}
 	public void paivitaKaikki(){
 		alkuruutu.paivitaTiedot();
 		projlisayspaneeli.paivitaAsiakkaat();
@@ -90,12 +95,12 @@ public class ProjektiHallintaUI {
 		Vaihe vaihe2 = new Vaihe (2,"Ohjelmointi","1.3.2012","30.4.2012","Ohjelmoidaan projektia");
 		Vaihe vaihe3 = new Vaihe (3,"Hiominen","1.5.2012","23.5.2012","Hiotaan miroa");
 		Vaihe lolz = new Vaihe (1,"Usercaset","1.5.1993","23.5.2012","Luodaan usercaseja");
-		Vaihe sofunni = new Vaihe (2,"Lis‰‰ usercaseja","23.5.2012","23.1.2094","Luodaan enemm‰n usercaseja");
+		Vaihe sofunni = new Vaihe (2,"Lis√§√§ usercaseja","23.5.2012","23.1.2094","Luodaan enemm√§n usercaseja");
 		Tyontekija tyontekija = new Tyontekija(1,"Robin","Jakara",1998,"Hevoset");
 		Tyontekija tyontekija2 = new Tyontekija(2,"Miro","Helenius",1994,"CSS Ohjelmointi");
 		Tyontekija tyontekija3 = new Tyontekija(3,"Make","Siwa",2000,"Java Ohjelmointi");
 		Tyontekija tyontekija4 = new Tyontekija(4,"Jay","Zu",1993,"Musiikki");
-		Asiakas asiakas1 = new Asiakas(0,"Kalle Tˆyryl‰", "Jasun hotpics Oy", "Robin Jakkara");
+		Asiakas asiakas1 = new Asiakas(0,"Kalle T√∂yryl√§", "Jasun hotpics Oy", "Robin Jakkara");
 		Asiakas asiakas2 = new Asiakas(1, "Juuso Korpela", "Jakkaramyynti Oy","Juusi Lampela");
 		Asiakas asiakas3 = new Asiakas(2, "Tuomas Salami", "Siwa Oy", "Jaakko Metsola");
 	    asiakkaat.lisaaAsiakas(asiakas1);
@@ -124,6 +129,9 @@ public class ProjektiHallintaUI {
 		System.out.println(projekti1.getTyontekijat().toString());
 		System.out.println(projekti2.getTyontekijat().toString());
 		
+	}
+	public Projektit getProjektit(){
+		return this.projektit;
 	}
 
 }
