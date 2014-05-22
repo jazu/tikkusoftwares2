@@ -107,6 +107,7 @@ public class ProjektiNakymaUI extends JPanel {
 				if (JOptionPane.showConfirmDialog(null, "Haluatko varmasti poistaa projektin: "+projektinNimiTextField.getText(), "Projektin poistaminen",
 				        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 					projektit.poistaProjekti((Projekti) projektiList.getSelectedValue());
+					paivitaTiedot();
 				} else {
 
 				}
@@ -171,6 +172,11 @@ public class ProjektiNakymaUI extends JPanel {
 
 			}
 		});
+		projektinNimiTextField.setEditable(false);
+		projektinDeadlineTextField.setEditable(false);
+		projektinStatusTextField.setEditable(false);
+		projektinAsiakasTextField.setEditable(false);
+		seliteTextArea.setEditable(false);
 
 	}
 	public void paivitaProjektinTiedot(){

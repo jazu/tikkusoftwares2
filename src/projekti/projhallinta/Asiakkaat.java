@@ -18,5 +18,8 @@ public class Asiakkaat {
 	public List<Asiakas> getAsiakkaat() {
 		return asiakkaat;
 	}
+	public void poistaAsiakas(Asiakas asiakas){
+		asiakkaat.remove(asiakas);
+	}
 
 }

@@ -4,8 +4,11 @@
  */
 package projekti.projhallinta;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,8 +42,8 @@ public class ProjektinMuokkausUI extends JPanel {
 	private JComboBox projAsiakasTextField;
 	private JTabbedPane tb;
 
-
-	public ProjektinMuokkausUI(Projektit projektit, Tyontekijat tyontekijat, Asiakkaat asiakkaat, final JTabbedPane tb) {
+	public ProjektinMuokkausUI(Projektit projektit, Tyontekijat tyontekijat,
+			Asiakkaat asiakkaat, final JTabbedPane tb) {
 		this.tb = tb;
 		this.asiakkaat = asiakkaat;
 		setLayout(null);
@@ -92,10 +95,9 @@ public class ProjektinMuokkausUI extends JPanel {
 		projAsiakasTextField = new JComboBox();
 		projAsiakasTextField.setBounds(125, 157, 170, 20);
 		add(projAsiakasTextField);
-		for(Asiakas asiakas: asiakkaat.getAsiakkaat()){
+		for (Asiakas asiakas : asiakkaat.getAsiakkaat()) {
 			projAsiakasTextField.addItem(asiakas);
 		}
-		
 
 		projTyontekijatTextArea = new JList();
 		projTyontekijatTextArea.setBounds(305, 67, 200, 296);
@@ -105,12 +107,12 @@ public class ProjektinMuokkausUI extends JPanel {
 		projVaiheetTextArea.setBounds(555, 67, 200, 296);
 		add(projVaiheetTextArea);
 
-
-		JButton muokkaaTyontekijoitaButton = new JButton("Muokkaa tyontekijoita");
+		JButton muokkaaTyontekijoitaButton = new JButton(
+				"Muokkaa tyontekijoita");
 		muokkaaTyontekijoitaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				tb.setSelectedIndex(4);
-				
+
 			}
 		});
 		muokkaaTyontekijoitaButton.setBounds(305, 374, 200, 23);
@@ -175,47 +177,80 @@ public class ProjektinMuokkausUI extends JPanel {
 				paivitaTiedot();
 			}
 		});
-		
-		
-
-
+        alkupvmTextField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                alkupvmTextField.setBackground(Color.WHITE);
+            }
+        });
+        loppupvmTextField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                loppupvmTextField.setBackground(Color.WHITE);
+            }
+        });
+        seliteTextArea.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                seliteTextArea.setBackground(Color.WHITE);
+            }
+        });
 
 	}
-	public void paivitaAsiakkaat(){
-		for(Asiakas asiakas: asiakkaat.getAsiakkaat()){
-			if(projAsiakasTextField.getItemCount() < asiakkaat.getAsiakkaat().size()){
+
+	public void paivitaAsiakkaat() {
+		for (Asiakas asiakas : asiakkaat.getAsiakkaat()) {
+			if (projAsiakasTextField.getItemCount() < asiakkaat.getAsiakkaat()
+					.size()) {
 				projAsiakasTextField.addItem(asiakas);
 			}
 
 		}
 	}
-	public void paivitaTiedot(){
-	    Projekti projekti = (Projekti) projektiComboBox.getSelectedItem();
+
+	public void paivitaTiedot() {
+		Projekti projekti = (Projekti) projektiComboBox.getSelectedItem();
 		this.loppupvmTextField.setText(projekti.getLoppupvm());
 		this.alkupvmTextField.setText(projekti.getAlkupvm());
 		this.seliteTextArea.setText(projekti.getSelite());
 		this.projVaiheetTextArea.setListData(projekti.getVaiheet().toArray());
-		this.projTyontekijatTextArea.setListData(projekti.getTyontekijat().toArray());
+		this.projTyontekijatTextArea.setListData(projekti.getTyontekijat()
+				.toArray());
 		this.projStatusComboBox.setSelectedItem(projekti.getStatus());
 		this.projAsiakasTextField.setSelectedItem(projekti.getAsiakas());
-	
+
 	}
-	public void muokkaaProjektia(){
-		for(Projekti projekti : projektit.palautaLista()){
-			if(projekti.equals(projektiComboBox.getSelectedItem())){
-				projekti.setAlkupvm(alkupvmTextField.getText());
-				projekti.setLoppupvm(loppupvmTextField.getText());
-				projekti.setSelite(seliteTextArea.getText());
-			    if(projStatusComboBox.getSelectedIndex() == 1){
-			    	projekti.setStatus(ProjektinStatus.KAYNNISSA);
-			    }else if(projStatusComboBox.getSelectedIndex() == 2){
-			    	projekti.setStatus(ProjektinStatus.PAATTYNYT);
-			    }else{
-			    	projekti.setStatus(ProjektinStatus.TARJOTTU);
-			    }
-			    Asiakas asiakas = (Asiakas) projAsiakasTextField.getSelectedItem();
-			    projekti.setAsiakas(asiakas);
-			    
+
+	public void muokkaaProjektia() {
+		if (alkupvmTextField.getText() != null
+				&& alkupvmTextField.getText().equals("")) {
+			alkupvmTextField.setBackground(Color.PINK);
+		}
+		if (loppupvmTextField.getText() != null
+				&& loppupvmTextField.getText().equals("")) {
+			loppupvmTextField.setBackground(Color.PINK);
+		}
+		if (seliteTextArea.getText() != null
+				&& seliteTextArea.getText().equals("")) {
+			seliteTextArea.setBackground(Color.PINK);
+		} else {
+			for (Projekti projekti : projektit.palautaLista()) {
+				if (projekti.equals(projektiComboBox.getSelectedItem())) {
+					projekti.setAlkupvm(alkupvmTextField.getText());
+					projekti.setLoppupvm(loppupvmTextField.getText());
+					projekti.setSelite(seliteTextArea.getText());
+					if (projStatusComboBox.getSelectedIndex() == 1) {
+						projekti.setStatus(ProjektinStatus.KAYNNISSA);
+					} else if (projStatusComboBox.getSelectedIndex() == 2) {
+						projekti.setStatus(ProjektinStatus.PAATTYNYT);
+					} else {
+						projekti.setStatus(ProjektinStatus.TARJOTTU);
+					}
+					Asiakas asiakas = (Asiakas) projAsiakasTextField
+							.getSelectedItem();
+					projekti.setAsiakas(asiakas);
+
+				}
 			}
 		}
 	}

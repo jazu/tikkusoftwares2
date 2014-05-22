@@ -4,8 +4,10 @@
  */
 package projekti.projhallinta;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -39,6 +41,7 @@ public class VaiheenLuontiUI extends JPanel {
 	private JList vaiheList;
 	private JTextArea seliteTextArea;
 	private Tyontekijat tyontekijat;
+	private JButton tallennaButton;
 
 	public VaiheenLuontiUI(Projektit projektit, Tyontekijat tyontekijat) {
 		setLayout(null);
@@ -86,13 +89,12 @@ public class VaiheenLuontiUI extends JPanel {
 		uusiButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				kentatPaalla();
-				vaiheenNimiTextField.setText("");
-				vaiheenAlkupvmTextField.setText("");
-				vaiheenLoppupvmTextField.setText("");
-				seliteTextArea.setText("");
+				tyhjennaKentat();
+				tallennaButton.setEnabled(true);
+
 			}
 		});
-		
+
 		projektiLabel = new JLabel("Projekti:");
 		projektiLabel.setBounds(10, 14, 76, 14);
 		add(projektiLabel);
@@ -108,15 +110,34 @@ public class VaiheenLuontiUI extends JPanel {
 		JButton poistaButton = new JButton("Poista");
 		poistaButton.setBounds(234, 279, 114, 23);
 		add(poistaButton);
+		poistaButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// tallennaVaihe();
+				Projekti proj = (Projekti) projektiComboBox.getSelectedItem();
+
+				proj.poistaVaihe((Vaihe) vaiheList.getSelectedValue());
+
+				kentatPaalla();
+				tyhjennaKentat();
+				paivitaTiedot();
+			}
+		});
 
 		JButton muokkaaButton = new JButton("Muokkaa");
 		muokkaaButton.setBounds(664, 279, 114, 23);
 		add(muokkaaButton);
+		muokkaaButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// tallennaVaihe();
+				kentatPaalla();
+				tallennaButton.setEnabled(true);
+			}
+		});
 
-		JButton tallennaButton = new JButton("Tallenna");
+		tallennaButton = new JButton("Tallenna");
 		tallennaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			//	tallennaVaihe();
+				// tallennaVaihe();
 				lisaaVaihe();
 				paivitaTiedot();
 			}
@@ -136,14 +157,13 @@ public class VaiheenLuontiUI extends JPanel {
 		projektiComboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				paivitaTiedot();
-				
+
 			}
 		});
 		vaiheList.addMouseListener(new MouseListener() {
 
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-
 
 			}
 
@@ -160,6 +180,8 @@ public class VaiheenLuontiUI extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				paivitaVaiheenTiedot();
+				kentatPois();
+				tallennaButton.setEnabled(false);
 
 			}
 
@@ -168,23 +190,46 @@ public class VaiheenLuontiUI extends JPanel {
 
 			}
 		});
+		vaiheenNimiTextField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            	vaiheenNimiTextField.setBackground(Color.WHITE);
+            }
+        });
+		
+        vaiheenAlkupvmTextField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                vaiheenAlkupvmTextField.setBackground(Color.WHITE);
+            }
+        });
+        vaiheenLoppupvmTextField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                vaiheenLoppupvmTextField.setBackground(Color.WHITE);
+            }
+        });
+        seliteTextArea.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                seliteTextArea.setBackground(Color.WHITE);
+            }
+        });
 		kentatPaalla();
 
-
 	}
-	public void paivitaVaiheenTiedot(){
+
+	public void paivitaVaiheenTiedot() {
 		int valittu = vaiheList.getSelectedIndex();
-		if(valittu >= 0){
-			Vaihe vaihe = (Vaihe) vaiheList.getModel()
-					.getElementAt(valittu);
+		if (valittu >= 0) {
+			Vaihe vaihe = (Vaihe) vaiheList.getModel().getElementAt(valittu);
 			vaiheenNimiTextField.setText(vaihe.getNimi());
 			vaiheenAlkupvmTextField.setText(vaihe.getAlkupvm());
 			vaiheenLoppupvmTextField.setText(vaihe.getLoppupvm());
 			seliteTextArea.setText(vaihe.getSelite());
-			
+
 		}
 
-		
 	}
 
 	public void paivitaTiedot() {
@@ -212,17 +257,17 @@ public class VaiheenLuontiUI extends JPanel {
 
 		for (Projekti projekti : projektit.palautaLista()) {
 			if (projekti.equals(projektiComboBox.getSelectedItem())) {
-				Vaihe vaihe = projekti.getVaiheet().get(projekti.getVaiheet().size() - 1);
+				Vaihe vaihe = projekti.getVaiheet().get(
+						projekti.getVaiheet().size() - 1);
 				id = vaihe.getId();
 				id++;
-				
+
 			}
 		}
 
 		return id;
 
 	}
-	
 
 	public void tallennaVaihe() {
 		int id = tarkistaId();
@@ -232,44 +277,87 @@ public class VaiheenLuontiUI extends JPanel {
 
 	}
 
-	public void lisaaVaihe() {
-		int id = 1;
-		Projekti zz = (Projekti) projektiComboBox.getSelectedItem();
-		if(zz.getVaiheet().size() == 0){
-			id = 1;
-		}else{
-		    id = tarkistaId();
+	public void poistaVaihe() {
+		Projekti proj = (Projekti) projektiComboBox.getSelectedItem();
+		Vaihe vaihe = (Vaihe) vaiheList.getSelectedValue();
+		Vaihe poistettava = null;
+
+		for (Vaihe vaih : proj.getVaiheet()) {
+			if (vaih.equals(vaihe)) {
+				poistettava = vaih;
+
+			}
+		}
+		if (poistettava != null) {
+			proj.poistaVaihe(vaihe);
 		}
 
+	}
 
-		Vaihe vaihe = new Vaihe(id, vaiheenNimiTextField.getText(),
-				vaiheenAlkupvmTextField.getText(),
-				vaiheenLoppupvmTextField.getText(), seliteTextArea.getText());
-
-		for (Projekti projekti : projektit.palautaLista()) {
-			if (projekti.equals(projektiComboBox.getSelectedItem())) {
-				projekti.lisaaVaihe(vaihe);
+	public void lisaaVaihe() {
+		if (vaiheenNimiTextField.getText() != null
+				&& vaiheenNimiTextField.getText().equals("")) {
+			vaiheenNimiTextField.setBackground(Color.PINK);
+		}
+		if (vaiheenAlkupvmTextField.getText() != null
+				&& vaiheenAlkupvmTextField.getText().equals("")) {
+			vaiheenAlkupvmTextField.setBackground(Color.PINK);
+		}
+		if (vaiheenLoppupvmTextField.getText() != null
+				&& vaiheenLoppupvmTextField.getText().equals("")) {
+			vaiheenLoppupvmTextField.setBackground(Color.PINK);
+		}
+		if (seliteTextArea.getText() != null
+				&& seliteTextArea.getText().equals("")) {
+			seliteTextArea.setBackground(Color.PINK);
+		} else {
+			int id = 1;
+			Projekti zz = (Projekti) projektiComboBox.getSelectedItem();
+			if (zz.getVaiheet().size() == 0) {
+				id = 1;
+			} else {
+				id = tarkistaId();
 			}
-			vaiheenNimiTextField.setText("");
-			vaiheenAlkupvmTextField.setText("");
-			vaiheenLoppupvmTextField.setText("");
-			seliteTextArea.setText("");
 
+			Vaihe vaihe = new Vaihe(id, vaiheenNimiTextField.getText(),
+					vaiheenAlkupvmTextField.getText(),
+					vaiheenLoppupvmTextField.getText(),
+					seliteTextArea.getText());
+
+			for (Projekti projekti : projektit.palautaLista()) {
+				if (projekti.equals(projektiComboBox.getSelectedItem())) {
+					projekti.lisaaVaihe(vaihe);
+				}
+				vaiheenNimiTextField.setText("");
+				vaiheenAlkupvmTextField.setText("");
+				vaiheenLoppupvmTextField.setText("");
+				seliteTextArea.setText("");
+
+			}
 		}
 	}
+
 	public void kentatPaalla() {
-		if(vaiheList.isSelectionEmpty()==true) {
+
+		vaiheenNimiTextField.setEditable(true);
+		vaiheenAlkupvmTextField.setEditable(true);
+		vaiheenLoppupvmTextField.setEditable(true);
+		seliteTextArea.setEditable(true);
+
+	}
+
+	public void kentatPois() {
 		vaiheenNimiTextField.setEditable(false);
 		vaiheenAlkupvmTextField.setEditable(false);
 		vaiheenLoppupvmTextField.setEditable(false);
 		seliteTextArea.setEditable(false);
-		System.out.println("vittu");
-		} else {
-			vaiheenNimiTextField.setEditable(true);
-			vaiheenAlkupvmTextField.setEditable(true);
-			vaiheenLoppupvmTextField.setEditable(true);
-			seliteTextArea.setEditable(true);	
-		}
 
+	}
+
+	public void tyhjennaKentat() {
+		vaiheenNimiTextField.setText("");
+		vaiheenAlkupvmTextField.setText("");
+		vaiheenLoppupvmTextField.setText("");
+		seliteTextArea.setText("");
 	}
 }

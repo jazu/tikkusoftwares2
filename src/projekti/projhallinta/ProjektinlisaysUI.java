@@ -4,8 +4,11 @@
  */
 package projekti.projhallinta;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -153,6 +156,32 @@ public class ProjektinlisaysUI extends JPanel {
 		separator.setBounds(530, 67, 2, 295);
 		add(separator);
 		
+		nimeaProjektiTextField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            	nimeaProjektiTextField.setBackground(Color.WHITE);
+            }
+        });
+		
+        alkupvmTextField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                alkupvmTextField.setBackground(Color.WHITE);
+            }
+        });
+        loppupvmTextField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                loppupvmTextField.setBackground(Color.WHITE);
+            }
+        });
+        seliteTextArea.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                seliteTextArea.setBackground(Color.WHITE);
+            }
+        });
+		
 
 
 	}
@@ -174,9 +203,22 @@ public class ProjektinlisaysUI extends JPanel {
 	}
 
 	public void lisaaProjekti() {
-		if (!this.nimeaProjektiTextField.equals("")
-				&& !this.loppupvmTextField.equals("")
-				&& !this.alkupvmTextField.equals("")) {
+		if (nimeaProjektiTextField.getText() != null
+				&& nimeaProjektiTextField.getText().equals("")) {
+			nimeaProjektiTextField.setBackground(Color.PINK);
+		}
+		if (alkupvmTextField.getText() != null
+				&& alkupvmTextField.getText().equals("")) {
+			alkupvmTextField.setBackground(Color.PINK);
+		}
+		if (loppupvmTextField.getText() != null
+				&& loppupvmTextField.getText().equals("")) {
+			loppupvmTextField.setBackground(Color.PINK);
+		}
+		if (seliteTextArea.getText() != null
+				&& seliteTextArea.getText().equals("")) {
+			seliteTextArea.setBackground(Color.PINK);
+		} else {
 			int id = tarkistaId();
 			
 			String miro = seliteTextArea.getText();

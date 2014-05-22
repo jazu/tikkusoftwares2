@@ -4,8 +4,10 @@
  */
 package projekti.projhallinta;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -36,12 +38,14 @@ public class AsiakasUI extends JPanel {
 	private JLabel vaiheLabel;
 	private Projektit projektit;
 	private List<Projekti> apulista = new ArrayList<Projekti>();
-	private JList vaiheList;
+	private JList asiakasList;
 	private JTextArea seliteTextArea;
 	private Tyontekijat tyontekijat;
 	private Asiakkaat asiakkaat;
+	private JButton tallennaButton;
 
-	public AsiakasUI(Projektit projektit, Tyontekijat tyontekijat, Asiakkaat asiakkaat) {
+	public AsiakasUI(Projektit projektit, Tyontekijat tyontekijat,
+			final Asiakkaat asiakkaat) {
 		setLayout(null);
 		this.projektit = projektit;
 		this.tyontekijat = tyontekijat;
@@ -74,17 +78,14 @@ public class AsiakasUI extends JPanel {
 		vaiheenLoppupvmLabel.setBounds(389, 76, 163, 14);
 		add(vaiheenLoppupvmLabel);
 
-
-
 		uusiButton = new JButton("Uusi");
 		uusiButton.setBounds(389, 279, 114, 23);
 		add(uusiButton);
 		uusiButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				kentatPaalla();
-				vaiheenNimiTextField.setText("");
-				vaiheenAlkupvmTextField.setText("");
-				vaiheenLoppupvmTextField.setText("");
+				tyhjennaKentat();
+				tallennaButton.setEnabled(true);
 			}
 		});
 
@@ -95,12 +96,30 @@ public class AsiakasUI extends JPanel {
 		JButton poistaButton = new JButton("Poista");
 		poistaButton.setBounds(234, 279, 114, 23);
 		add(poistaButton);
+		poistaButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				asiakkaat.poistaAsiakas((Asiakas) asiakasList
+						.getSelectedValue());
+				kentatPaalla();
+				tyhjennaKentat();
+				paivitaTiedot();
+				tallennaButton.setEnabled(true);
+
+			}
+		});
 
 		JButton muokkaaButton = new JButton("Muokkaa");
 		muokkaaButton.setBounds(664, 279, 114, 23);
 		add(muokkaaButton);
+		muokkaaButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				kentatPaalla();
+				tallennaButton.setEnabled(true);
 
-		JButton tallennaButton = new JButton("Tallenna");
+			}
+		});
+
+		tallennaButton = new JButton("Tallenna");
 		tallennaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				lisaaAsiakas();
@@ -116,18 +135,14 @@ public class AsiakasUI extends JPanel {
 		separator.setBounds(367, 13, 2, 289);
 		add(separator);
 
-		vaiheList = new JList();
-		vaiheList.setBounds(8, 33, 340, 182);
-		add(vaiheList);
+		asiakasList = new JList();
+		asiakasList.setBounds(8, 33, 340, 182);
+		add(asiakasList);
 
-		
-
-		
-		vaiheList.addMouseListener(new MouseListener() {
+		asiakasList.addMouseListener(new MouseListener() {
 
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-
 
 			}
 
@@ -143,7 +158,9 @@ public class AsiakasUI extends JPanel {
 
 			@Override
 			public void mousePressed(MouseEvent arg0) {
-				paivitaVaiheenTiedot();
+				paivitaAsiakkaanTiedot();
+				kentatPois();
+				tallennaButton.setEnabled(false);
 
 			}
 
@@ -152,32 +169,49 @@ public class AsiakasUI extends JPanel {
 
 			}
 		});
-		
-		
+		vaiheenNimiTextField.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				vaiheenNimiTextField.setBackground(Color.WHITE);
+			}
+		});
+
+		vaiheenAlkupvmTextField.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				vaiheenAlkupvmTextField.setBackground(Color.WHITE);
+			}
+		});
+		vaiheenLoppupvmTextField.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				vaiheenLoppupvmTextField.setBackground(Color.WHITE);
+			}
+		});
 
 	}
-	public void paivitaVaiheenTiedot(){
-		int valittu = vaiheList.getSelectedIndex();
-		if(valittu >= 0){
-			Asiakas asiakas = (Asiakas) vaiheList.getModel()
-					.getElementAt(valittu);
+
+	public void paivitaAsiakkaanTiedot() {
+		int valittu = asiakasList.getSelectedIndex();
+		if (valittu >= 0) {
+			Asiakas asiakas = (Asiakas) asiakasList.getModel().getElementAt(
+					valittu);
 			vaiheenNimiTextField.setText(asiakas.getNimi());
 			vaiheenAlkupvmTextField.setText(asiakas.getAyritys());
 			vaiheenLoppupvmTextField.setText(asiakas.getAyhteishenkilo());
-			
+
 		}
 
-		
 	}
 
 	public void paivitaTiedot() {
-		this.vaiheList.setListData(asiakkaat.getAsiakkaat().toArray());
+		this.asiakasList.setListData(asiakkaat.getAsiakkaat().toArray());
 		kentatPaalla();
 
 	}
 
 	public void paivitaProjektit() {
-		
+
 		for (Projekti projekti : projektit.palautaLista()) {
 			if (projektit.palautaLista() == null) {
 			} else {
@@ -195,12 +229,13 @@ public class AsiakasUI extends JPanel {
 		int selectedIx = 0;
 
 		for (Asiakas asiakas : asiakkaat.getAsiakkaat()) {
-			
-			if (asiakas.equals(vaiheList.getModel().getElementAt(selectedIx))) {
-				Asiakas asiakas1 = asiakkaat.getAsiakkaat().get(asiakkaat.getAsiakkaat().size() - 1);
+
+			if (asiakas.equals(asiakasList.getModel().getElementAt(selectedIx))) {
+				Asiakas asiakas1 = asiakkaat.getAsiakkaat().get(
+						asiakkaat.getAsiakkaat().size() - 1);
 				id = asiakas1.getID();
 				id++;
-				
+
 			}
 			selectedIx++;
 		}
@@ -210,36 +245,59 @@ public class AsiakasUI extends JPanel {
 	}
 
 	public void lisaaAsiakas() {
-		int id = 1;
-		int selectedIx = vaiheList.getSelectedIndex();
-		Asiakkaat zz = (Asiakkaat) vaiheList.getModel().getElementAt(selectedIx);
-		if(zz.getAsiakkaat().size() == 0){
-			id = 1;
-		}else{
-		    id = tarkistaId();
+		if (vaiheenNimiTextField.getText() != null
+				&& vaiheenNimiTextField.getText().equals("")) {
+			vaiheenNimiTextField.setBackground(Color.PINK);
 		}
+		if (vaiheenAlkupvmTextField.getText() != null
+				&& vaiheenAlkupvmTextField.getText().equals("")) {
+			vaiheenAlkupvmTextField.setBackground(Color.PINK);
+		}
+		if (vaiheenLoppupvmTextField.getText() != null
+				&& vaiheenLoppupvmTextField.getText().equals("")) {
+			vaiheenLoppupvmTextField.setBackground(Color.PINK);
+		} else {
+			int id = 1;
+			// int selectedIx = asiakasList.getSelectedIndex();
+			// Asiakas zz = (Asiakas)
+			// asiakasList.getModel().getElementAt(selectedIx);
+			if (asiakkaat.getAsiakkaat().size() == 0) {
+				id = 1;
+			} else {
+				id = tarkistaId();
+			}
 
-
-		Asiakas asiakas = new Asiakas(id, vaiheenNimiTextField.getText(),
-				vaiheenAlkupvmTextField.getText(),
-				vaiheenLoppupvmTextField.getText());
+			Asiakas asiakas = new Asiakas(id, vaiheenNimiTextField.getText(),
+					vaiheenAlkupvmTextField.getText(),
+					vaiheenLoppupvmTextField.getText());
 
 			vaiheenNimiTextField.setText("");
 			vaiheenAlkupvmTextField.setText("");
 			vaiheenLoppupvmTextField.setText("");
 
+			asiakkaat.lisaaAsiakas(asiakas);
 		}
+	}
+
 	public void kentatPaalla() {
-		if(vaiheList.isSelectionEmpty()==true) {
+
+		vaiheenNimiTextField.setEditable(true);
+		vaiheenAlkupvmTextField.setEditable(true);
+		vaiheenLoppupvmTextField.setEditable(true);
+
+	}
+
+	public void kentatPois() {
 		vaiheenNimiTextField.setEditable(false);
 		vaiheenAlkupvmTextField.setEditable(false);
 		vaiheenLoppupvmTextField.setEditable(false);
-		} else {
-			vaiheenNimiTextField.setEditable(true);
-			vaiheenAlkupvmTextField.setEditable(true);
-			vaiheenLoppupvmTextField.setEditable(true);
-		}
 
 	}
-	
+
+	public void tyhjennaKentat() {
+		vaiheenNimiTextField.setText("");
+		vaiheenAlkupvmTextField.setText("");
+		vaiheenLoppupvmTextField.setText("");
+	}
+
 }

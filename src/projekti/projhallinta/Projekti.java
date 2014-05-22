@@ -75,6 +75,12 @@ public class Projekti {
 	public List<Vaihe> getVaiheet() {
 		return vaiheet;
 	}
+	public void poistaVaihe(Vaihe vaihe){
+		if(vaiheet.contains(vaihe)){
+			this.vaiheet.remove(vaihe);
+		}
+
+	}
 
 	public void setVaiheet(List<Vaihe> vaiheet) {
 		this.vaiheet = vaiheet;

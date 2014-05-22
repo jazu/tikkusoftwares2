@@ -118,7 +118,7 @@ public class TyontekijaUI extends JFrame{
     	panel.add(formattedTextField2);
     	
     	formattedTextField3 = new JFormattedTextField();
-    	formattedTextField3.setToolTipText("Paivamaara DD-MM-YYYY");
+    	formattedTextField3.setToolTipText("Paivamaara DD-MM-YYYY muoodossa");
     	formattedTextField3.setBounds(120, 143, 312, 20);
     	panel.add(formattedTextField3);
     	
