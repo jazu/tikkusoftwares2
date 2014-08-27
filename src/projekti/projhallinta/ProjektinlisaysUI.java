@@ -9,17 +9,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JList;
-import javax.swing.JComboBox;
-import javax.swing.JTextArea;
 import javax.swing.JSeparator;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 /**
@@ -66,14 +68,16 @@ public class ProjektinlisaysUI extends JPanel {
 		add(projVaiheetComboBox);
 		projVaiheetComboBox.addItem("Filter");
 
-		loppupvmTextField = new JTextField();
-		loppupvmTextField.setToolTipText("DD:MM:YYYY");
+		DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+		
+		loppupvmTextField = new JFormattedTextField(format);
+		loppupvmTextField.setToolTipText("DD.MM.YYYY");
 		loppupvmTextField.setColumns(10);
 		loppupvmTextField.setBounds(125, 94, 170, 20);
 		add(loppupvmTextField);
 
-		alkupvmTextField = new JTextField();
-		alkupvmTextField.setToolTipText("DD:MM:YYYY");
+		alkupvmTextField = new JFormattedTextField(format);
+		alkupvmTextField.setToolTipText("DD.MM.YYYY");
 		alkupvmTextField.setColumns(10);
 		alkupvmTextField.setBounds(125, 63, 170, 20);
 		add(alkupvmTextField);
@@ -156,6 +160,7 @@ public class ProjektinlisaysUI extends JPanel {
 		separator.setBounds(530, 67, 2, 295);
 		add(separator);
 		
+		
 		nimeaProjektiTextField.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -201,7 +206,7 @@ public class ProjektinlisaysUI extends JPanel {
 		return id;
 
 	}
-
+	
 	public void lisaaProjekti() {
 		if (nimeaProjektiTextField.getText() != null
 				&& nimeaProjektiTextField.getText().equals("")) {

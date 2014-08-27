@@ -10,11 +10,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -56,8 +59,12 @@ public class VaiheenLuontiUI extends JPanel {
 		JLabel vaiheenNimiLabel = new JLabel("Vaiheen nimi:");
 		vaiheenNimiLabel.setBounds(389, 14, 114, 14);
 		add(vaiheenNimiLabel);
+		
+		DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+		
 
-		vaiheenAlkupvmTextField = new JTextField();
+		vaiheenAlkupvmTextField = new JFormattedTextField(format);
+		vaiheenAlkupvmTextField.setToolTipText("DD.MM.YYYY");
 		vaiheenAlkupvmTextField.setColumns(10);
 		vaiheenAlkupvmTextField.setBounds(562, 42, 216, 20);
 		add(vaiheenAlkupvmTextField);
@@ -66,7 +73,8 @@ public class VaiheenLuontiUI extends JPanel {
 		vaiheenAlkupvmLabel.setBounds(389, 45, 163, 14);
 		add(vaiheenAlkupvmLabel);
 
-		vaiheenLoppupvmTextField = new JTextField();
+		vaiheenLoppupvmTextField = new JFormattedTextField(format);
+		vaiheenLoppupvmTextField.setToolTipText("DD.MM.YYYY");
 		vaiheenLoppupvmTextField.setColumns(10);
 		vaiheenLoppupvmTextField.setBounds(562, 73, 216, 20);
 		add(vaiheenLoppupvmTextField);
