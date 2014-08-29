@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import projekti.*;
 import projekti.login.User;
+import projekti.projhallinta.Projekti;
 import projekti.projhallinta.Tyontekija;
 import projekti.tyontekija.*;
 
@@ -26,8 +27,8 @@ public class Tietovarasto {
 	}
 
 	public Tietovarasto() {
-		this("org.apache.derby.jdbc.EmbeddedDriver", "jdbc:derby:projhallintadb",
-				"admin", "mika");
+		this("org.apache.derby.jdbc.EmbeddedDriver", "jdbc:derby:tikkudb",
+				"Admin", "admin");
 	}
 	public User haeKayttaja(String kayttajanimi){
 			User user=null;
@@ -221,6 +222,44 @@ public class Tietovarasto {
 
 		}
 	}
+	public List<Projekti> haeKaikkiProjektit() {
+		List<Projekti> projektit = new ArrayList<Projekti>();
+		Connection yhteys = null;
+		PreparedStatement hakulause = null;
+		ResultSet tulosjoukko = null;
+		try {
+			yhteys = Yhteydenhallinta
+					.avaaYhteys(ajuri, url, kayttaja, salasana);
+			if (yhteys != null) {
+
+				String haeKaikkiSql = "select * from projekti";
+				hakulause = yhteys.prepareStatement(haeKaikkiSql);
+				tulosjoukko = hakulause.executeQuery();
+
+				while (tulosjoukko.next()) {
+					int iD = tulosjoukko.getInt(1);
+					String nimi = tulosjoukko.getString(2);
+					String alkupvm = tulosjoukko.getString(3);
+					String loppupvm = tulosjoukko.getString(4);
+					String selite = tulosjoukko.getString(5);
+				
+
+					projektit.add(new Projekti(iD, nimi, alkupvm, loppupvm, selite));
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Yhteydenhallinta.suljeTulosjoukko(tulosjoukko);
+			Yhteydenhallinta.suljeLause(hakulause);
+			Yhteydenhallinta.suljeYhteys(yhteys);
+
+		}
+		return projektit;
+	}
+	
+	
 	public boolean muutaTyontekijanTietoja(Tyontekija tyontekija){
 		Connection yhteys= Yhteydenhallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
 		if(yhteys==null) return false;
@@ -246,6 +285,7 @@ public class Tietovarasto {
 			Yhteydenhallinta.suljeYhteys(yhteys);
 		}
 	}
+	
 
 }
 

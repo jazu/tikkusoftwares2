@@ -2,15 +2,28 @@ package projekti.projhallinta;
 
 public class Vaihe {
 	private int id;
+	private int vaihenro;
 	private String nimi;
 	private String alkupvm;
 	private String loppupvm;
 	private String selite;
-
+	
 	public Vaihe(int id, String nimi, String alkupvm, String loppupvm,
 			String selite) {
 
 		this.id = id;
+		this.vaihenro = vaihenro;
+		this.nimi = nimi;
+		this.alkupvm = alkupvm;
+		this.loppupvm = loppupvm;
+		this.selite = selite;
+	}
+
+	public Vaihe(int id,int vaihenro, String nimi, String alkupvm, String loppupvm,
+			String selite) {
+
+		this.id = id;
+		this.vaihenro = vaihenro;
 		this.nimi = nimi;
 		this.alkupvm = alkupvm;
 		this.loppupvm = loppupvm;

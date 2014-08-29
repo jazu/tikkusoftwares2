@@ -79,7 +79,7 @@ public class AsiakasUI extends JPanel {
 		add(vaiheenLoppupvmLabel);
 
 		uusiButton = new JButton("Uusi");
-		uusiButton.setBounds(389, 279, 114, 23);
+		uusiButton.setBounds(389, 378, 114, 23);
 		add(uusiButton);
 		uusiButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -94,7 +94,7 @@ public class AsiakasUI extends JPanel {
 		add(vaiheLabel);
 
 		JButton poistaButton = new JButton("Poista");
-		poistaButton.setBounds(234, 279, 114, 23);
+		poistaButton.setBounds(234, 378, 114, 23);
 		add(poistaButton);
 		poistaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -109,7 +109,7 @@ public class AsiakasUI extends JPanel {
 		});
 
 		JButton muokkaaButton = new JButton("Muokkaa");
-		muokkaaButton.setBounds(664, 279, 114, 23);
+		muokkaaButton.setBounds(663, 378, 114, 23);
 		add(muokkaaButton);
 		muokkaaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -127,16 +127,16 @@ public class AsiakasUI extends JPanel {
 			}
 		});
 
-		tallennaButton.setBounds(528, 279, 114, 23);
+		tallennaButton.setBounds(525, 378, 114, 23);
 		add(tallennaButton);
 
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
-		separator.setBounds(367, 13, 2, 289);
+		separator.setBounds(367, 13, 2, 388);
 		add(separator);
 
 		asiakasList = new JList();
-		asiakasList.setBounds(8, 33, 340, 182);
+		asiakasList.setBounds(8, 33, 340, 320);
 		add(asiakasList);
 
 		asiakasList.addMouseListener(new MouseListener() {

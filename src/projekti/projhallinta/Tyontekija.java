@@ -1,7 +1,7 @@
 package projekti.projhallinta;
 
 public class Tyontekija {
-	private int kayttajaID;
+	private int tyontekijaID;
 	private String etunimi;
 	private String sukunimi;
 	private int syntymavuosi;
@@ -27,8 +27,8 @@ public class Tyontekija {
 	 */
 
 	public Tyontekija(int kayttajaID, String etunimi, String sukunimi,
-			int syntymavuosi, String Osaaminen) {
-		this.kayttajaID = kayttajaID;
+		int syntymavuosi, String Osaaminen) {
+		this.tyontekijaID = kayttajaID;
 		this.etunimi = etunimi;
 		this.sukunimi = sukunimi;
 		this.syntymavuosi = syntymavuosi;
@@ -36,7 +36,7 @@ public class Tyontekija {
 	}
 
 	public int getKayttajaID() {
-		return kayttajaID;
+		return tyontekijaID;
 	}
 
 	public String getEtunimi() {
@@ -65,7 +65,7 @@ public class Tyontekija {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + kayttajaID;
+		result = prime * result + tyontekijaID;
 		return result;
 	}
 
@@ -78,7 +78,7 @@ public class Tyontekija {
 		if (getClass() != obj.getClass())
 			return false;
 		Tyontekija other = (Tyontekija) obj;
-		if (kayttajaID != other.kayttajaID)
+		if (tyontekijaID != other.tyontekijaID)
 			return false;
 		return true;
 	}

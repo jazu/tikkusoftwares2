@@ -4,8 +4,11 @@
  */
 package projekti.tyontekija;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +45,8 @@ public class TyontekijaUI extends JFrame{
     private JFormattedTextField formattedTextField2;
     private JFormattedTextField formattedTextField3;
     private JTextArea textArea;
+    
+    
 	
     public TyontekijaUI(String kirjautujannimi) {
     	phu = new ProjektiHallintaUI(kirjautujannimi);
@@ -50,7 +55,12 @@ public class TyontekijaUI extends JFrame{
     	this.kirjautujannimi = kirjautujannimi;
     	setResizable(false);
     	setSize(630, 480);
-    	this.setTitle("Kirjautunut sisaan kayttajana: "+kirjautujannimi);
+    	this.setTitle("Tikku Project Management - Kirjautunut sisaan kayttajana: "+kirjautujannimi);
+		URL url = ClassLoader.getSystemResource("data/32x32kuvake.png");
+		Toolkit kit = Toolkit.getDefaultToolkit();
+		Image img = kit.createImage(url);
+		this.setIconImage(img);
+
     	
     	JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
     	GroupLayout groupLayout = new GroupLayout(getContentPane());

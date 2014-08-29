@@ -1,5 +1,8 @@
 package projekti.projhallinta;
 
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -17,6 +20,7 @@ public class ProjektiHallintaUI {
     Tyontekijat tyontekijat = new Tyontekijat();
     Asiakkaat asiakkaat = new Asiakkaat();
     
+    
     ProjektiNakymaUI alkuruutu = new ProjektiNakymaUI(projektit,tyontekijat, tabbedPane);
     ProjektinlisaysUI projlisayspaneeli = new ProjektinlisaysUI(projektit,tyontekijat, asiakkaat);
     VaiheenLuontiUI vaiheidenluontipaneeli = new VaiheenLuontiUI(projektit,tyontekijat);
@@ -25,6 +29,8 @@ public class ProjektiHallintaUI {
     ProjektinMuokkausUI projmuokkauspaneeli = new ProjektinMuokkausUI(projektit,tyontekijat, asiakkaat, tabbedPane);
     AsiakasUI asiakasui = new AsiakasUI(projektit,tyontekijat, asiakkaat);
     private static String kirjautujannimi;
+    
+    
     
 	public ProjektiHallintaUI(String kirjautujannimi) {
 		this.kirjautujannimi = kirjautujannimi;
@@ -43,7 +49,12 @@ public class ProjektiHallintaUI {
         frame.setSize(950, 500);
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
-		frame.setTitle("Kirjautunut sisaan kayttajana: "+kirjautujannimi);
+		frame.setTitle("Tikku Project Management - Kirjautunut sisaan kayttajana: "+kirjautujannimi);
+		URL url = ClassLoader.getSystemResource("data/32x32kuvake.png");
+		Toolkit kit = Toolkit.getDefaultToolkit();
+		Image img = kit.createImage(url);
+	    frame.setIconImage(img);
+
 
         jasutus();
         tabbedPane.addChangeListener(new ChangeListener() {
@@ -92,11 +103,11 @@ public class ProjektiHallintaUI {
 	public void jasutus(){
 		Projekti projekti1 = new Projekti(1,"Testiprojekti","12.2.2012","23.5.2012","Testaillaan projektia");
 		Projekti projekti2 = new Projekti(2,"Miron Salainen Projekti","14.6.2012","23.8.2012","Makkaraperunat");
-		Vaihe vaihe1 = new Vaihe (1,"Suunnittelu","13.2.2012","30.2.2012","Projektin Suunnittelu");
-		Vaihe vaihe2 = new Vaihe (2,"Ohjelmointi","1.3.2012","30.4.2012","Ohjelmoidaan projektia");
-		Vaihe vaihe3 = new Vaihe (3,"Hiominen","1.5.2012","23.5.2012","Hiotaan miroa");
-		Vaihe lolz = new Vaihe (1,"Usercaset","1.5.1993","23.5.2012","Luodaan usercaseja");
-		Vaihe sofunni = new Vaihe (2,"Lis‰‰ usercaseja","23.5.2012","23.1.2094","Luodaan enemm‰n usercaseja");
+		Vaihe vaihe1 = new Vaihe (1,1,"Suunnittelu","13.2.2012","30.2.2012","Projektin Suunnittelu");
+		Vaihe vaihe2 = new Vaihe (2,2,"Ohjelmointi","1.3.2012","30.4.2012","Ohjelmoidaan projektia");
+		Vaihe vaihe3 = new Vaihe (3,3,"Hiominen","1.5.2012","23.5.2012","Hiotaan miroa");
+		Vaihe lolz = new Vaihe (4,1,"Usercaset","1.5.1993","23.5.2012","Luodaan usercaseja");
+		Vaihe sofunni = new Vaihe (5,2,"Lis‰‰ usercaseja","23.5.2012","23.1.2094","Luodaan enemm‰n usercaseja");
 		Tyontekija tyontekija = new Tyontekija(1,"Robin","Jakara",1998,"Hevoset");
 		Tyontekija tyontekija2 = new Tyontekija(2,"Miro","Helenius",1994,"CSS Ohjelmointi");
 		Tyontekija tyontekija3 = new Tyontekija(3,"Make","Siwa",2000,"Java Ohjelmointi");
