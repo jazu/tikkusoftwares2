@@ -9,11 +9,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -28,8 +31,8 @@ import javax.swing.SwingConstants;
  * @author s1200508
  */
 public class ProjektinMuokkausUI extends JPanel {
-	private JTextField loppupvmTextField;
-	private JTextField alkupvmTextField;
+	private JFormattedTextField loppupvmTextField;
+	private JFormattedTextField alkupvmTextField;
 	private Projektit projektit;
 	private JComboBox projektiComboBox;
 	private List<Projekti> apulista = new ArrayList<Projekti>();
@@ -67,12 +70,16 @@ public class ProjektinMuokkausUI extends JPanel {
 		add(projVaiheetComboBox);
 		projVaiheetComboBox.addItem("Filter");
 
-		loppupvmTextField = new JTextField();
+		DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+		
+		loppupvmTextField = new JFormattedTextField(format);
+		loppupvmTextField.setToolTipText("DD.MM.YYYY");
 		loppupvmTextField.setColumns(10);
 		loppupvmTextField.setBounds(125, 95, 170, 20);
 		add(loppupvmTextField);
 
-		alkupvmTextField = new JTextField();
+		alkupvmTextField = new JFormattedTextField(format);
+		alkupvmTextField.setToolTipText("DD.MM.YYYY");
 		alkupvmTextField.setColumns(10);
 		alkupvmTextField.setBounds(125, 64, 170, 20);
 		add(alkupvmTextField);
