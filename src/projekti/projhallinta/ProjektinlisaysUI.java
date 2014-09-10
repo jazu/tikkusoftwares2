@@ -11,6 +11,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -23,6 +25,8 @@ import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import projekti.sql.Tietovarasto;
 
 /**
  * 
@@ -38,6 +42,7 @@ public class ProjektinlisaysUI extends JPanel {
 	private JComboBox projStatusComboBox;
 	private Asiakkaat asiakkaat;
 	private JComboBox projAsiakasComboBox;
+	private Tietovarasto rekisteri= new Tietovarasto();
 	
 
 	public ProjektinlisaysUI(Projektit projektit,Tyontekijat tyontekijat, Asiakkaat asiakkaat) {
@@ -191,7 +196,9 @@ public class ProjektinlisaysUI extends JPanel {
 
 	}
 	public void paivitaAsiakkaat(){
-		for(Asiakas asiakas: asiakkaat.getAsiakkaat()){
+		
+
+		for(Asiakas asiakas: rekisteri.haeKaikkiAsiakkaat()){
 			if(projAsiakasComboBox.getItemCount() < asiakkaat.getAsiakkaat().size()){
 				projAsiakasComboBox.addItem(asiakas);
 			}
@@ -243,6 +250,8 @@ public class ProjektinlisaysUI extends JPanel {
 		    projekti.setAsiakas((Asiakas) projAsiakasComboBox.getSelectedItem());
 
 			projektit.lisaaProjekti(projekti);
+			rekisteri.lisaaProjekti(projekti);
+			rekisteri.lisaaProjektinAsiakas( (Asiakas) projAsiakasComboBox.getSelectedItem());
 			nimeaProjektiTextField.setText("");
 			loppupvmTextField.setText("");
 			alkupvmTextField.setText("");

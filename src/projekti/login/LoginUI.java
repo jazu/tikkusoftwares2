@@ -60,7 +60,8 @@ public class LoginUI extends javax.swing.JFrame {
 	
 
 	private void kirjaudu() {
-			
+		
+		System.out.println(rekisteri.haeKaikkiProjektit());
 		
 
 

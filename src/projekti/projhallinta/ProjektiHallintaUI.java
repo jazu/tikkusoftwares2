@@ -12,6 +12,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import projekti.sql.Tietovarasto;
+
 
 public class ProjektiHallintaUI {
 	JFrame frame = new JFrame();
@@ -19,6 +21,7 @@ public class ProjektiHallintaUI {
     Projektit projektit = new Projektit();
     Tyontekijat tyontekijat = new Tyontekijat();
     Asiakkaat asiakkaat = new Asiakkaat();
+    Tietovarasto rekisteri;
     
     
     ProjektiNakymaUI alkuruutu = new ProjektiNakymaUI(projektit,tyontekijat, tabbedPane);

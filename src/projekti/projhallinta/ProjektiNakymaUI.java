@@ -23,6 +23,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import projekti.sql.Tietovarasto;
+
 /**
  * 
  * @author s1200508
@@ -43,6 +45,7 @@ public class ProjektiNakymaUI extends JPanel {
 	private JTabbedPane tb;
 	private JButton poistaButton;
 	private JButton muokkaaButton;
+	private Tietovarasto rekisteri = new Tietovarasto();
 
 	public ProjektiNakymaUI(final Projektit projektit, Tyontekijat tyontekijat, final JTabbedPane tb) {
 		this.tb = tb;
@@ -182,12 +185,17 @@ public class ProjektiNakymaUI extends JPanel {
 	public void paivitaProjektinTiedot(){
 		int valittu = projektiList.getSelectedIndex();
 		if(valittu >= 0){
+
 			Projekti projekti = (Projekti) projektiList.getModel().getElementAt(valittu);
 			projektinNimiTextField.setText(projekti.getNimi());
 			projektinDeadlineTextField.setText(projekti.getLoppupvm());
-			projektinStatusTextField.setText(projekti.getStatus().toString());
-			projektinAsiakasTextField.setText(projekti.getAsiakas().getNimi());
+			PStatus pstatus = rekisteri.haeProjektinStatus(projekti.getID());
+			projektinStatusTextField.setText(pstatus.getStatus());
+			Asiakas pasiakas = rekisteri.haeProjektinAsiakas(projekti.getID());
+			projektinAsiakasTextField.setText(pasiakas.getNimi());
 			seliteTextArea.setText(projekti.getSelite());
+			System.out.println(rekisteri.haeKaikkiAsiakkaat());
+			
 			
 		}
 
@@ -195,7 +203,7 @@ public class ProjektiNakymaUI extends JPanel {
 	}
 
 	public void paivitaTiedot() {
-		this.projektiList.setListData(projektit.palautaLista().toArray());
+		this.projektiList.setListData(rekisteri.haeKaikkiProjektit().toArray());
 
 
 	
