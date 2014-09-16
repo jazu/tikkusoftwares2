@@ -1,0 +1,26 @@
+insert into loginusers (kayttajanimi, salasana, onkoAdmin) values('Admin','admin',1);
+insert into loginusers (kayttajanimi, salasana, onkoAdmin) values('User','user',0);
+insert into loginusers (kayttajanimi, salasana, onkoAdmin) values('Kulho','superninja',0);
+
+insert into projekti (projektinimi, alkupvm, deadline,  selite) values('Testiprojekti','12.02.2012','23.05.2012','Testaillaan projektia');
+insert into projekti (projektinimi, alkupvm, deadline,  selite) values('Miron salainen projekti','14.06.2012','23.08.2012','Makkaraperunat');
+
+insert into asiakkaat (nimi, yritys, yhteyshlo) values('Robin Jakkara','Jasun hotpics Oy','Kalle Töyrylä');
+insert into asiakkaat (projektiID, nimi, yritys, yhteyshlo) values(2,'Juusi Lampela','Jakkaramyynti Oy','Juuso Korpela');
+insert into asiakkaat (projektiID, nimi, yritys, yhteyshlo) values(1,'Jaakko Metsola','Siwa Oy','Tuomas Salami');
+
+insert into projektinvaiheet (vaiheennro, nimi,  alkupvm, loppupvm, selite, projektiID) values (1, 'Suunnittelu',  '13.02.2012', '30.02.2012', 'Projektin Suunnittelu',1);
+insert into projektinvaiheet (vaiheennro, nimi,  alkupvm, loppupvm, selite, projektiID) values (2, 'Ohjelmointi',  '01.04.2012', '30.04.2012', 'Ohjelmoidaan projektia',1);
+insert into projektinvaiheet (vaiheennro, nimi,  alkupvm, loppupvm, selite, projektiID) values (3, 'Hiominen',     '01.05.2012', '23.05.2012', 'Hiotaan miroa',1);
+insert into projektinvaiheet (vaiheennro, nimi,  alkupvm, loppupvm, selite, projektiID) values (1, 'Usercaset',  '01.05.1993', '23.05.2012', 'Luodaan usercaseja',2);
+insert into projektinvaiheet (vaiheennro, nimi,  alkupvm, loppupvm, selite, projektiID) values (2, 'Lisaa usercaseja',  '23.05.2012', '23.01.2094', 'Luodaan enemman usercaseja',2);
+
+insert into statustaulu (projektiID, statusID, status) values(1,1,'KÄYNNISSÄ');
+insert into statustaulu (projektiID, statusID, status) values(2,2,'TARJOTTU');
+insert into statustaulu (projektiID, statusID, status) values(3,3,'PÄÄTTYNYT');
+
+insert into tyontekija (etunimi, sukunimi, syntymavuosi, osaaminen, projektiID) values ('Make', 'Siwa',2000, 'Java Ohjelmointi', 1);
+insert into tyontekija (etunimi, sukunimi, syntymavuosi, osaaminen, projektiID) values ('Jay', 'Zu',1993, 'Musiikki', 1);
+insert into tyontekija (etunimi, sukunimi, syntymavuosi, osaaminen, projektiID) values ('Robin', 'Jakara',1998, 'Poni asiantuntija', 2);
+insert into tyontekija (etunimi, sukunimi, syntymavuosi, osaaminen, projektiID) values ('Miro', 'Helenius',1994, 'CSGO Ohjelmointi', 2);
+

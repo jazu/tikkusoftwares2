@@ -205,14 +205,15 @@ public class ProjektinlisaysUI extends JPanel {
 		}
 	}
 
-	public int tarkistaId() {
+	/*public int tarkistaId() {
 
-		Projekti projekti = projektit.palautaLista().get(projektit.palautaLista().size()-1);
+		Projekti projekti = projektit.palautaLista().get(rekisteri.haeKaikkiProjektit().size()-1);
 		int id = projekti.getID();
 		id++;
 		return id;
 
 	}
+	*/
 	
 	public void lisaaProjekti() {
 		if (nimeaProjektiTextField.getText() != null
@@ -231,12 +232,10 @@ public class ProjektinlisaysUI extends JPanel {
 				&& seliteTextArea.getText().equals("")) {
 			seliteTextArea.setBackground(Color.PINK);
 		} else {
-			int id = tarkistaId();
 			
 			String miro = seliteTextArea.getText();
 
-			Projekti projekti = new Projekti(id,
-					nimeaProjektiTextField.getText(),
+			Projekti projekti = new Projekti(nimeaProjektiTextField.getText(),
 					alkupvmTextField.getText(), loppupvmTextField.getText(),
 					miro);
 		    if(projStatusComboBox.getSelectedIndex() == 1){
@@ -248,16 +247,25 @@ public class ProjektinlisaysUI extends JPanel {
 		    }
 		    
 		    projekti.setAsiakas((Asiakas) projAsiakasComboBox.getSelectedItem());
-
-			projektit.lisaaProjekti(projekti);
-			rekisteri.lisaaProjekti(projekti);
-			rekisteri.lisaaProjektinAsiakas( (Asiakas) projAsiakasComboBox.getSelectedItem());
+		    
+		    rekisteri.lisaaProjekti(projekti);
+		    Projekti nykyinen = null;
+		    
+		    for(Projekti forloop : rekisteri.haeKaikkiProjektit()){
+		    	if(forloop.getNimi().equals(projekti.getNimi()) && forloop.getLoppupvm().equals(projekti.getLoppupvm())){
+		    		nykyinen = forloop;
+		    	}
+		    }
+		    	
+			rekisteri.lisaaProjektinAsiakas( (Asiakas) projAsiakasComboBox.getSelectedItem(),nykyinen);
+			rekisteri.lisaaProjektinStatus(new PStatus(nykyinen.getID(),nykyinen.getID(),projekti.getStatus().toString()));
+			
 			nimeaProjektiTextField.setText("");
 			loppupvmTextField.setText("");
 			alkupvmTextField.setText("");
 			seliteTextArea.setText("");
 			
-			JOptionPane.showMessageDialog(this, "Projekti: "+projekti.getNimi()+" luotu IDllä: "+projekti.getID()+" onnistuneesti","Projekti luotu",JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Projekti: "+projekti.getNimi()+" luotu onnistuneesti","Projekti luotu",JOptionPane.INFORMATION_MESSAGE);
 
 		}
 	}

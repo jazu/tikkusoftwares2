@@ -17,6 +17,19 @@ public class Projekti {
 	private ProjektinStatus status;
 	private Asiakas asiakas;
 	
+	public Projekti(String nimi, String alkupvm, String loppupvm, String selite) {
+		
+		this.nimi = nimi;
+		this.alkupvm = alkupvm;
+		this.loppupvm = loppupvm;
+		this.selite = selite;
+		this.vaiheet = new ArrayList<Vaihe>();
+		this.tyontekijat = new ArrayList<Tyontekija>();
+		this.status = status;
+		this.asiakkaat = new ArrayList<Asiakas>();
+	}
+
+	
 
 	
 	public Projekti(int iD, String nimi, String alkupvm, String loppupvm, String selite) {

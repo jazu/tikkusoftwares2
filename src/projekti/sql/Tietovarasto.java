@@ -480,7 +480,7 @@ public class Tietovarasto {
 		}
 	}
 	
-	public boolean lisaaProjektinAsiakas(Asiakas asiakas) {
+	public boolean lisaaProjektinAsiakas(Asiakas asiakas, Projekti projekti) {
 		Connection yhteys = null;
 		PreparedStatement lisayslause = null;
 		try {
@@ -492,7 +492,7 @@ public class Tietovarasto {
 			String lisaaHenkiloSql = "insert into asiakkaat (projektiID, nimi, yritys, yhteyshlo) values(?,?,?,?)";
 			lisayslause = yhteys.prepareStatement(lisaaHenkiloSql);
 			
-			lisayslause.setInt(1, asiakas.getID());
+			lisayslause.setInt(1, projekti.getID());
 			lisayslause.setString(2, asiakas.getNimi());
 			lisayslause.setString(3, asiakas.getAyritys());
 			lisayslause.setString(4, asiakas.getAyhteishenkilo());
@@ -510,6 +510,203 @@ public class Tietovarasto {
 
 		}
 	}
+	
+	public boolean poistaProjekti(int projektiID) {
+		Connection yhteys = null;
+		PreparedStatement poistolause = null;
+		try {
+			yhteys = Yhteydenhallinta
+					.avaaYhteys(ajuri, url, kayttaja, salasana);
+
+			if (yhteys == null)
+				return false;
+
+			String poistaHenkiloSql = "delete from projekti where projektiID = ?";
+			poistolause = yhteys.prepareStatement(poistaHenkiloSql);
+			poistolause.setInt(1, projektiID);
+			poistolause.executeUpdate();
+			return true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			Yhteydenhallinta.suljeLause(poistolause);
+			Yhteydenhallinta.suljeYhteys(yhteys);
+
+		}
+	}
+	public boolean poistaProjektinAsiakas(int projektiID) {
+		Connection yhteys = null;
+		PreparedStatement poistolause = null;
+		try {
+			yhteys = Yhteydenhallinta
+					.avaaYhteys(ajuri, url, kayttaja, salasana);
+
+			if (yhteys == null)
+				return false;
+
+			String poistaHenkiloSql = "delete from asiakkaat where projektiID = ?";
+			poistolause = yhteys.prepareStatement(poistaHenkiloSql);
+			poistolause.setInt(1, projektiID);
+			poistolause.executeUpdate();
+			return true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			Yhteydenhallinta.suljeLause(poistolause);
+			Yhteydenhallinta.suljeYhteys(yhteys);
+
+		}
+	}
+	public boolean poistaProjektinStatus(int projektiID) {
+		Connection yhteys = null;
+		PreparedStatement poistolause = null;
+		try {
+			yhteys = Yhteydenhallinta
+					.avaaYhteys(ajuri, url, kayttaja, salasana);
+
+			if (yhteys == null)
+				return false;
+
+			String poistaHenkiloSql = "delete from statustaulu where projektiID = ?";
+			poistolause = yhteys.prepareStatement(poistaHenkiloSql);
+			poistolause.setInt(1, projektiID);
+			poistolause.executeUpdate();
+			return true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			Yhteydenhallinta.suljeLause(poistolause);
+			Yhteydenhallinta.suljeYhteys(yhteys);
+
+		}
+	}
+	public int haeProjektiID(Projekti projekti){
+		Projekti pprojekti = null;
+		
+		Connection yhteys = null;
+		PreparedStatement hakulause = null;
+		ResultSet tulosjoukko = null;
+		try {
+			yhteys = Yhteydenhallinta
+					.avaaYhteys(ajuri, url, kayttaja, salasana);
+			if (yhteys != null) {
+
+				String haeKaikkiSql = "select * from projekti where projektinimi="+projekti.getNimi();
+				hakulause = yhteys.prepareStatement(haeKaikkiSql);
+				tulosjoukko = hakulause.executeQuery();
+
+				while (tulosjoukko.next()) {
+					int iD = tulosjoukko.getInt(1);
+					String nimi = tulosjoukko.getString(2);
+					String alkupvm = tulosjoukko.getString(3);
+					String loppupvm = tulosjoukko.getString(4);
+					String selite = tulosjoukko.getString(5);
+				
+
+					pprojekti = new Projekti(iD, nimi, alkupvm, loppupvm, selite);
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Yhteydenhallinta.suljeTulosjoukko(tulosjoukko);
+			Yhteydenhallinta.suljeLause(hakulause);
+			Yhteydenhallinta.suljeYhteys(yhteys);
+
+		}
+		return pprojekti.getID();
+		
+	}
+	
+	
+//########################################
+	// PROJEKTIN MUOKKAUS 
+	
+	// PROJEKTIN JA SEN TIETOJEN LISÄÄMINEN TIETOKANTAAN 
+	//###################################################
+	public boolean muokkaaProjektia(Projekti projekti){
+		Connection yhteys= Yhteydenhallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+		if(yhteys==null) return false;
+		
+		PreparedStatement muutoslause=null;
+		try{
+			String muutoslauseSql ="update projekti set projektinimi=?, alkupvm=?, deadline=?, selite=? where projektiID= ?";
+			muutoslause = yhteys.prepareStatement(muutoslauseSql);
+			muutoslause.setString(1, projekti.getNimi());
+			muutoslause.setString(2, projekti.getAlkupvm());
+			muutoslause.setString(3, projekti.getLoppupvm());
+			muutoslause.setString(4, projekti.getSelite());
+			muutoslause.setInt(5, projekti.getID());
+			
+			muutoslause.executeUpdate();
+			return true;
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		finally{
+			Yhteydenhallinta.suljeLause(muutoslause);
+			Yhteydenhallinta.suljeYhteys(yhteys);
+		}
+	}
+	public boolean muokkaaProjektinAsiakasta(Asiakas asiakas, Projekti projekti){
+		Connection yhteys= Yhteydenhallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+		if(yhteys==null) return false;
+		
+		PreparedStatement muutoslause=null;
+		try{
+			String muutoslauseSql ="update asiakkaat set nimi=?, yritys=?, yhteyshlo=? where projektiID= ?";
+			muutoslause = yhteys.prepareStatement(muutoslauseSql);
+			muutoslause.setString(1, asiakas.getNimi());
+			muutoslause.setString(2, asiakas.getAyritys());
+			muutoslause.setString(3, asiakas.getAyhteishenkilo());;
+			muutoslause.setInt(4, projekti.getID());
+			
+			muutoslause.executeUpdate();
+			return true;
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		finally{
+			Yhteydenhallinta.suljeLause(muutoslause);
+			Yhteydenhallinta.suljeYhteys(yhteys);
+		}
+	}
+	
+	public boolean muokkaaProjektinStatusta(PStatus status, Projekti projekti){
+		Connection yhteys= Yhteydenhallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+		if(yhteys==null) return false;
+		
+		PreparedStatement muutoslause=null;
+		try{
+			String muutoslauseSql ="update statustaulu set status=?, where projektiID= ?";
+			muutoslause = yhteys.prepareStatement(muutoslauseSql);
+			muutoslause.setString(1, status.getStatus());
+			muutoslause.setInt(2, projekti.getID());
+			
+			muutoslause.executeUpdate();
+			return true;
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		finally{
+			Yhteydenhallinta.suljeLause(muutoslause);
+			Yhteydenhallinta.suljeYhteys(yhteys);
+		}
+	}
+	
 	
 
 }

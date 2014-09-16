@@ -244,7 +244,7 @@ public class AsiakasUI extends JPanel {
 
 	}
 
-	public void lisaaAsiakas() {
+	private void lisaaAsiakas() {
 		if (vaiheenNimiTextField.getText() != null
 				&& vaiheenNimiTextField.getText().equals("")) {
 			vaiheenNimiTextField.setBackground(Color.PINK);

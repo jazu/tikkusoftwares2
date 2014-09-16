@@ -110,7 +110,16 @@ public class ProjektiNakymaUI extends JPanel {
 				if (JOptionPane.showConfirmDialog(null, "Haluatko varmasti poistaa projektin: "+projektinNimiTextField.getText(), "Projektin poistaminen",
 				        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 					projektit.poistaProjekti((Projekti) projektiList.getSelectedValue());
+					Projekti poistettava = (Projekti) projektiList.getSelectedValue();
+					rekisteri.poistaProjektinAsiakas(poistettava.getID());
+					rekisteri.poistaProjektinStatus(poistettava.getID());
+					rekisteri.poistaProjekti(poistettava.getID());
 					paivitaTiedot();
+					projektinNimiTextField.setText("");
+					projektinStatusTextField.setText("");
+					projektinDeadlineTextField.setText("");
+					projektinAsiakasTextField.setText("");
+					seliteTextArea.setText("");
 				} else {
 
 				}
@@ -189,10 +198,23 @@ public class ProjektiNakymaUI extends JPanel {
 			Projekti projekti = (Projekti) projektiList.getModel().getElementAt(valittu);
 			projektinNimiTextField.setText(projekti.getNimi());
 			projektinDeadlineTextField.setText(projekti.getLoppupvm());
-			PStatus pstatus = rekisteri.haeProjektinStatus(projekti.getID());
-			projektinStatusTextField.setText(pstatus.getStatus());
-			Asiakas pasiakas = rekisteri.haeProjektinAsiakas(projekti.getID());
-			projektinAsiakasTextField.setText(pasiakas.getNimi());
+
+			if(rekisteri.haeProjektinStatus(projekti.getID()) != null){
+				PStatus pstatus = rekisteri.haeProjektinStatus(projekti.getID());
+				projektinStatusTextField.setText(pstatus.getStatus());
+			}else{
+				projektinStatusTextField.setText("EI LÖYTYNYT");
+			}
+
+			if(rekisteri.haeProjektinAsiakas(projekti.getID()) != null){
+				Asiakas pasiakas = rekisteri.haeProjektinAsiakas(projekti.getID());
+				projektinAsiakasTextField.setText(pasiakas.getNimi());
+			}else{
+				projektinAsiakasTextField.setText("EI LÖYTYNYT");
+			}
+
+			
+
 			seliteTextArea.setText(projekti.getSelite());
 			System.out.println(rekisteri.haeKaikkiAsiakkaat());
 			

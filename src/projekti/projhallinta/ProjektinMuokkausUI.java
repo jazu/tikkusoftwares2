@@ -26,6 +26,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import projekti.sql.Tietovarasto;
+
 /**
  * 
  * @author s1200508
@@ -44,6 +46,7 @@ public class ProjektinMuokkausUI extends JPanel {
 	private Asiakkaat asiakkaat;
 	private JComboBox projAsiakasTextField;
 	private JTabbedPane tb;
+	private Tietovarasto rekisteri = new Tietovarasto();
 
 	public ProjektinMuokkausUI(Projektit projektit, Tyontekijat tyontekijat,
 			Asiakkaat asiakkaat, final JTabbedPane tb) {
@@ -241,20 +244,30 @@ public class ProjektinMuokkausUI extends JPanel {
 				&& seliteTextArea.getText().equals("")) {
 			seliteTextArea.setBackground(Color.PINK);
 		} else {
-			for (Projekti projekti : projektit.palautaLista()) {
+			for (Projekti projekti : rekisteri.haeKaikkiProjektit()) {
 				if (projekti.equals(projektiComboBox.getSelectedItem())) {
 					projekti.setAlkupvm(alkupvmTextField.getText());
 					projekti.setLoppupvm(loppupvmTextField.getText());
 					projekti.setSelite(seliteTextArea.getText());
-					if (projStatusComboBox.getSelectedIndex() == 1) {
-						projekti.setStatus(ProjektinStatus.KAYNNISSA);
-					} else if (projStatusComboBox.getSelectedIndex() == 2) {
-						projekti.setStatus(ProjektinStatus.PAATTYNYT);
-					} else {
-						projekti.setStatus(ProjektinStatus.TARJOTTU);
-					}
+					rekisteri.muokkaaProjektia(projekti);
 					Asiakas asiakas = (Asiakas) projAsiakasTextField
 							.getSelectedItem();
+					rekisteri.muokkaaProjektinAsiakasta(asiakas, projekti);
+
+					if (projStatusComboBox.getSelectedIndex() == 1) {
+						projekti.setStatus(ProjektinStatus.KAYNNISSA);
+						PStatus statusz = new PStatus(projekti.getID(),projekti.getID(),"KAYNNISSA");
+						rekisteri.muokkaaProjektinStatusta(statusz, projekti);
+					} else if (projStatusComboBox.getSelectedIndex() == 2) {
+						projekti.setStatus(ProjektinStatus.PAATTYNYT);
+						PStatus statusz = new PStatus(projekti.getID(),projekti.getID(),"PAATTYNYT");
+						rekisteri.muokkaaProjektinStatusta(statusz, projekti);
+					} else {
+						projekti.setStatus(ProjektinStatus.TARJOTTU);
+						PStatus statusz = new PStatus(projekti.getID(),projekti.getID(),"TARJOTTU");
+						rekisteri.muokkaaProjektinStatusta(statusz, projekti);
+					}
+
 					projekti.setAsiakas(asiakas);
 
 				}
@@ -264,7 +277,7 @@ public class ProjektinMuokkausUI extends JPanel {
 
 	public void paivitaProjektit() {
 
-		for (Projekti projekti : projektit.palautaLista()) {
+		for (Projekti projekti : rekisteri.haeKaikkiProjektit()) {
 			if (projektit.palautaLista() == null) {
 			} else {
 				if (!apulista.contains(projekti)) {

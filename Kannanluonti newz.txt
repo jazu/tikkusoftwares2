@@ -1,0 +1,81 @@
+CREATE TABLE loginusers  ( 
+	kayttajaID  	INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+	kayttajanimi	VARCHAR(25) NOT NULL,
+	salasana    	VARCHAR(25) NOT NULL,
+	onkoAdmin   	INTEGER NOT NULL,
+	PRIMARY KEY(kayttajaID)
+	);
+
+CREATE TABLE projekti  ( 
+	projektiID              	INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+	projektinimi            	VARCHAR(50) NOT NULL,
+	alkupvm                 	VARCHAR(10) NOT NULL,
+	deadline                	VARCHAR(10) NOT NULL,
+	selite                  	VARCHAR(200), 
+	PRIMARY KEY(projektiID)
+	);
+
+CREATE TABLE asiakkaat  ( 
+	asiakasID 	INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+	nimi		VARCHAR(50) NOT NULL,
+	yritys    	VARCHAR(50) NOT NULL,
+	yhteyshlo 	VARCHAR(50),
+	PRIMARY KEY(asiakasID) 
+	);
+
+CREATE TABLE projektinvaiheet  ( 
+	vaiheenID 	INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+	vaiheennro	INTEGER NOT NULL,
+	nimi      	VARCHAR(50) NOT NULL,
+	alkupvm   	VARCHAR(10) NOT NULL,
+	loppupvm  	VARCHAR(10) NOT NULL,
+	selite    	VARCHAR(200) NOT NULL,
+	projektiID	INTEGER,
+	PRIMARY KEY(vaiheenID)
+	);
+
+CREATE TABLE statustaulu  ( 
+	projektiID	INTEGER,
+	statusID	INTEGER NOT NULL,
+	status    	VARCHAR(50) NOT NULL,
+	PRIMARY KEY(statusID)
+	);
+
+CREATE TABLE tyontekija  ( 
+	tyontekijaID	INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+	etunimi     	VARCHAR(30) NOT NULL,
+	sukunimi    	VARCHAR(30) NOT NULL,
+	syntymavuosi    INTEGER NOT NULL,
+	osaaminen   	VARCHAR(200) NOT NULL,
+	projektiID  	INTEGER,
+	PRIMARY KEY (tyontekijaID) 
+	);
+
+CREATE TABLE projektiasiakkaat  ( 
+	asiakasID 	INTEGER,
+	projektiID	INTEGER,
+	nimi		VARCHAR(50) NOT NULL,
+	yritys    	VARCHAR(50) NOT NULL,
+	yhteyshlo 	VARCHAR(50),
+	);
+
+ALTER TABLE projektinvaiheet
+	ADD CONSTRAINT REL_4
+	FOREIGN KEY(projektiID)
+	REFERENCES projekti(projektiID);
+
+ALTER TABLE asiakkaat
+	ADD CONSTRAINT REL_1
+	FOREIGN KEY(projektiID)
+	REFERENCES projekti(projektiID);
+
+ALTER TABLE tyontekija
+	ADD CONSTRAINT REL_2
+	FOREIGN KEY(projektiID)
+	REFERENCES projekti(projektiID);
+
+ALTER TABLE statustaulu
+	ADD CONSTRAINT REL_3
+	FOREIGN KEY(projektiID)
+	REFERENCES projekti(projektiID);
+

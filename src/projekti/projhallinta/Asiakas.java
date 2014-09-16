@@ -1,18 +1,32 @@
 package projekti.projhallinta;
-
+/**
+ * 
+ * @author s1200508
+ *
+ */
 public class Asiakas {
+	
 	private int ID;
 	private String nimi;
 	private String ayritys;
 	private String ayhteishenkilo;
-	
+	/**
+	 * 
+	 * @param iD
+	 * @param nimi
+	 * @param ayritys
+	 * @param ayhteishenkilo
+	 */
 	public Asiakas(int iD, String nimi, String ayritys, String ayhteishenkilo) {
 		ID = iD;
 		this.nimi = nimi;
 		this.ayritys = ayritys;
 		this.ayhteishenkilo = ayhteishenkilo;
 	}
-
+	/** 
+	 * Returns the ID of the customer.
+	 * @return Customer ID.
+	 */
 	public int getID() {
 		return ID;
 	}
