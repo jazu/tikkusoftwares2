@@ -105,7 +105,7 @@ public class ProjektinMuokkausUI extends JPanel {
 		projAsiakasTextField = new JComboBox();
 		projAsiakasTextField.setBounds(125, 157, 170, 20);
 		add(projAsiakasTextField);
-		for (Asiakas asiakas : asiakkaat.getAsiakkaat()) {
+		for (Asiakas asiakas : rekisteri.haeKaikkiAsiakkaat()) {
 			projAsiakasTextField.addItem(asiakas);
 		}
 
@@ -253,6 +253,8 @@ public class ProjektinMuokkausUI extends JPanel {
 					Asiakas asiakas = (Asiakas) projAsiakasTextField
 							.getSelectedItem();
 					rekisteri.muokkaaProjektinAsiakasta(asiakas, projekti);
+					System.out.println(asiakas.getID());
+					System.out.println(projekti.getID());
 
 					if (projStatusComboBox.getSelectedIndex() == 1) {
 						projekti.setStatus(ProjektinStatus.KAYNNISSA);

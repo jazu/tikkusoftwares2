@@ -298,8 +298,6 @@ public class Tietovarasto {
 		return projektit;
 	}
 	
-
-
 	
 	public PStatus haeProjektinStatus(int projeID){
 		int projID = projeID;
@@ -350,19 +348,18 @@ public class Tietovarasto {
 					.avaaYhteys(ajuri, url, kayttaja, salasana);
 			if (yhteys != null) {
 
-				String haeKaikkiSql = "select * from asiakkaat where projektiID="+projID;
+				String haeKaikkiSql = "select nimi,yritys,yhteyshlo from projektiasiakkaat,asiakkaat where projektiasiakkaat.asiakasID=asiakkaat.asiakasID and projektiID=?";
 				hakulause = yhteys.prepareStatement(haeKaikkiSql);
+				hakulause.setInt(1,projeID);
 				tulosjoukko = hakulause.executeQuery();
 
 				while (tulosjoukko.next()) {
-					int asiakasID = tulosjoukko.getInt(1);
-					int projektiID = tulosjoukko.getInt(2);
-					String nimi = tulosjoukko.getString(3);
-					String yritys = tulosjoukko.getString(4);
-					String yhteyshlo = tulosjoukko.getString(5);
+					String nimi = tulosjoukko.getString(1);
+					String yritys = tulosjoukko.getString(2);
+					String yhteyshlo = tulosjoukko.getString(3);
 				
 
-					asiakas = new Asiakas(projektiID, nimi, yritys, yhteyshlo);
+					asiakas = new Asiakas(projeID, nimi, yritys, yhteyshlo);
 				}
 			}
 
@@ -393,14 +390,13 @@ public class Tietovarasto {
 				tulosjoukko = hakulause.executeQuery();
 
 				while (tulosjoukko.next()) {
-					int asiakasiD = tulosjoukko.getInt(1);
-					int projektiID = tulosjoukko.getInt(2);
-					String nimi = tulosjoukko.getString(3);
-					String yritys = tulosjoukko.getString(4);
-					String yhteyshlo = tulosjoukko.getString(5);
+					int asiakasID = tulosjoukko.getInt(1);
+					String nimi = tulosjoukko.getString(2);
+					String yritys = tulosjoukko.getString(3);
+					String yhteyshlo = tulosjoukko.getString(4);
 				
 
-					asiakkaat.add(new Asiakas(projektiID, nimi, yritys, yhteyshlo));
+					asiakkaat.add(new Asiakas(asiakasID, nimi, yritys, yhteyshlo));
 				}
 			}
 
@@ -489,13 +485,11 @@ public class Tietovarasto {
 			if (yhteys == null)
 				return false;
 
-			String lisaaHenkiloSql = "insert into asiakkaat (projektiID, nimi, yritys, yhteyshlo) values(?,?,?,?)";
+			String lisaaHenkiloSql = "insert into projektiasiakkaat (asiakasID, projektiID) values(?,?)";
 			lisayslause = yhteys.prepareStatement(lisaaHenkiloSql);
 			
-			lisayslause.setInt(1, projekti.getID());
-			lisayslause.setString(2, asiakas.getNimi());
-			lisayslause.setString(3, asiakas.getAyritys());
-			lisayslause.setString(4, asiakas.getAyhteishenkilo());
+			lisayslause.setInt(1, asiakas.getID());
+			lisayslause.setInt(2, projekti.getID());
 
 
 			lisayslause.executeUpdate();
@@ -546,7 +540,7 @@ public class Tietovarasto {
 			if (yhteys == null)
 				return false;
 
-			String poistaHenkiloSql = "delete from asiakkaat where projektiID = ?";
+			String poistaHenkiloSql = "delete from projektiasiakkaat where projektiID = ?";
 			poistolause = yhteys.prepareStatement(poistaHenkiloSql);
 			poistolause.setInt(1, projektiID);
 			poistolause.executeUpdate();
@@ -626,9 +620,8 @@ public class Tietovarasto {
 	}
 	
 	
-//########################################
+	//########################################
 	// PROJEKTIN MUOKKAUS 
-	
 	// PROJEKTIN JA SEN TIETOJEN LISÄÄMINEN TIETOKANTAAN 
 	//###################################################
 	public boolean muokkaaProjektia(Projekti projekti){
@@ -637,7 +630,7 @@ public class Tietovarasto {
 		
 		PreparedStatement muutoslause=null;
 		try{
-			String muutoslauseSql ="update projekti set projektinimi=?, alkupvm=?, deadline=?, selite=? where projektiID= ?";
+			String muutoslauseSql ="update projekti set projektinimi=?, alkupvm=?, deadline=?, selite=? where projektiID=?";
 			muutoslause = yhteys.prepareStatement(muutoslauseSql);
 			muutoslause.setString(1, projekti.getNimi());
 			muutoslause.setString(2, projekti.getAlkupvm());
@@ -663,12 +656,10 @@ public class Tietovarasto {
 		
 		PreparedStatement muutoslause=null;
 		try{
-			String muutoslauseSql ="update asiakkaat set nimi=?, yritys=?, yhteyshlo=? where projektiID= ?";
+			String muutoslauseSql ="update projektiasiakkaat set asiakasID=? where projektiID=?";
 			muutoslause = yhteys.prepareStatement(muutoslauseSql);
-			muutoslause.setString(1, asiakas.getNimi());
-			muutoslause.setString(2, asiakas.getAyritys());
-			muutoslause.setString(3, asiakas.getAyhteishenkilo());;
-			muutoslause.setInt(4, projekti.getID());
+			muutoslause.setInt(1, asiakas.getID());
+			muutoslause.setInt(2, projekti.getID());
 			
 			muutoslause.executeUpdate();
 			return true;
@@ -689,7 +680,7 @@ public class Tietovarasto {
 		
 		PreparedStatement muutoslause=null;
 		try{
-			String muutoslauseSql ="update statustaulu set status=?, where projektiID= ?";
+			String muutoslauseSql ="update statustaulu set status=? where projektiID=?";
 			muutoslause = yhteys.prepareStatement(muutoslauseSql);
 			muutoslause.setString(1, status.getStatus());
 			muutoslause.setInt(2, projekti.getID());
@@ -708,6 +699,67 @@ public class Tietovarasto {
 	}
 	
 	
+	
+	//#########################################
+	// ASIAKAS TAULUN METODIT
+	//#########################################
+	
+	
+	public boolean lisaaAsiakas(Asiakas asiakas) {
+		Connection yhteys = null;
+		PreparedStatement lisayslause = null;
+		
+		try {
+			yhteys = Yhteydenhallinta
+					.avaaYhteys(ajuri, url, kayttaja, salasana);
+			if (yhteys == null)
+				return false;
+
+			String lisaaHenkiloSql = "insert into asiakkaat (nimi, yritys, yhteyshlo) values(?,?,?)";
+			lisayslause = yhteys.prepareStatement(lisaaHenkiloSql);
+			
+			lisayslause.setString(1, asiakas.getNimi());
+			lisayslause.setString(2, asiakas.getAyritys());
+			lisayslause.setString(3, asiakas.getAyhteishenkilo());
+
+			lisayslause.executeUpdate();
+			return true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			Yhteydenhallinta.suljeLause(lisayslause);
+			Yhteydenhallinta.suljeYhteys(yhteys);
+
+		}
+	}
+	
+	public boolean poistaAsiakas(Asiakas asiakas) {
+		Connection yhteys = null;
+		PreparedStatement poistolause = null;
+		try {
+			yhteys = Yhteydenhallinta
+					.avaaYhteys(ajuri, url, kayttaja, salasana);
+
+			if (yhteys == null)
+				return false;
+
+			String poistaHenkiloSql = "delete from asiakkaat where asiakasID = ?";
+			poistolause = yhteys.prepareStatement(poistaHenkiloSql);
+			poistolause.setInt(1, asiakas.getID());
+			poistolause.executeUpdate();
+			return true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			Yhteydenhallinta.suljeLause(poistolause);
+			Yhteydenhallinta.suljeYhteys(yhteys);
+
+		}
+	}
 
 }
 

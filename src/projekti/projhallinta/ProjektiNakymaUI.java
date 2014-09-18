@@ -216,7 +216,6 @@ public class ProjektiNakymaUI extends JPanel {
 			
 
 			seliteTextArea.setText(projekti.getSelite());
-			System.out.println(rekisteri.haeKaikkiAsiakkaat());
 			
 			
 		}

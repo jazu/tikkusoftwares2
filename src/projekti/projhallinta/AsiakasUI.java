@@ -23,6 +23,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import projekti.sql.Tietovarasto;
+
 /**
  * 
  * @author s1200508
@@ -43,6 +45,7 @@ public class AsiakasUI extends JPanel {
 	private Tyontekijat tyontekijat;
 	private Asiakkaat asiakkaat;
 	private JButton tallennaButton;
+	private Tietovarasto rekisteri = new Tietovarasto();
 
 	public AsiakasUI(Projektit projektit, Tyontekijat tyontekijat,
 			final Asiakkaat asiakkaat) {
@@ -98,7 +101,7 @@ public class AsiakasUI extends JPanel {
 		add(poistaButton);
 		poistaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				asiakkaat.poistaAsiakas((Asiakas) asiakasList
+				rekisteri.poistaAsiakas((Asiakas) asiakasList
 						.getSelectedValue());
 				kentatPaalla();
 				tyhjennaKentat();
@@ -205,7 +208,7 @@ public class AsiakasUI extends JPanel {
 	}
 
 	public void paivitaTiedot() {
-		this.asiakasList.setListData(asiakkaat.getAsiakkaat().toArray());
+		this.asiakasList.setListData(rekisteri.haeKaikkiAsiakkaat().toArray());
 		kentatPaalla();
 
 	}
@@ -275,7 +278,7 @@ public class AsiakasUI extends JPanel {
 			vaiheenAlkupvmTextField.setText("");
 			vaiheenLoppupvmTextField.setText("");
 
-			asiakkaat.lisaaAsiakas(asiakas);
+			rekisteri.lisaaAsiakas(asiakas);
 		}
 	}
 

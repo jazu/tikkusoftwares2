@@ -21,7 +21,7 @@ public class ProjektiHallintaUI {
     Projektit projektit = new Projektit();
     Tyontekijat tyontekijat = new Tyontekijat();
     Asiakkaat asiakkaat = new Asiakkaat();
-    Tietovarasto rekisteri;
+    Tietovarasto rekisteri = new Tietovarasto();
     
     
     ProjektiNakymaUI alkuruutu = new ProjektiNakymaUI(projektit,tyontekijat, tabbedPane);
@@ -143,6 +143,7 @@ public class ProjektiHallintaUI {
 		System.out.println(projekti1.getVaiheet().toString());
 		System.out.println(projekti1.getTyontekijat().toString());
 		System.out.println(projekti2.getTyontekijat().toString());
+		System.out.println(rekisteri.haeKaikkiAsiakkaat().toString());
 		
 	}
 	public Projektit getProjektit(){

@@ -105,7 +105,7 @@ public class ProjektinlisaysUI extends JPanel {
 		projAsiakasComboBox = new JComboBox();
 		projAsiakasComboBox.setBounds(125, 156, 170, 20);
 		add(projAsiakasComboBox);
-		for(Asiakas asiakas: asiakkaat.getAsiakkaat()){
+		for(Asiakas asiakas: rekisteri.haeKaikkiAsiakkaat()){
 			projAsiakasComboBox.addItem(new Asiakas(asiakas.getID(),asiakas.getNimi(), asiakas.getAyritys(), asiakas.getAyhteishenkilo()));
 		}
 		
