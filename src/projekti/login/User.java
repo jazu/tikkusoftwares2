@@ -1,5 +1,11 @@
 package projekti.login;
 
+/**
+ * Object used to store information about the users in the database.
+ * @author s1200508
+ *
+ */
+
 public class User {
 	private int userID;
 	private String nimi;
@@ -19,6 +25,14 @@ insert into loginusers (kayttajaID, kayttajanimi, salasana, onkoAdmin) values(3,
 			
 			*/
 	
+	/**
+	 * Creates a new user with the info given as parameters.
+	 * @param userID
+	 * @param nimi
+	 * @param password
+	 * @param isAdmin
+	 */
+	
 	
 	public User(int userID, String nimi, String password, int isAdmin) {
 		this.userID=userID;
@@ -26,9 +40,19 @@ insert into loginusers (kayttajaID, kayttajanimi, salasana, onkoAdmin) values(3,
 		this.password = password;
 		this.isAdmin = isAdmin;
 	}
+	
+	/**
+	 * Returns the user ID.
+	 * @return user ID
+	 */
 	public int getUserID() {
 		return userID;
 	}
+	
+	/**
+	 * Returns the user name.
+	 * @return name
+	 */
 
 
 
@@ -37,12 +61,20 @@ insert into loginusers (kayttajaID, kayttajanimi, salasana, onkoAdmin) values(3,
 	}
 
 
+	/**
+	 * Returns the user password.
+	 * @return password
+	 */
 
 	public String getPassword() {
 		return password;
 	}
 
 
+	/**
+	 * Returns 1 if the user is a project manager and 0 if the user is a worker.
+	 * @return integer 1 or 0
+	 */
 
 	public int getIsAdmin() {
 		return isAdmin;

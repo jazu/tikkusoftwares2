@@ -26,7 +26,8 @@ import javax.swing.SwingConstants;
 import projekti.sql.Tietovarasto;
 
 /**
- * 
+ * Main window of the project management application,
+ * where user is able to view the projects and information about them from the database.
  * @author s1200508
  */
 public class ProjektiNakymaUI extends JPanel {
@@ -46,6 +47,13 @@ public class ProjektiNakymaUI extends JPanel {
 	private JButton poistaButton;
 	private JButton muokkaaButton;
 	private Tietovarasto rekisteri = new Tietovarasto();
+	
+	/**
+	 * 
+	 * @param projektit
+	 * @param tyontekijat
+	 * @param tb
+	 */
 
 	public ProjektiNakymaUI(final Projektit projektit, Tyontekijat tyontekijat, final JTabbedPane tb) {
 		this.tb = tb;
@@ -191,6 +199,10 @@ public class ProjektiNakymaUI extends JPanel {
 		seliteTextArea.setEditable(false);
 
 	}
+	
+	/**
+	 * Updates the textfields with the information of the project currently selected.
+	 */
 	public void paivitaProjektinTiedot(){
 		int valittu = projektiList.getSelectedIndex();
 		if(valittu >= 0){
@@ -222,6 +234,10 @@ public class ProjektiNakymaUI extends JPanel {
 
 		
 	}
+	
+	/**
+	 * updates the projectlist with all the projects from the database.
+	 */
 
 	public void paivitaTiedot() {
 		this.projektiList.setListData(rekisteri.haeKaikkiProjektit().toArray());

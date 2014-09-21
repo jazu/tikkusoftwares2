@@ -47,6 +47,13 @@ public class ProjektinMuokkausUI extends JPanel {
 	private JComboBox projAsiakasTextField;
 	private JTabbedPane tb;
 	private Tietovarasto rekisteri = new Tietovarasto();
+	/**
+	 * 
+	 * @param projektit
+	 * @param tyontekijat
+	 * @param asiakkaat
+	 * @param tb
+	 */
 
 	public ProjektinMuokkausUI(Projektit projektit, Tyontekijat tyontekijat,
 			Asiakkaat asiakkaat, final JTabbedPane tb) {
@@ -207,6 +214,9 @@ public class ProjektinMuokkausUI extends JPanel {
         });
 
 	}
+	/**
+	 * Adds all the customers from the database to a JComboBox so they can be used while editing the project.
+	 */
 
 	public void paivitaAsiakkaat() {
 		for (Asiakas asiakas : asiakkaat.getAsiakkaat()) {
@@ -217,19 +227,28 @@ public class ProjektinMuokkausUI extends JPanel {
 
 		}
 	}
+	
+	/**
+	 * Updates the textfields with correct data while selecting a project from the project combobox.
+	 */
 
 	public void paivitaTiedot() {
 		Projekti projekti = (Projekti) projektiComboBox.getSelectedItem();
 		this.loppupvmTextField.setText(projekti.getLoppupvm());
 		this.alkupvmTextField.setText(projekti.getAlkupvm());
 		this.seliteTextArea.setText(projekti.getSelite());
-		this.projVaiheetTextArea.setListData(projekti.getVaiheet().toArray());
-		this.projTyontekijatTextArea.setListData(projekti.getTyontekijat()
+		this.projVaiheetTextArea.setListData(rekisteri.haeProjektinVaiheet(projekti).toArray());
+		this.projTyontekijatTextArea.setListData(rekisteri.haeProjektinTyontekijat(projekti)
 				.toArray());
 		this.projStatusComboBox.setSelectedItem(projekti.getStatus());
 		this.projAsiakasTextField.setSelectedItem(projekti.getAsiakas());
 
 	}
+	
+	/**
+	 * Checks if textfields contain data and edits the selected project in database with
+	 * the data given the the textfields.
+	 */
 
 	public void muokkaaProjektia() {
 		if (alkupvmTextField.getText() != null
@@ -253,8 +272,6 @@ public class ProjektinMuokkausUI extends JPanel {
 					Asiakas asiakas = (Asiakas) projAsiakasTextField
 							.getSelectedItem();
 					rekisteri.muokkaaProjektinAsiakasta(asiakas, projekti);
-					System.out.println(asiakas.getID());
-					System.out.println(projekti.getID());
 
 					if (projStatusComboBox.getSelectedIndex() == 1) {
 						projekti.setStatus(ProjektinStatus.KAYNNISSA);
@@ -276,6 +293,10 @@ public class ProjektinMuokkausUI extends JPanel {
 			}
 		}
 	}
+	
+	/**
+	 * Updates the projects to project combobox from the database.
+	 */
 
 	public void paivitaProjektit() {
 

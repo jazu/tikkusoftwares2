@@ -1,6 +1,6 @@
 package projekti.projhallinta;
 /**
- * 
+ * Customer object class.
  * @author s1200508
  *
  */
@@ -11,7 +11,7 @@ public class Asiakas {
 	private String ayritys;
 	private String ayhteishenkilo;
 	/**
-	 * 
+	 * Creates a new Customer with the info given a paremeters.
 	 * @param iD
 	 * @param nimi
 	 * @param ayritys
@@ -35,14 +35,29 @@ public class Asiakas {
 	public String toString() {
 		return nimi + " :  " + ayritys;
 	}
+	
+	/**
+	 * Returns the name of the customer.
+	 * @return customer name
+	 */
 
 	public String getNimi() {
 		return nimi;
 	}
+	
+	/**
+	 * Returns the company of the customer.
+	 * @return customers company.
+	 */
 
 	public String getAyritys() {
 		return ayritys;
 	}
+	
+	/**
+	 * Returns the contact person of the customer
+	 * @return contact person
+	 */
 
 	public String getAyhteishenkilo() {
 		return ayhteishenkilo;

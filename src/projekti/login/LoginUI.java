@@ -26,7 +26,7 @@ import projekti.tyontekija.TyontekijaUI;
  */
 
 /**
- * 
+ * The user interface used while logging in the application.
  * @author s1200508
  */
 public class LoginUI extends javax.swing.JFrame {
@@ -58,7 +58,10 @@ public class LoginUI extends javax.swing.JFrame {
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	
-
+/**
+ * Method used to check if the user has entered his details correctly and check if the program should
+ * open the project management view or the worker view.
+ */
 	private void kirjaudu() {
 		
 		System.out.println(rekisteri.haeKaikkiProjektit());
@@ -126,6 +129,10 @@ public class LoginUI extends javax.swing.JFrame {
 		}
 
 	}
+	
+	/**
+	 * Quits the program
+	 */
 
 	private void lopetus() {
 		System.exit(0);

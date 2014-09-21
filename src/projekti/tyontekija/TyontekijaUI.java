@@ -29,6 +29,7 @@ import projekti.login.LoginUI;
 import projekti.projhallinta.Projekti;
 import projekti.projhallinta.ProjektiHallintaUI;
 import projekti.projhallinta.Projektit;
+import projekti.sql.Tietovarasto;
 
 /**
  *
@@ -45,13 +46,14 @@ public class TyontekijaUI extends JFrame{
     private JFormattedTextField formattedTextField2;
     private JFormattedTextField formattedTextField3;
     private JTextArea textArea;
+    private Tietovarasto rekisteri = new Tietovarasto();
     
     
 	
     public TyontekijaUI(String kirjautujannimi) {
     	phu = new ProjektiHallintaUI(kirjautujannimi);
     	phu.stealthmode();
-        this.projektit = phu.getProjektit();
+        this.projektit = (Projektit) rekisteri.haeKaikkiProjektit();
     	this.kirjautujannimi = kirjautujannimi;
     	setResizable(false);
     	setSize(630, 480);

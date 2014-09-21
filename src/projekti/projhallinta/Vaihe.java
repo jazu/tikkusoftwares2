@@ -1,5 +1,10 @@
 package projekti.projhallinta;
 
+/**
+ * Object class used to store data about the phases on a project
+ * @author s1200508
+ *
+ */
 public class Vaihe {
 	private int id;
 	private int vaihenro;
@@ -8,7 +13,16 @@ public class Vaihe {
 	private String loppupvm;
 	private String selite;
 	
-	public Vaihe(int id, String nimi, String alkupvm, String loppupvm,
+	/**
+	 * Creates a new phase with the given parameters.
+	 * @param vaihenro
+	 * @param nimi
+	 * @param alkupvm
+	 * @param loppupvm
+	 * @param selite
+	 */
+	
+	public Vaihe(int vaihenro, String nimi, String alkupvm, String loppupvm,
 			String selite) {
 
 		this.id = id;
@@ -17,6 +31,14 @@ public class Vaihe {
 		this.alkupvm = alkupvm;
 		this.loppupvm = loppupvm;
 		this.selite = selite;
+	}
+
+	public int getVaihenro() {
+		return vaihenro;
+	}
+
+	public void setVaihenro(int vaihenro) {
+		this.vaihenro = vaihenro;
 	}
 
 	public Vaihe(int id,int vaihenro, String nimi, String alkupvm, String loppupvm,
@@ -94,7 +116,7 @@ public class Vaihe {
 
 	@Override
 	public String toString() {
-		return "Vaihe: " + id + " " + nimi;
+		return "Vaihe: " + vaihenro + " " + nimi;
 	}
 
 }

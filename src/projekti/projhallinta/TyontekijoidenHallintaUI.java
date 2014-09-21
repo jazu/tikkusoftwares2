@@ -10,13 +10,16 @@ import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
+
+import projekti.sql.Tietovarasto;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * The user interface used to manage the workers in the projects.
  * @author s1200508
  */
 public class TyontekijoidenHallintaUI extends JPanel {
@@ -26,7 +29,14 @@ public class TyontekijoidenHallintaUI extends JPanel {
 	private Tyontekijat tyontekijat;
 	private JList projTyontekijatList;
 	private JList vapaatTyontekijatList;
-	private List<Tyontekija> jasu = new ArrayList<Tyontekija>();
+	private List<Tyontekija> tyontekijalista = new ArrayList<Tyontekija>();
+	private Tietovarasto rekisteri = new Tietovarasto();
+	
+	/**
+	 * 
+	 * @param projektit
+	 * @param tyontekijat
+	 */
 
     public TyontekijoidenHallintaUI(Projektit projektit, Tyontekijat tyontekijat) {
     	setLayout(null);
@@ -105,9 +115,12 @@ public class TyontekijoidenHallintaUI extends JPanel {
 		
 		
     }
+    /**
+     * Updates the available projects from the database to a JComboBox.
+     */
     public void paivitaProjektit(){
-		for (Projekti projekti : projektit.palautaLista()) {
-			if (projektit.palautaLista() == null) {
+		for (Projekti projekti : rekisteri.haeKaikkiProjektit()) {
+			if (rekisteri.haeKaikkiProjektit() == null) {
 			} else {
 				if (!apulista.contains(projekti)) {
 					apulista.add(projekti);
@@ -117,58 +130,68 @@ public class TyontekijoidenHallintaUI extends JPanel {
 			}
 		}
     }
+    /**
+     * Updates the JLists containing the workers who are available and who are working in the selected project for the first
+     * time the window is loaded.
+     */
     public void paivitaAluksi(){
     	Projekti proj = (Projekti) projektiComboBox.getSelectedItem();
     	List<Tyontekija> poistettavat = new ArrayList<Tyontekija>();
-    	for(Projekti projekti : projektit.palautaLista()){
-        	for(Tyontekija tyontekija : projekti.getTyontekijat()){
-        		if(!jasu.contains(tyontekija)){
-    				jasu.add(tyontekija);
+    	for(Projekti projekti : rekisteri.haeKaikkiProjektit()){
+        	for(Tyontekija tyontekija : rekisteri.haeProjektinTyontekijat(projekti)){
+        		if(!tyontekijalista.contains(tyontekija)){
+    				tyontekijalista.add(tyontekija);
         		}
         	}
     		
     	}
     	
 
-		for(Tyontekija jasuttaja : jasu){
+		for(Tyontekija jasuttaja : tyontekijalista){
 			
-			if(proj.getTyontekijat().contains(jasuttaja)){
+			if(rekisteri.haeProjektinTyontekijat(proj).contains(jasuttaja)){
 				poistettavat.add(jasuttaja);
 			}	
 		}
-    	jasu.removeAll(poistettavat);
-    	System.out.println(jasu.toString()+" PAIVITAALUKSI");
-    	this.projTyontekijatList.setListData(proj.getTyontekijat().toArray());
-    	this.vapaatTyontekijatList.setListData(jasu.toArray());
+    	tyontekijalista.removeAll(poistettavat);
+    	System.out.println(tyontekijalista.toString()+" PAIVITAALUKSI");
+    	this.projTyontekijatList.setListData(rekisteri.haeProjektinTyontekijat(proj).toArray());
+    	this.vapaatTyontekijatList.setListData(rekisteri.haeKaikkiTyontekijat().toArray());
     	
     	
     }
+    /**
+     * Updates the workers in the JLists after changes have been made.
+     */
     public void paivita(){
     	Projekti proj = (Projekti) projektiComboBox.getSelectedItem();
-    	this.projTyontekijatList.setListData(proj.getTyontekijat().toArray());
-    	this.vapaatTyontekijatList.setListData(jasu.toArray());
+    	this.projTyontekijatList.setListData(rekisteri.haeProjektinTyontekijat(proj).toArray());
+    	this.vapaatTyontekijatList.setListData(rekisteri.haeKaikkiTyontekijat().toArray());
     	
     }
+    
+    /**
+     * Adds the selected worker in the selected project if the project doesn't already contain the worker.
+     */
     public void lisaaProjektiin(){
     	Projekti proj = (Projekti) projektiComboBox.getSelectedItem();
-
-    	int num = vapaatTyontekijatList.getSelectedIndex();
-        if(!proj.getTyontekijat().contains(jasu.get(num))){
-        	proj.lisaaTyontekija(jasu.get(num));
-        	jasu.remove(num);
-        	
+    	Tyontekija tyontekija = (Tyontekija) vapaatTyontekijatList.getSelectedValue();
+        if(!rekisteri.haeProjektinTyontekijat(proj).contains(tyontekija)){
+     //   	rekisteri.muokkaaProjektinTyontekijaa(tyontekija, proj);
+        	rekisteri.lisaaTyontekijaProjektiin(tyontekija, proj);
         }
 
 
     	
     }
+    /**
+     * Removes the selected worker from the selected project
+     */
 
     public void poistaProjektista(){
-    	Projekti proj = (Projekti) projektiComboBox.getSelectedItem();
-    	int num = projTyontekijatList.getSelectedIndex();
-    	Tyontekija tyontekija = proj.getTyontekijat().get(num);
-    	proj.poistaTyontekija(tyontekija);
-    	jasu.add(tyontekija);
+    	Projekti projekti = (Projekti) projektiComboBox.getSelectedItem();
+    	Tyontekija tyontekija = (Tyontekija) projTyontekijatList.getSelectedValue();
+    	rekisteri.poistaTyontekijaProjektista(tyontekija, projekti);
     	
     	
     }

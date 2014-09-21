@@ -26,8 +26,10 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import projekti.sql.Tietovarasto;
+
 /**
- * 
+ * User interface used in managing the existing phases of a project and creating new ones for projects.
  * @author s1200508
  */
 public class VaiheenLuontiUI extends JPanel {
@@ -45,6 +47,13 @@ public class VaiheenLuontiUI extends JPanel {
 	private JTextArea seliteTextArea;
 	private Tyontekijat tyontekijat;
 	private JButton tallennaButton;
+	private Tietovarasto rekisteri = new Tietovarasto();
+	
+	/**
+	 * 
+	 * @param projektit
+	 * @param tyontekijat
+	 */
 
 	public VaiheenLuontiUI(Projektit projektit, Tyontekijat tyontekijat) {
 		setLayout(null);
@@ -123,7 +132,9 @@ public class VaiheenLuontiUI extends JPanel {
 				// tallennaVaihe();
 				Projekti proj = (Projekti) projektiComboBox.getSelectedItem();
 
-				proj.poistaVaihe((Vaihe) vaiheList.getSelectedValue());
+				Vaihe vaih = (Vaihe) vaiheList.getSelectedValue();
+								
+				rekisteri.poistaVaihe(vaih);
 
 				kentatPaalla();
 				tyhjennaKentat();
@@ -226,6 +237,10 @@ public class VaiheenLuontiUI extends JPanel {
 		kentatPaalla();
 
 	}
+	
+	/**
+	 * Updates the textfields with the correct data from the currently selected phase.
+	 */
 
 	public void paivitaVaiheenTiedot() {
 		int valittu = vaiheList.getSelectedIndex();
@@ -239,16 +254,24 @@ public class VaiheenLuontiUI extends JPanel {
 		}
 
 	}
+	
+	/**
+	 * Updates the JList with all the phases in the selected project.
+	 */
 
 	public void paivitaTiedot() {
 		Projekti projekti = (Projekti) projektiComboBox.getSelectedItem();
-		this.vaiheList.setListData(projekti.getVaiheet().toArray());
+		this.vaiheList.setListData(rekisteri.haeProjektinVaiheet(projekti).toArray());
 		kentatPaalla();
 
 	}
+	
+	/**
+	 * Updates the project JComboBox with all the projects in the database.
+	 */
 
 	public void paivitaProjektit() {
-		for (Projekti projekti : projektit.palautaLista()) {
+		for (Projekti projekti : rekisteri.haeKaikkiProjektit()) {
 			if (projektit.palautaLista() == null) {
 			} else {
 				if (!apulista.contains(projekti)) {
@@ -260,14 +283,19 @@ public class VaiheenLuontiUI extends JPanel {
 		}
 	}
 
-	public int tarkistaId() {
+	/**
+	 * Method used to automatically create the sequence numbers on the phases while adding a new phase on a project.
+	 * @return sequence number of a phase on a project
+	 */
+	
+
+	public int tarkistaVaiheNro() {
 		int id = 0;
 
-		for (Projekti projekti : projektit.palautaLista()) {
+		for (Projekti projekti : rekisteri.haeKaikkiProjektit()) {
 			if (projekti.equals(projektiComboBox.getSelectedItem())) {
-				Vaihe vaihe = projekti.getVaiheet().get(
-						projekti.getVaiheet().size() - 1);
-				id = vaihe.getId();
+				Vaihe vaihe = rekisteri.haeProjektinVaiheet(projekti).get(rekisteri.haeProjektinVaiheet(projekti).size() - 1);
+				id = vaihe.getVaihenro();
 				id++;
 
 			}
@@ -276,14 +304,20 @@ public class VaiheenLuontiUI extends JPanel {
 		return id;
 
 	}
+	
+	
 
 	public void tallennaVaihe() {
-		int id = tarkistaId();
+		int id = tarkistaVaiheNro();
 		Vaihe vaihe = new Vaihe(id, vaiheenNimiTextField.getText(),
 				vaiheenAlkupvmTextField.getText(),
 				vaiheenLoppupvmTextField.getText(), "Selite");
 
 	}
+	
+	/**
+	 * Removes the selected phase from the selected project.
+	 */
 
 	public void poistaVaihe() {
 		Projekti proj = (Projekti) projektiComboBox.getSelectedItem();
@@ -297,10 +331,14 @@ public class VaiheenLuontiUI extends JPanel {
 			}
 		}
 		if (poistettava != null) {
-			proj.poistaVaihe(vaihe);
+			rekisteri.poistaVaihe(vaihe);
 		}
 
 	}
+	
+	/**
+	 * Adds a new phase for the selected project, but only if data is entered in all the textfields.
+	 */
 
 	public void lisaaVaihe() {
 		if (vaiheenNimiTextField.getText() != null
@@ -319,22 +357,24 @@ public class VaiheenLuontiUI extends JPanel {
 				&& seliteTextArea.getText().equals("")) {
 			seliteTextArea.setBackground(Color.PINK);
 		} else {
-			int id = 1;
-			Projekti zz = (Projekti) projektiComboBox.getSelectedItem();
-			if (zz.getVaiheet().size() == 0) {
-				id = 1;
+			int vaiheNro = 1;
+			Projekti projektiN = (Projekti) projektiComboBox.getSelectedItem();
+			if (rekisteri.haeProjektinVaiheet(projektiN).size() == 0) {
+				System.out.println("size == 0");
+				vaiheNro = 1;
 			} else {
-				id = tarkistaId();
+				System.out.println("size != 0");
+				vaiheNro = tarkistaVaiheNro();
 			}
 
-			Vaihe vaihe = new Vaihe(id, vaiheenNimiTextField.getText(),
+			Vaihe vaihe = new Vaihe(vaiheNro, vaiheenNimiTextField.getText(),
 					vaiheenAlkupvmTextField.getText(),
 					vaiheenLoppupvmTextField.getText(),
 					seliteTextArea.getText());
 
-			for (Projekti projekti : projektit.palautaLista()) {
+			for (Projekti projekti : rekisteri.haeKaikkiProjektit()) {
 				if (projekti.equals(projektiComboBox.getSelectedItem())) {
-					projekti.lisaaVaihe(vaihe);
+					rekisteri.lisaaVaihe(vaihe, projekti);
 				}
 				vaiheenNimiTextField.setText("");
 				vaiheenAlkupvmTextField.setText("");
@@ -344,6 +384,9 @@ public class VaiheenLuontiUI extends JPanel {
 			}
 		}
 	}
+	/**
+	 * Enables all the textfields
+	 */
 
 	public void kentatPaalla() {
 
@@ -353,6 +396,11 @@ public class VaiheenLuontiUI extends JPanel {
 		seliteTextArea.setEditable(true);
 
 	}
+	
+	
+	/**
+	 * Disables all the textfields.
+	 */
 
 	public void kentatPois() {
 		vaiheenNimiTextField.setEditable(false);
@@ -361,6 +409,10 @@ public class VaiheenLuontiUI extends JPanel {
 		seliteTextArea.setEditable(false);
 
 	}
+	
+	/**
+	 * Clears all the textfields.
+	 */
 
 	public void tyhjennaKentat() {
 		vaiheenNimiTextField.setText("");

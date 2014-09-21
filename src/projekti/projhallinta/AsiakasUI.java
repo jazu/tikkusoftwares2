@@ -26,7 +26,7 @@ import javax.swing.SwingConstants;
 import projekti.sql.Tietovarasto;
 
 /**
- * 
+ * User interface for adding, removing and managing the customers in the database.
  * @author s1200508
  */
 public class AsiakasUI extends JPanel {
@@ -46,9 +46,16 @@ public class AsiakasUI extends JPanel {
 	private Asiakkaat asiakkaat;
 	private JButton tallennaButton;
 	private Tietovarasto rekisteri = new Tietovarasto();
+	
+	/**
+	 * Creates new AsiakasUI window
+	 * @param projektit
+	 * @param tyontekijat
+	 * @param asiakkaat
+	 */
 
-	public AsiakasUI(Projektit projektit, Tyontekijat tyontekijat,
-			final Asiakkaat asiakkaat) {
+	public AsiakasUI(Projektit projektit, Tyontekijat tyontekijat,final Asiakkaat asiakkaat) {
+		
 		setLayout(null);
 		this.projektit = projektit;
 		this.tyontekijat = tyontekijat;
@@ -206,13 +213,17 @@ public class AsiakasUI extends JPanel {
 		}
 
 	}
+	
+	/**
+	 * Places all the customers to the JList object from the database.
+	 */
 
 	public void paivitaTiedot() {
 		this.asiakasList.setListData(rekisteri.haeKaikkiAsiakkaat().toArray());
 		kentatPaalla();
 
 	}
-
+/*
 	public void paivitaProjektit() {
 
 		for (Projekti projekti : projektit.palautaLista()) {
@@ -226,6 +237,13 @@ public class AsiakasUI extends JPanel {
 			}
 		}
 	}
+	
+	
+	*/
+	/**
+	 * Generates the customerID for a new customer that is being added.
+	 * @return customerID as int.
+	 */
 
 	public int tarkistaId() {
 		int id = 0;
@@ -247,6 +265,10 @@ public class AsiakasUI extends JPanel {
 
 	}
 
+	/**
+	 * Checks if the textfields have data entered and adds a new customer in the database,
+	 * if the fields have insufficient data, the fields will turn red.
+	 */
 	private void lisaaAsiakas() {
 		if (vaiheenNimiTextField.getText() != null
 				&& vaiheenNimiTextField.getText().equals("")) {
@@ -281,6 +303,10 @@ public class AsiakasUI extends JPanel {
 			rekisteri.lisaaAsiakas(asiakas);
 		}
 	}
+	
+	/**
+	 * Enables the textfields.
+	 */
 
 	public void kentatPaalla() {
 
@@ -289,6 +315,10 @@ public class AsiakasUI extends JPanel {
 		vaiheenLoppupvmTextField.setEditable(true);
 
 	}
+	
+	/**
+	 * Disables the textfields.
+	 */
 
 	public void kentatPois() {
 		vaiheenNimiTextField.setEditable(false);
@@ -296,6 +326,10 @@ public class AsiakasUI extends JPanel {
 		vaiheenLoppupvmTextField.setEditable(false);
 
 	}
+	
+	/**
+	 * Clears the textfields.
+	 */
 
 	public void tyhjennaKentat() {
 		vaiheenNimiTextField.setText("");

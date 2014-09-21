@@ -29,8 +29,8 @@ import javax.swing.SwingConstants;
 import projekti.sql.Tietovarasto;
 
 /**
- * 
- * @author Jay-Z u
+ * User interface for adding new projects in the database.
+ * @author s1200508
  */
 public class ProjektinlisaysUI extends JPanel {
 	private JTextField nimeaProjektiTextField;
@@ -43,6 +43,13 @@ public class ProjektinlisaysUI extends JPanel {
 	private Asiakkaat asiakkaat;
 	private JComboBox projAsiakasComboBox;
 	private Tietovarasto rekisteri= new Tietovarasto();
+	
+	/**
+	 * 
+	 * @param projektit
+	 * @param tyontekijat
+	 * @param asiakkaat
+	 */
 	
 
 	public ProjektinlisaysUI(Projektit projektit,Tyontekijat tyontekijat, Asiakkaat asiakkaat) {
@@ -195,9 +202,12 @@ public class ProjektinlisaysUI extends JPanel {
 
 
 	}
+	
+	/**
+	 * Fills the combobox with selectable customers from the database.
+	 */
 	public void paivitaAsiakkaat(){
 		
-
 		for(Asiakas asiakas: rekisteri.haeKaikkiAsiakkaat()){
 			if(projAsiakasComboBox.getItemCount() < asiakkaat.getAsiakkaat().size()){
 				projAsiakasComboBox.addItem(asiakas);
@@ -215,6 +225,10 @@ public class ProjektinlisaysUI extends JPanel {
 	}
 	*/
 	
+	/**
+	 * Checks if the fields have data entered in them and creates a new project in the database,
+	 * also creates a pop-up message letting the user know a new project has been created.
+	 */
 	public void lisaaProjekti() {
 		if (nimeaProjektiTextField.getText() != null
 				&& nimeaProjektiTextField.getText().equals("")) {
