@@ -70,16 +70,6 @@ public class ProjektinMuokkausUI extends JPanel {
 		projektiLabel.setBounds(10, 39, 105, 14);
 		add(projektiLabel);
 
-		JComboBox projTyontekijatComboBox = new JComboBox();
-		projTyontekijatComboBox.setBounds(305, 36, 200, 20);
-		add(projTyontekijatComboBox);
-		projTyontekijatComboBox.addItem("Filter");
-
-		JComboBox projVaiheetComboBox = new JComboBox();
-		projVaiheetComboBox.setBounds(555, 36, 200, 20);
-		add(projVaiheetComboBox);
-		projVaiheetComboBox.addItem("Filter");
-
 		DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
 		
 		loppupvmTextField = new JFormattedTextField(format);
@@ -117,11 +107,11 @@ public class ProjektinMuokkausUI extends JPanel {
 		}
 
 		projTyontekijatTextArea = new JList();
-		projTyontekijatTextArea.setBounds(305, 67, 200, 296);
+		projTyontekijatTextArea.setBounds(305, 36, 200, 327);
 		add(projTyontekijatTextArea);
 
 		projVaiheetTextArea = new JList();
-		projVaiheetTextArea.setBounds(555, 67, 200, 296);
+		projVaiheetTextArea.setBounds(555, 36, 200, 327);
 		add(projVaiheetTextArea);
 
 		JButton muokkaaTyontekijoitaButton = new JButton(
@@ -150,16 +140,8 @@ public class ProjektinMuokkausUI extends JPanel {
 				muokkaaProjektia();
 			}
 		});
-		tallennaButton.setBounds(555, 425, 127, 23);
+		tallennaButton.setBounds(471, 408, 127, 23);
 		add(tallennaButton);
-
-		JButton peruutaButton = new JButton("Peruuta");
-		peruutaButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		peruutaButton.setBounds(378, 425, 127, 23);
-		add(peruutaButton);
 
 		seliteTextArea = new JTextArea();
 		seliteTextArea.setBounds(10, 221, 285, 142);
@@ -187,7 +169,7 @@ public class ProjektinMuokkausUI extends JPanel {
 
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
-		separator.setBounds(530, 68, 2, 295);
+		separator.setBounds(530, 37, 2, 326);
 		add(separator);
 		projektiComboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
