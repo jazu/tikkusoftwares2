@@ -62,68 +62,49 @@ public class ProjektinlisaysUI extends JPanel {
 		setLayout(null);
 
 		JLabel nimeaProjektiLabel = new JLabel("Nimea Projekti: ");
-		nimeaProjektiLabel.setBounds(10, 38, 105, 14);
+		nimeaProjektiLabel.setBounds(10, 24, 105, 14);
 		add(nimeaProjektiLabel);
 
 		nimeaProjektiTextField = new JTextField();
-		nimeaProjektiTextField.setBounds(125, 35, 170, 20);
+		nimeaProjektiTextField.setBounds(10, 49, 225, 20);
 		add(nimeaProjektiTextField);
 		nimeaProjektiTextField.setColumns(10);
-
-		JComboBox projTyontekijatComboBox = new JComboBox();
-		projTyontekijatComboBox.setBounds(305, 35, 200, 20);
-		add(projTyontekijatComboBox);
-		projTyontekijatComboBox.addItem("Filter");
-
-		JComboBox projVaiheetComboBox = new JComboBox();
-		projVaiheetComboBox.setBounds(555, 35, 200, 20);
-		add(projVaiheetComboBox);
-		projVaiheetComboBox.addItem("Filter");
 
 		DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
 		
 		loppupvmTextField = new JFormattedTextField(format);
 		loppupvmTextField.setToolTipText("DD.MM.YYYY");
 		loppupvmTextField.setColumns(10);
-		loppupvmTextField.setBounds(125, 94, 170, 20);
+		loppupvmTextField.setBounds(290, 108, 225, 20);
 		add(loppupvmTextField);
 
 		alkupvmTextField = new JFormattedTextField(format);
 		alkupvmTextField.setToolTipText("DD.MM.YYYY");
 		alkupvmTextField.setColumns(10);
-		alkupvmTextField.setBounds(125, 63, 170, 20);
+		alkupvmTextField.setBounds(10, 108, 225, 20);
 		add(alkupvmTextField);
 
 		JLabel alkupvmLabel = new JLabel("Alkupaivamaara:");
-		alkupvmLabel.setBounds(10, 66, 105, 14);
+		alkupvmLabel.setBounds(10, 80, 105, 14);
 		add(alkupvmLabel);
 
 		JLabel loppupvmLabel = new JLabel("Loppupaivamaara:");
-		loppupvmLabel.setBounds(10, 97, 106, 14);
+		loppupvmLabel.setBounds(290, 80, 106, 14);
 		add(loppupvmLabel);
 
 		projStatusComboBox = new JComboBox();
-		projStatusComboBox.setBounds(125, 125, 170, 20);
+		projStatusComboBox.setBounds(289, 166, 226, 20);
 		add(projStatusComboBox);
 		projStatusComboBox.addItem(ProjektinStatus.TARJOTTU);
 		projStatusComboBox.addItem(ProjektinStatus.KAYNNISSA);
 		projStatusComboBox.addItem(ProjektinStatus.PAATTYNYT);
 
 		projAsiakasComboBox = new JComboBox();
-		projAsiakasComboBox.setBounds(125, 156, 170, 20);
+		projAsiakasComboBox.setBounds(10, 166, 225, 20);
 		add(projAsiakasComboBox);
 		for(Asiakas asiakas: rekisteri.haeKaikkiAsiakkaat()){
 			projAsiakasComboBox.addItem(new Asiakas(asiakas.getID(),asiakas.getNimi(), asiakas.getAyritys(), asiakas.getAyhteishenkilo()));
 		}
-		
-
-		JList projTyontekijatTextArea_1 = new JList();
-		projTyontekijatTextArea_1.setBounds(305, 66, 200, 296);
-		add(projTyontekijatTextArea_1);
-
-		JList projVaiheetTextArea = new JList();
-		projVaiheetTextArea.setBounds(555, 66, 200, 296);
-		add(projVaiheetTextArea);
 
 		JButton tallennaButton = new JButton("Tallenna");
 		tallennaButton.addActionListener(new ActionListener() {
@@ -132,19 +113,11 @@ public class ProjektinlisaysUI extends JPanel {
 
 			}
 		});
-		tallennaButton.setBounds(555, 373, 127, 23);
+		tallennaButton.setBounds(388, 373, 127, 23);
 		add(tallennaButton);
 
-		JButton peruutaButton = new JButton("Peruuta");
-		peruutaButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		peruutaButton.setBounds(378, 373, 127, 23);
-		add(peruutaButton);
-
 		seliteTextArea = new JTextArea();
-		seliteTextArea.setBounds(10, 220, 285, 142);
+		seliteTextArea.setBounds(10, 220, 505, 142);
 		add(seliteTextArea);
 
 		JLabel seliteLabel = new JLabel("Selite:");
@@ -152,24 +125,16 @@ public class ProjektinlisaysUI extends JPanel {
 		add(seliteLabel);
 
 		JLabel projStatusLabel = new JLabel("Projektin status:");
-		projStatusLabel.setBounds(10, 128, 106, 14);
+		projStatusLabel.setBounds(289, 139, 106, 14);
 		add(projStatusLabel);
 
 		JLabel projAsiakasLabel = new JLabel("Projektin asiakas:");
-		projAsiakasLabel.setBounds(10, 159, 105, 14);
+		projAsiakasLabel.setBounds(10, 141, 105, 14);
 		add(projAsiakasLabel);
-
-		JLabel projTyontekijatTextArea = new JLabel("Projektin tyontekijat:");
-		projTyontekijatTextArea.setBounds(305, 11, 200, 14);
-		add(projTyontekijatTextArea);
-
-		JLabel projVaiheetLabel = new JLabel("Projektin vaiheet");
-		projVaiheetLabel.setBounds(555, 10, 200, 14);
-		add(projVaiheetLabel);
 
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
-		separator.setBounds(530, 67, 2, 295);
+		separator.setBounds(530, 24, 2, 338);
 		add(separator);
 		
 		

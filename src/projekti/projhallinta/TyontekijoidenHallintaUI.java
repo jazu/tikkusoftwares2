@@ -55,23 +55,13 @@ public class TyontekijoidenHallintaUI extends JPanel {
     	projTyontekijatLabel.setBounds(10, 59, 153, 14);
     	add(projTyontekijatLabel);
     	
-    	JComboBox projTyontekijatComboBox = new JComboBox();
-    	projTyontekijatComboBox.setBounds(10, 84, 201, 20);
-    	add(projTyontekijatComboBox);
-    	projTyontekijatComboBox.addItem("Filter");
-    	
     	projTyontekijatList = new JList();
-    	projTyontekijatList.setBounds(10, 114, 201, 249);
+    	projTyontekijatList.setBounds(10, 84, 201, 279);
     	add(projTyontekijatList);
     	
     	vapaatTyontekijatList = new JList();
-    	vapaatTyontekijatList.setBounds(440, 114, 201, 249);
+    	vapaatTyontekijatList.setBounds(440, 84, 201, 279);
     	add(vapaatTyontekijatList);
-    	
-    	JComboBox vapaatTyontekijatComboBox = new JComboBox();
-    	vapaatTyontekijatComboBox.setBounds(440, 84, 201, 20);
-    	add(vapaatTyontekijatComboBox);
-    	vapaatTyontekijatComboBox.addItem("Filter");
     	
     	JLabel vapaatTyontekijatLabel = new JLabel("Saatavilla olevat tyontekijat:");
     	vapaatTyontekijatLabel.setBounds(440, 59, 201, 14);
@@ -84,7 +74,7 @@ public class TyontekijoidenHallintaUI extends JPanel {
     			paivita();
     		}
     	});
-    	lisaaProjektiinButton.setBounds(221, 178, 209, 23);
+    	lisaaProjektiinButton.setBounds(221, 97, 209, 23);
     	add(lisaaProjektiinButton);
     	
     	JButton poistaProjektistaButton = new JButton("Poista projektista");
@@ -94,13 +84,13 @@ public class TyontekijoidenHallintaUI extends JPanel {
     			paivita();
     		}
     	});
-    	poistaProjektistaButton.setBounds(221, 212, 209, 23);
+    	poistaProjektistaButton.setBounds(221, 327, 209, 23);
     	add(poistaProjektistaButton);
     	
 
     	
     	JSeparator separator = new JSeparator();
-    	separator.setBounds(221, 114, 209, 2);
+    	separator.setBounds(221, 84, 209, 2);
     	add(separator);
     	
     	JSeparator separator_1 = new JSeparator();
