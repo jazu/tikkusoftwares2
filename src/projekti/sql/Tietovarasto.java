@@ -1139,6 +1139,38 @@ public boolean lisaaTyontekijaProjektiin(Tyontekija tyontekija, Projekti projekt
 		}
 	}
 
+public String haeHelpteksti(int helpid){
+	User user=null;
+	Connection yhteys = Yhteydenhallinta.avaaYhteys(ajuri, url, kayttaja, salasana);;
+	PreparedStatement hakulause = null;
+	ResultSet tulosjoukko = null;
+	if (yhteys == null) return null;
+	try {
+			String hakuSql = "select * from help where helpID = ?";
+			hakulause = yhteys.prepareStatement(hakuSql);
+			hakulause.setInt(1, helpid);
+			tulosjoukko = hakulause.executeQuery();
+
+			if (tulosjoukko.next()) {
+				return (tulosjoukko.getString(2));
+			} else{
+				return null;
+			}
+		
+
+	} catch (Exception e) {
+		e.printStackTrace();
+		return null;
+	} finally {
+		Yhteydenhallinta.suljeTulosjoukko(tulosjoukko);
+		Yhteydenhallinta.suljeLause(hakulause);
+		Yhteydenhallinta.suljeYhteys(yhteys);
+
+	}
+	
+}
+
+
 
 	
 
