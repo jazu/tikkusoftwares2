@@ -28,7 +28,7 @@ import projekti.sql.Tietovarasto;
 /**
  * Main window of the project management application,
  * where user is able to view the projects and information about them from the database.
- * @author s1200508
+ * 
  */
 public class ProjektiNakymaUI extends JPanel {
 	private JTextField projektinNimiTextField;

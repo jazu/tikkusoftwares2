@@ -30,7 +30,7 @@ import projekti.sql.Tietovarasto;
 
 /**
  * User interface used in managing the existing phases of a project and creating new ones for projects.
- * @author s1200508
+ * 
  */
 public class VaiheenLuontiUI extends JPanel {
 	private JTextField vaiheenNimiTextField;

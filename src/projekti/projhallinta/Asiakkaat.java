@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Object class to store customers.
- * @author s1200508
+ * 
  *
  */
 public class Asiakkaat {

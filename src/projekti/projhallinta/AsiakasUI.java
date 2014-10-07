@@ -27,7 +27,7 @@ import projekti.sql.Tietovarasto;
 
 /**
  * User interface for adding, removing and managing the customers in the database.
- * @author s1200508
+ * 
  */
 public class AsiakasUI extends JPanel {
 	private JTextField vaiheenNimiTextField;

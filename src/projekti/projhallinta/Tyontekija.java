@@ -2,7 +2,7 @@ package projekti.projhallinta;
 
 /**
  * Class used to create and store data about the workers.
- * @author s1200508
+ * 
  *
  */
 

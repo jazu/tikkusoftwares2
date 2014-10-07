@@ -27,7 +27,7 @@ import projekti.tyontekija.TyontekijaUI;
 
 /**
  * The user interface used while logging in the application.
- * @author s1200508
+ * 
  */
 public class LoginUI extends javax.swing.JFrame {
 

@@ -18,10 +18,13 @@ public class Help extends JPanel {
 	JTextArea helpTextarea = new JTextArea();
 	Tietovarasto rekisteri = new Tietovarasto();
 	public Help() {
+		
 		setLayout(null);
 		
 
 		helpTextarea.setBounds(10, 11, 509, 324);
+		helpTextarea.setLineWrap(true);
+		helpTextarea.setWrapStyleWord(true);
 		add(helpTextarea);
 		
 		JSeparator separator = new JSeparator();
@@ -29,7 +32,7 @@ public class Help extends JPanel {
 		separator.setBounds(542, 11, 9, 324);
 		add(separator);
 		
-		JButton projektinakymaButton = new JButton("Projektin n\u00E4kym\u00E4 help!");
+		JButton projektinakymaButton = new JButton("Projektin n\u00E4kym\u00E4");
 		projektinakymaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				helpTextarea.setText(rekisteri.haeHelpteksti(1));
@@ -38,7 +41,7 @@ public class Help extends JPanel {
 		projektinakymaButton.setBounds(561, 12, 192, 23);
 		add(projektinakymaButton);
 		
-		JButton lisaaprojektiButton = new JButton("Lisaa projekti help!");
+		JButton lisaaprojektiButton = new JButton("Lisaa projekti");
 		lisaaprojektiButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				helpTextarea.setText(rekisteri.haeHelpteksti(2));
@@ -47,7 +50,7 @@ public class Help extends JPanel {
 		lisaaprojektiButton.setBounds(561, 72, 192, 23);
 		add(lisaaprojektiButton);
 		
-		JButton muokaaprojektiButton = new JButton("Muokkaa projektia help!");
+		JButton muokaaprojektiButton = new JButton("Muokkaa projektia");
 		muokaaprojektiButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				helpTextarea.setText(rekisteri.haeHelpteksti(3));
@@ -56,7 +59,7 @@ public class Help extends JPanel {
 		muokaaprojektiButton.setBounds(561, 132, 192, 23);
 		add(muokaaprojektiButton);
 		
-		JButton hallitsevaiheitaButton = new JButton("Hallitse vaiheita help!");
+		JButton hallitsevaiheitaButton = new JButton("Hallitse vaiheita");
 		hallitsevaiheitaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				helpTextarea.setText(rekisteri.haeHelpteksti(4));
@@ -65,7 +68,7 @@ public class Help extends JPanel {
 		hallitsevaiheitaButton.setBounds(561, 192, 192, 23);
 		add(hallitsevaiheitaButton);
 		
-		JButton hallitsetyontekijoitaButton = new JButton("Hallitse ty\u00F6ntekij\u00F6it\u00E4 help!");
+		JButton hallitsetyontekijoitaButton = new JButton("Hallitse ty\u00F6ntekij\u00F6it\u00E4");
 		hallitsetyontekijoitaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				helpTextarea.setText(rekisteri.haeHelpteksti(5));
@@ -75,7 +78,7 @@ public class Help extends JPanel {
 		hallitsetyontekijoitaButton.setBounds(561, 252, 192, 23);
 		add(hallitsetyontekijoitaButton);
 		
-		JButton asiakkaidenhallintaButton = new JButton("Asiakkaiden hallinta help!");
+		JButton asiakkaidenhallintaButton = new JButton("Asiakkaiden hallinta");
 		asiakkaidenhallintaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				helpTextarea.setText(rekisteri.haeHelpteksti(6));

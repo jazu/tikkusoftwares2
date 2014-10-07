@@ -2,7 +2,7 @@ package projekti.projhallinta;
 
 /**
  * Object class used to store data about the phases on a project
- * @author s1200508
+ * 
  *
  */
 public class Vaihe {

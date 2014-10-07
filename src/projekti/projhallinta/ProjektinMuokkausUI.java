@@ -29,8 +29,8 @@ import javax.swing.SwingConstants;
 import projekti.sql.Tietovarasto;
 
 /**
+ *  User interface used to edit the projects.
  * 
- * @author s1200508
  */
 public class ProjektinMuokkausUI extends JPanel {
 	private JFormattedTextField loppupvmTextField;

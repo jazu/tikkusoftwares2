@@ -1,7 +1,7 @@
 package projekti.projhallinta;
 /**
  * Customer object class.
- * @author s1200508
+ * 
  *
  */
 public class Asiakas {

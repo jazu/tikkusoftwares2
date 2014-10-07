@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Class to store the projects as objects.
- * @author s1200508
+ *
  *
  */
 

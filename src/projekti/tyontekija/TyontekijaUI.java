@@ -33,7 +33,7 @@ import projekti.sql.Tietovarasto;
 
 /**
  *
- * @author s1200508
+ * 
  */
 public class TyontekijaUI extends JFrame{
 	private static String kirjautujannimi;

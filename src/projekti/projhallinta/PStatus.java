@@ -2,7 +2,7 @@ package projekti.projhallinta;
 
 /**
  * The PStatus object is used to store individual project status objects used in database.
- * @author s1200508
+ * 
  *
  */
 

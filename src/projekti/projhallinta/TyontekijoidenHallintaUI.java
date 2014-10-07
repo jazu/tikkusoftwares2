@@ -20,7 +20,7 @@ import java.util.List;
 
 /**
  * The user interface used to manage the workers in the projects.
- * @author s1200508
+ * 
  */
 public class TyontekijoidenHallintaUI extends JPanel {
 	private Projektit projektit;

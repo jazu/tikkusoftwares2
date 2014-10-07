@@ -17,7 +17,7 @@ import projekti.sql.Tietovarasto;
 /**
  * The main class of the project management user interface. Contains creation of the jTabbedPanes,
  * which include the functionality of the program.
- * @author s1200508
+ *
  *
  */
 

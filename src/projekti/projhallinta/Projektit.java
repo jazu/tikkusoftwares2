@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Object class containing an arraylist with projects.
- * @author s1200508
+ * 
  *
  */
 
@@ -62,7 +62,7 @@ public class Projektit {
 	}
 	/**
 	 * Returns the projects arraylist
-	 * @return
+	 * @return arraylist with projects
 	 */
 	public List<Projekti> palautaLista(){
 		return this.projektit;

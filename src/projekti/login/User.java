@@ -2,7 +2,7 @@ package projekti.login;
 
 /**
  * Object used to store information about the users in the database.
- * @author s1200508
+ * 
  *
  */
 

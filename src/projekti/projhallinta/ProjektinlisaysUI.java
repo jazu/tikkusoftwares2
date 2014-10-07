@@ -30,7 +30,7 @@ import projekti.sql.Tietovarasto;
 
 /**
  * User interface for adding new projects in the database.
- * @author s1200508
+ *
  */
 public class ProjektinlisaysUI extends JPanel {
 	private JTextField nimeaProjektiTextField;
