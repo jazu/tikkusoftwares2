@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Tue Oct 07 09:20:16 EEST 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077): instance a816c00e-0148-e943-eff0-000006bbaa98 
+Wed Oct 08 14:34:39 EEST 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077): instance a816c00e-0148-ef8a-1d27-000006bde1c8 
 on database directory C:\GitHub\RuipiGui\tikkudb  with class loader sun.misc.Launcher$AppClassLoader@4d24bd93 
 Loaded from file:/C:/GitHub/RuipiGui/derby.jar
 java.vendor=Oracle Corporation

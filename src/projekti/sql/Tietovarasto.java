@@ -1170,6 +1170,38 @@ public String haeHelpteksti(int helpid){
 	
 }
 
+/**
+ * Edits the info of a customer in the customer table
+ * @param asiakas
+ * @return true if edit was succesfull, false if not
+ */
+public boolean muokkaaAsiakas(Asiakas asiakas){
+	Connection yhteys= Yhteydenhallinta.avaaYhteys(ajuri, url, kayttaja, salasana);
+	if(yhteys==null) return false;
+	
+	PreparedStatement muutoslause=null;
+	try{
+		String muutoslauseSql ="update asiakkaat set nimi=?, yritys=?, yhteyshlo=? where asiakasID=?";
+		muutoslause = yhteys.prepareStatement(muutoslauseSql);
+		muutoslause.setString(1, asiakas.getNimi());
+		muutoslause.setString(2, asiakas.getAyritys());
+		muutoslause.setString(3, asiakas.getAyhteishenkilo());
+		muutoslause.setInt(4, asiakas.getID());
+		
+		muutoslause.executeUpdate();
+		return true;
+		
+	}catch(Exception e){
+		e.printStackTrace();
+		return false;
+	}
+	finally{
+		Yhteydenhallinta.suljeLause(muutoslause);
+		Yhteydenhallinta.suljeYhteys(yhteys);
+	}
+}
+
+
 
 
 	

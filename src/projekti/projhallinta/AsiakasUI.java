@@ -291,6 +291,16 @@ public class AsiakasUI extends JPanel {
 			} else {
 				id = tarkistaId();
 			}
+			
+			if(rekisteri.haeKaikkiAsiakkaat().contains(asiakasList.getSelectedValue())){
+				Asiakas valittuasiakas = (Asiakas) asiakasList.getSelectedValue();
+				Asiakas asiakas = new Asiakas(valittuasiakas.getID(), vaiheenNimiTextField.getText(),
+						vaiheenAlkupvmTextField.getText(),
+						vaiheenLoppupvmTextField.getText());
+
+				rekisteri.muokkaaAsiakas(asiakas);
+			}else{
+
 
 			Asiakas asiakas = new Asiakas(id, vaiheenNimiTextField.getText(),
 					vaiheenAlkupvmTextField.getText(),
@@ -299,8 +309,8 @@ public class AsiakasUI extends JPanel {
 			vaiheenNimiTextField.setText("");
 			vaiheenAlkupvmTextField.setText("");
 			vaiheenLoppupvmTextField.setText("");
-
 			rekisteri.lisaaAsiakas(asiakas);
+			}
 		}
 	}
 	

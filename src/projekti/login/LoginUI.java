@@ -30,6 +30,7 @@ import projekti.tyontekija.TyontekijaUI;
  * 
  */
 public class LoginUI extends javax.swing.JFrame {
+	
 
 	private Tietovarasto rekisteri = new Tietovarasto();
 	private String kirjautujannimi = "";
